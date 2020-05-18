@@ -19,6 +19,16 @@ public class Class
     this.maxCapacity = maxCapacity;
   }
 
+  public String getName()
+  {
+    return name;
+  }
+
+  public int getMaxCapacity()
+  {
+    return maxCapacity;
+  }
+
   public String toString()
   {
     return "Class{" + "name='" + name + '\'' + ", maxCapacity=" + maxCapacity
