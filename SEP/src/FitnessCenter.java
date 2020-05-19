@@ -114,17 +114,37 @@ public class FitnessCenter
     scheduledClasses.remove(scheduledClass);
   }
 
-  public ScheduledClass getScheduledClass(DateTime dateTime, String name)
+  public ScheduledClass getScheduledClass(DateTime dateTime, String className)
   {
     for (ScheduledClass scheduledClass : scheduledClasses)
     {
       if (scheduledClass.getDateTime().equals(dateTime) && scheduledClass
-          .getClassItem().getName().equals(name))
+          .getClassItem().getName().equals(className))
       {
         return scheduledClass;
       }
     }
     return null;
+  }
+
+  public ArrayList<Instructor> getInstructors()
+  {
+    return instructors;
+  }
+
+  public ArrayList<Class> getClasses()
+  {
+    return classes;
+  }
+
+  public ArrayList<Member> getMembers()
+  {
+    return members;
+  }
+
+  public ArrayList<ScheduledClass> getScheduledClasses()
+  {
+    return scheduledClasses;
   }
 
   public String toString()
