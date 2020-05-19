@@ -23,17 +23,40 @@ public class FitnessCenter
   public void removeClass(Class classItem)
   {
     classes.remove(classItem);
+    for (ScheduledClass scheduledClass : scheduledClasses)
+    {
+      if (scheduledClass.getClassItem().equals(classItem))
+      {
+        scheduledClasses.remove(scheduledClass);
+      }
+    }
   }
 
   public void removeClass(String className)
   {
-    for (Class classItem : classes)
+    int indexToRemove = -1;
+    for (int i = 0; i < classes.size(); i++)
     {
-      if (classItem.getName().equals(className))
+      if (classes.get(i).getName().equals(className))
+        indexToRemove = i;
+    }
+    classes.remove(indexToRemove);
+//    for (ScheduledClass scheduledClass : scheduledClasses)
+//    {
+//      if (scheduledClass.getClassItem().getName().equals(className))
+//      {
+//        scheduledClasses.remove(scheduledClass);
+//      }
+//    }
+    indexToRemove = -1;
+    for (int i = 0; i < scheduledClasses.size(); i++)
+    {
+      if (scheduledClasses.get(i).getClassItem().getName().equals(className))
       {
-        classes.remove(classItem);
+        indexToRemove = i;
       }
     }
+    scheduledClasses.remove(indexToRemove);
   }
 
   public Class getClassItem(String className)

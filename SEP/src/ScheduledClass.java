@@ -71,7 +71,10 @@ public class ScheduledClass
 
   public void addMember(Member member)
   {
-    members.add(member);
+    if (member.hasPremiumMembership())
+    {
+      members.add(member);
+    }
   }
 
   public void removeMember(Member member)

@@ -19,9 +19,14 @@ public class Member extends Person
     premiumMembership = false;
   }
 
+  public boolean hasPremiumMembership()
+  {
+    return premiumMembership;
+  }
+
   public String toString()
   {
-    return "Member{" + "premiumMembership=" + premiumMembership + '}';
+    return "Member{" + super.toString() + "premiumMembership=" + premiumMembership + '}';
   }
 
   public Member copy()
