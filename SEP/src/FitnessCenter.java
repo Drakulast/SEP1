@@ -34,6 +34,7 @@ public class FitnessCenter
 
   public void removeClass(String className)
   {
+    //Removing the class object from the array
     int indexToRemove = -1;
     for (int i = 0; i < classes.size(); i++)
     {
@@ -41,14 +42,10 @@ public class FitnessCenter
         indexToRemove = i;
     }
     classes.remove(indexToRemove);
-//    for (ScheduledClass scheduledClass : scheduledClasses)
-//    {
-//      if (scheduledClass.getClassItem().getName().equals(className))
-//      {
-//        scheduledClasses.remove(scheduledClass);
-//      }
-//    }
+
+    //Removing the scheduledClass item from the array
     indexToRemove = -1;
+    System.out.println(scheduledClasses.size());
     for (int i = 0; i < scheduledClasses.size(); i++)
     {
       if (scheduledClasses.get(i).getClassItem().getName().equals(className))
