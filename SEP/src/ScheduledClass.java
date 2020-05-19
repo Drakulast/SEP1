@@ -7,11 +7,10 @@ public class ScheduledClass
   private Class classItem;
   private DateTime dateTime;
 
-  public ScheduledClass(ArrayList<Member> members, Instructor instructor,
-      Class classItem, DateTime dateTime)
+  public ScheduledClass(Class classItem, Instructor instructors, DateTime dateTime, ArrayList<Member> members)
   {
     this.members = members;
-    this.instructor = instructor;
+    this.instructor = instructors;
     this.classItem = classItem;
     this.dateTime = dateTime;
   }

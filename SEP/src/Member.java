@@ -3,10 +3,10 @@ public class Member extends Person
   private boolean premiumMembership;
 
   public Member(String firstName, String lastName, String address, String email,
-      String phoneNumber, boolean premiumMembership)
+      String phoneNumber)
   {
     super(firstName, lastName, address, email, phoneNumber);
-    this.premiumMembership = premiumMembership;
+    premiumMembership = false;
   }
 
   public void upgradeMembership()
@@ -26,7 +26,7 @@ public class Member extends Person
 
   public Member copy()
   {
-    return new Member(super.getFirstName(), super.getLastName(), super.getAddress(), super.getEmail(), super.getPhoneNumber(), premiumMembership);
+    return new Member(super.getFirstName(), super.getLastName(), super.getAddress(), super.getEmail(), super.getPhoneNumber());
   }
 
   public boolean equals(Object obj)

@@ -5,10 +5,10 @@ public class Instructor extends Person
   private ArrayList<String> classes;
 
   public Instructor(String firstName, String lastName, String address,
-      String email, String phoneNumber, ArrayList<String> classes)
+      String email, String phoneNumber)
   {
     super(firstName, lastName, address, email, phoneNumber);
-    this.classes = classes;
+    this.classes = new ArrayList<String>();
   }
 
   public void addClass(String className)
@@ -49,7 +49,7 @@ public class Instructor extends Person
   public Instructor copy()
   {
     return new Instructor(super.getFirstName(), super.getLastName(),
-        super.getAddress(), super.getEmail(), super.getPhoneNumber(), classes);
+        super.getAddress(), super.getEmail(), super.getPhoneNumber());
   }
 
   public boolean equals(Object obj)
