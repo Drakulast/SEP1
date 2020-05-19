@@ -47,3 +47,6 @@ public class Class
 }
 
 //I WANNA KILL MYSELF BECAUSE OF THE INTELLIJ
+
+//Roses are red, violets are blue,
+//Good luck Maria, I hope it works for you
