@@ -22,19 +22,23 @@ public class FitnessCenter
 
   public void removeClass(Class classItem)
   {
+    //Removing the Class object from the classes array
     classes.remove(classItem);
-    for (ScheduledClass scheduledClass : scheduledClasses)
+
+    //Removing the ScheduledClass object from the scheduledClasses array
+    int indexToRemove = -1;
+    for (int i = 0; i < scheduledClasses.size(); i++)
     {
-      if (scheduledClass.getClassItem().equals(classItem))
-      {
-        scheduledClasses.remove(scheduledClass);
-      }
+      if (scheduledClasses.get(i).getClassItem().equals(classItem))
+        indexToRemove = i;
     }
+    scheduledClasses.remove(indexToRemove);
+
   }
 
   public void removeClass(String className)
   {
-    //Removing the class object from the array
+    //Removing the Class object from the classes array
     int indexToRemove = -1;
     for (int i = 0; i < classes.size(); i++)
     {
@@ -43,9 +47,8 @@ public class FitnessCenter
     }
     classes.remove(indexToRemove);
 
-    //Removing the scheduledClass item from the array
+    //Removing the scheduledClass object from the scheduledClasses array
     indexToRemove = -1;
-    System.out.println(scheduledClasses.size());
     for (int i = 0; i < scheduledClasses.size(); i++)
     {
       if (scheduledClasses.get(i).getClassItem().getName().equals(className))
@@ -75,11 +78,25 @@ public class FitnessCenter
 
   public void removeInstructor(String phoneNumber)
   {
-    for (Instructor instructor : instructors)
+    //Removing the Instructor object from the instructors array
+    int indexToRemove = -1;
+    for (int i = 0; i < instructors.size(); i++)
     {
-      if (instructor.getPhoneNumber().equals(phoneNumber))
+      if (instructors.get(i).getPhoneNumber().equals(phoneNumber));
       {
-        instructors.remove(instructor);
+        indexToRemove = i;
+      }
+    }
+    instructors.remove(indexToRemove);
+
+    //Setting the Instructor to null in all the scheduled classes he teaches
+    System.out.println(scheduledClasses.size());
+    for (ScheduledClass scheduledClass : scheduledClasses)
+    {
+      if (scheduledClass.getInstructor().getPhoneNumber().equals(phoneNumber))
+      {
+        scheduledClass.setInstructor(null);
+        break;
       }
     }
   }
