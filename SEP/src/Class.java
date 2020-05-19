@@ -45,3 +45,5 @@ public class Class
     return name.equals(other.name) && maxCapacity == other.maxCapacity;
   }
 }
+
+//I WANNA KILL MYSELF BECUASE OF THE INTELLIJ
