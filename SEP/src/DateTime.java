@@ -8,11 +8,105 @@ public class DateTime
 
   public DateTime(int day, int month, int year, int hour, int minute)
   {
-    this.day = day;
-    this.month = month;
-    this.year = year;
-    this.hour = hour;
-    this.minute = minute;
+    boolean isLeapYear = false;
+    if (year % 4 == 0)
+    {
+      if (year % 100 == 0)
+      {
+        if (year % 400 == 0)
+          isLeapYear = true;
+        else
+          isLeapYear = false;
+      }
+      else
+        isLeapYear = true;
+    }
+    else
+    {
+      isLeapYear = false;
+    }
+    if (hour >= 0 && hour < 24 && minute >= 0 && minute < 60)
+    {
+      if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+          || month == 10 || month == 12)
+      {
+        if (day > 0 && day < 32)
+        {
+          this.day = day;
+          this.hour = hour;
+          this.minute = minute;
+          this.month = month;
+          this.year = year;
+
+        }
+        else
+        {
+          System.out.println(
+              "The date and time has not been created. Enter correct values");
+        }
+      }
+      else if (month == 4 || month == 6 || month == 9 || month == 11)
+      {
+        if (day > 0 && day < 31)
+        {
+          this.day = day;
+          this.hour = hour;
+          this.minute = minute;
+          this.month = month;
+          this.year = year;
+        }
+        else
+        {
+          System.out.println(
+              "The date and time has not been created. Enter correct values");
+        }
+      }
+      else if (month == 2)
+      {
+        if (isLeapYear)
+        {
+          if (day > 0 && day < 29)
+          {
+            this.day = day;
+            this.hour = hour;
+            this.minute = minute;
+            this.month = month;
+            this.year = year;
+          }
+          else
+          {
+            System.out.println(
+                "The date and time has not been created. Enter correct values");
+          }
+        }
+        else
+        {
+          if (day > 0 && day < 29)
+          {
+            this.day = day;
+            this.hour = hour;
+            this.minute = minute;
+            this.month = month;
+            this.year = year;
+          }
+          else
+          {
+            System.out.println(
+                "The date and time has not been created. Enter correct values");
+          }
+
+        }
+      }
+      else
+      {
+        System.out.println(
+            "The date and time has not been created. Enter correct values");
+      }
+    }
+    else {
+      System.out.println(
+          "The date and time has not been created. Enter correct values");
+    }
   }
 
   public int getDay()
@@ -78,8 +172,7 @@ public class DateTime
       return false;
     }
     DateTime other = (DateTime) obj;
-    return day == other.day && month == other.getMonth()
-        && year == other.getYear() && hour == other.hour
-        && minute == other.minute;
+    return day == other.day && month == other.getMonth() && year == other
+        .getYear() && hour == other.hour && minute == other.minute;
   }
 }
