@@ -15,14 +15,11 @@ public class Main
     viaFit.addClass(class1);
     viaFit.addClass(class2);
 
-    viaFit.removeClass("Yoga");
-
     Member member1 = new Member("John", "Doe", "Horsens", "johndoe@gmail.com", "45852123");
     Member member2 = new Member("Jane", "Doe", "Horsens", "janedoe@gmail.com", "45123456");
     Member member3 = new Member("Cezary", "Doe", "Horsens", "cezary@gmail.com", "81458963");
     Member member4 = new Member("Maria", "Doe", "Horsens", "maria@gmail.com", "75312345");
     Member member5 = new Member("Claudiu", "Doe", "Horsens", "claudiu@gmail.com", "12458796");
-
 
     member1.upgradeMembership();
     member3.upgradeMembership();
@@ -42,6 +39,8 @@ public class Main
     viaFit.getScheduledClass(new DateTime(19, 5, 2020, 18, 0), "Spinning").addMember(member3);
     viaFit.getScheduledClass(new DateTime(19, 5, 2020, 18, 0), "Spinning").addMember(member4);
     viaFit.getScheduledClass(new DateTime(19, 5, 2020, 18, 0), "Spinning").addMember(member5);
+
+    viaFit.removeClass("Spinning");
 
     ArrayList<Class> classes = viaFit.getClasses();
     for (Class classItem : classes)
