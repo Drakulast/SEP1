@@ -143,7 +143,18 @@ public class FitnessCenter
 
   public void addScheduledClass(ScheduledClass scheduledClass)
   {
-    scheduledClasses.add(scheduledClass);
+    boolean classAlreadyExists = false;
+    for (ScheduledClass scheduledClassItem : scheduledClasses)
+    {
+      if (scheduledClassItem.equals(scheduledClass))
+      {
+        classAlreadyExists = true;
+      }
+    }
+    if (!classAlreadyExists)
+    {
+      scheduledClasses.add(scheduledClass);
+    }
   }
 
   public void removeScheduledClass(ScheduledClass scheduledClass)

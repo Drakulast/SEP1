@@ -6,8 +6,9 @@ public class ScheduledClass
   private Instructor instructor;
   private Class classItem;
   private DateTime dateTime;
+  private int duration;
 
-  public ScheduledClass(Class classItem, Instructor instructor, DateTime dateTime, ArrayList<Member> members)
+  public ScheduledClass(Class classItem, Instructor instructor, DateTime dateTime, ArrayList<Member> members, int duration)
   {
     this.members = members;
     this.classItem = classItem;
@@ -16,9 +17,10 @@ public class ScheduledClass
     {
       this.instructor = instructor;
     }
+    this.duration = duration;
   }
 
-  public ScheduledClass(Class classItem, Instructor instructor, DateTime dateTime)
+  public ScheduledClass(Class classItem, Instructor instructor, DateTime dateTime, int duration)
   {
     this.members = new ArrayList<Member>();
     this.classItem = classItem;
@@ -27,6 +29,7 @@ public class ScheduledClass
     {
       this.instructor = instructor;
     }
+    this.duration = duration;
   }
 
   public ArrayList<Member> getMembers()
@@ -77,6 +80,16 @@ public class ScheduledClass
     }
   }
 
+  public void setDuration(int duration)
+  {
+    this.duration = duration;
+  }
+
+  public int getDuration()
+  {
+    return duration;
+  }
+
   public void removeMember(Member member)
   {
     members.remove(member);
@@ -98,6 +111,6 @@ public class ScheduledClass
     ScheduledClass other = (ScheduledClass) obj;
     return classItem.equals(other.classItem) && instructor
         .equals(other.instructor) && dateTime.equals(other.dateTime) && members
-        .equals(other.members);
+        .equals(other.members) && duration == other.duration;
   }
 }
