@@ -4,7 +4,7 @@ public class Main
 {
   public static void main(String[] args)
   {
-    ArrayList<Member> members = new ArrayList<>()
+    ArrayList<Member> members = new ArrayList<>();
 
     FitnessCenter viaFit = new FitnessCenter();
     viaFit.addInstructor(new Instructor("Bob", "Sixpack", "Biceps Lane", "bob@sixpack.com", "53758965"));
