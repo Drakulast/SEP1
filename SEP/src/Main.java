@@ -13,6 +13,5 @@ public class Main
     viaFit.addMember(new Member("Jane", "Doe", "Kamtjatka", "janedoe@gmail.com", "81325984"));
     viaFit.addScheduledClass(new ScheduledClass(viaFit.getClassItem("Yoga"),
         viaFit.getInstructor("53758965"),new DateTime(19, 5, 2020, 14, 0), new ArrayList<Member>()));
-
   }
 }
