@@ -5,6 +5,9 @@ public class Main
 {
   public static void main(String[] args)
   {
+    FitnessCenterFileAdapter fileAdapter = new FitnessCenterFileAdapter(
+        "members.bin", "classes.bin", "instructors.bin", "schedule.bin");
+
     FitnessCenter viaFit = new FitnessCenter();
 
     Instructor instructor1 = new Instructor("Bob", "Sixpack", "Horsens",
@@ -63,5 +66,7 @@ public class Main
 
     DateTime date2 = new DateTime(31, 12, 2020, 22, 24);
     System.out.println(date2);
+
+    fileAdapter.saveMembers(viaFit.getMembers());
   }
 }

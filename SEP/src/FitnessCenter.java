@@ -82,7 +82,8 @@ public class FitnessCenter
     int indexToRemove = -1;
     for (int i = 0; i < instructors.size(); i++)
     {
-      if (instructors.get(i).getPhoneNumber().equals(phoneNumber));
+      if (instructors.get(i).getPhoneNumber().equals(phoneNumber))
+        ;
       {
         indexToRemove = i;
       }

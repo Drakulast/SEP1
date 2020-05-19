@@ -3,141 +3,57 @@ import java.util.ArrayList;
 
 public class MyFileIO
 {
-   // Writes the given object to a file with the given file name
-   public void writeToFile(String fileName, Object obj) throws FileNotFoundException, IOException
-   {
-      ObjectOutputStream writeToFile = null;
+  public void writeToFile(String fileName, Object obj)
+      throws FileNotFoundException, IOException
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName, true);
+    ObjectOutputStream write = new ObjectOutputStream(fileOut);
+    write.writeObject(obj);
+    write.close();
+  }
 
+  public void writeToFile(String fileName, Object[] obj)
+      throws FileNotFoundException, IOException
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName);
+    ObjectOutputStream write = new ObjectOutputStream(fileOut);
+    for (int i = 0; i < obj.length; i++)
+    {
+      write.writeObject(obj[i]);
+    }
+    write.close();
+  }
+
+  public Object readObjectFromFile(String fileName)
+      throws FileNotFoundException, IOException, ClassNotFoundException
+  {
+    FileInputStream fileIn = new FileInputStream(fileName);
+    ObjectInputStream read = new ObjectInputStream(fileIn);
+    return (Object) read.readObject();
+  }
+
+  public Object[] readArrayFromFile(String fileName)
+      throws FileNotFoundException, IOException, ClassNotFoundException
+  {
+    FileInputStream fileIn = new FileInputStream(fileName);
+    ObjectInputStream read = new ObjectInputStream(fileIn);
+    ArrayList<Object> tempArray = new ArrayList<Object>();
+    while (true)
+    {
       try
       {
-         FileOutputStream fileOutStream = new FileOutputStream(fileName);
-         writeToFile = new ObjectOutputStream(fileOutStream);
-
-         writeToFile.writeObject(obj);
+        Object object = (Object) read.readObject();
+        tempArray.add(object);
       }
-      finally
+      catch (EOFException e)
       {
-         if (writeToFile != null)
-         {
-            try
-            {
-               writeToFile.close();
-            }
-            catch (IOException e)
-            {
-               System.out.println("IO Error closing file " + fileName);
-            }
-         }
+        System.out.println("End of file.");
+        break;
       }
-   }
-   
-   // Writes the objects in the given array to a file with the given file name
-   public void writeToFile(String fileName, Object[] objs) throws FileNotFoundException, IOException
-   {
-      ObjectOutputStream writeToFile = null;
-
-      try
-      {
-         FileOutputStream fileOutStream = new FileOutputStream(fileName);
-         writeToFile = new ObjectOutputStream(fileOutStream);
-
-         for (int i = 0; i < objs.length; i++)
-         {
-            writeToFile.writeObject(objs[i]);
-         }
-      }
-      finally
-      {
-         if (writeToFile != null)
-         {
-            try
-            {
-               writeToFile.close();
-            }
-            catch (IOException e)
-            {
-               System.out.println("IO Error closing file " + fileName);
-            }
-         }
-      }
-   }
-   
-   // Reads the first object from the file with the given file name and returns it.
-   // Whoever calls the method will need to cast it from type Object to its real type
-   public Object readObjectFromFile(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException
-   {
-      Object obj = null;
-      ObjectInputStream readFromFile = null;
-      try
-      {
-         FileInputStream fileInStream = new FileInputStream(fileName);
-         readFromFile = new ObjectInputStream(fileInStream);
-         try
-         {
-            obj = readFromFile.readObject();
-         }
-         catch (EOFException eof)
-         {
-           //Done reading
-         }
-      }
-      finally
-      {
-         if (readFromFile != null)
-         {
-            try
-            {
-               readFromFile.close();
-            }
-            catch (IOException e)
-            {
-               System.out.println("IO Error closing file " + fileName);
-            }
-         }
-      }
-
-      return obj;
-   }
- 
-   // Reads all objects from the file with the given file name and returns it as an Object[].
-   // Whoever calls the method will need to cast the Objects to their real type
-   public Object[] readArrayFromFile(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException
-   {
-      ArrayList<Object> objs = new ArrayList<Object>();
-
-      ObjectInputStream readFromFile = null;
-      try
-      {
-         FileInputStream fileInStream = new FileInputStream(fileName);
-         readFromFile = new ObjectInputStream(fileInStream);
-         while (true)
-         {
-            try
-            {
-               objs.add(readFromFile.readObject());
-            }
-            catch (EOFException eof)
-            {
-              //Done reading
-               break;
-            }
-         }
-      }
-      finally
-      {
-         if (readFromFile != null)
-         {
-            try
-            {
-               readFromFile.close();
-            }
-            catch (IOException e)
-            {
-               System.out.println("IO Error closing file " + fileName);
-            }
-         }
-      }
-
-      return objs.toArray();
-   }
- }
+    }
+    read.close();
+    Object[] temp = new Object[tempArray.size()];
+    temp = tempArray.toArray(temp);
+    return temp;
+  }
+}

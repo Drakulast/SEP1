@@ -7,123 +7,70 @@ import java.util.Scanner;
 
 public class MyTextFileIO
 {
-   // Writes the given string to a file with the given file name
-   public void writeToFile(String fileName, String str) throws FileNotFoundException
-   {
-      write(fileName, str, false);  
-   }
+  public void writeToFile(String fileName, String str)
+      throws FileNotFoundException
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName);
+    PrintWriter write = new PrintWriter(fileOut);
+    write.println(str);
+    write.close();
+  }
 
-   // Appends the given string to a file with the given file name
-   public void appendToFile(String fileName, String str) throws FileNotFoundException
-   {
-      write(fileName, str, true);    
-   }
-   
-   // writeToFile and appendToFile are almost identical - only the boolean in the constructor
-   // of the FileOutputStream differs. So I made this private method that both methods call
-   private void write(String fileName, String str, boolean append) throws FileNotFoundException
-   {
-      PrintWriter writeToFile = null;
+  public void appendToFile(String fileName, String str)
+      throws FileNotFoundException
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName, true);
+    PrintWriter write = new PrintWriter(fileOut);
+    write.println(str);
+    write.close();
+  }
 
-      try
-      {
-         FileOutputStream fileOutStream = new FileOutputStream(fileName, append);
-         writeToFile = new PrintWriter(fileOutStream);
-         writeToFile.println(str);
-      }
-      finally
-      {
-         if (writeToFile != null)
-         {
-            writeToFile.close();
-         }
-      }
-   }
+  public void writeToFile(String fileName, String[] str)
+      throws FileNotFoundException
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName);
+    PrintWriter write = new PrintWriter(fileOut);
+    for (String string : str)
+    {
+      write.println(string);
+    }
+    write.close();
+  }
 
-   // Writes the strings in the given array to a file with the given file name
-   public void writeToFile(String fileName, String[] strs) throws FileNotFoundException
-   {
-      write(fileName, strs, false);
-   }
+  public void appendToFile(String fileName, String[] str)
+      throws FileNotFoundException
 
-   // Appends the strings in the given array to a file with the given file name
-   public void appendToFile(String fileName, String[] strs) throws FileNotFoundException
-   {
-      write(fileName, strs, true);
-   }
+  {
+    FileOutputStream fileOut = new FileOutputStream(fileName, true);
+    PrintWriter write = new PrintWriter(fileOut);
+    for (String string : str)
+    {
+      write.println(string);
+    }
+    write.close();
+  }
 
-   // Again the writeToFile and appendToFile with arrays are almost identical. 
-   // So I made this private method that both methods call
-   private void write(String fileName, String[] strs, boolean append) throws FileNotFoundException
-   {
-      PrintWriter writeToFile = null;
+  public String readStringFromFile(String fileName) throws FileNotFoundException
+  {
+    FileInputStream fileIn = new FileInputStream(fileName);
+    Scanner read = new Scanner(fileIn);
+    read.close();
+    return read.nextLine();
+  }
 
-      try
-      {
-         FileOutputStream fileOutStream = new FileOutputStream(fileName, append);
-         writeToFile = new PrintWriter(fileOutStream);
-
-         for (int i = 0; i < strs.length; i++)
-         {
-            writeToFile.println(strs[i]);
-         }
-      }
-      finally
-      {
-         if (writeToFile != null)
-         {
-            writeToFile.close();
-         }
-      }
-   }
-  
-   // Reads the first line from the file with the given file name and returns it as a String
-   public String readStringFromFile(String fileName) throws FileNotFoundException
-   {
-      Scanner readFromFile = null;
-      String str = "";
-
-      try
-      {
-         FileInputStream fileInStream = new FileInputStream(fileName);
-         readFromFile = new Scanner(fileInStream);
-         str = readFromFile.nextLine();
-      }
-      finally
-      {
-         if (readFromFile != null)
-         {
-            readFromFile.close();
-         }
-      }
-      return str;
-   }
-
-   // Reads all lines from the file with the given file name and returns it as a String[]
-   public String[] readArrayFromFile(String fileName) throws FileNotFoundException
-   {
-      Scanner readFromFile = null;
-      ArrayList<String> strs = new ArrayList<String>();
-  
-      try
-      {
-         FileInputStream fileInStream = new FileInputStream(fileName);
-         readFromFile = new Scanner(fileInStream);
-
-         while (readFromFile.hasNext())
-         {
-            strs.add(readFromFile.nextLine());
-         }
-      }
-      finally
-      {
-         if (readFromFile != null)
-         {
-            readFromFile.close();
-         }
-      }
-      
-      String[] strsArray = new String[strs.size()];
-      return strs.toArray(strsArray);
-   }
+  public String[] readArrayFromFile(String fileName)
+      throws FileNotFoundException
+  {
+    FileInputStream fileIn = new FileInputStream(fileName);
+    Scanner read = new Scanner(fileIn);
+    ArrayList<String> tempArray = new ArrayList<String>();
+    while (read.hasNext())
+    {
+      tempArray.add(read.nextLine());
+    }
+    read.close();
+    String[] temp = new String[tempArray.size()];
+    temp = tempArray.toArray(temp);
+    return temp;
+  }
 }
