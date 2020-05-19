@@ -6,6 +6,8 @@ public class DateTime
   private int hour;
   private int minute;
 
+  //nice date
+
   public DateTime(int day, int month, int year, int hour, int minute)
   {
     this.day = day;
