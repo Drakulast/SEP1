@@ -40,13 +40,7 @@ public class Main
     viaFit.getScheduledClass(new DateTime(19, 5, 2020, 18, 0), "Spinning").addMember(member4);
     viaFit.getScheduledClass(new DateTime(19, 5, 2020, 18, 0), "Spinning").addMember(member5);
 
-    viaFit.removeClass("Spinning");
-
-    ArrayList<Class> classes = viaFit.getClasses();
-    for (Class classItem : classes)
-    {
-      System.out.println(classItem);
-    }
+    viaFit.removeInstructor("45856745");
 
     ArrayList<ScheduledClass> scheduledClasses = viaFit.getScheduledClasses();
     for (ScheduledClass scheduledClass : scheduledClasses)
