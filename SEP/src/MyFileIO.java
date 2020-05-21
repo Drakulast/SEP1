@@ -1,59 +1,76 @@
-import java.io.*;
-import java.util.ArrayList;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class MyFileIO
 {
-  public void writeToFile(String fileName, Object obj)
+  public void writeObjectToFile(String fileName, Object object)
       throws FileNotFoundException, IOException
   {
-    FileOutputStream fileOut = new FileOutputStream(fileName, true);
-    ObjectOutputStream write = new ObjectOutputStream(fileOut);
-    write.writeObject(obj);
-    write.close();
-  }
+    ObjectOutputStream objectOutputStream = null;
 
-  public void writeToFile(String fileName, Object[] obj)
-      throws FileNotFoundException, IOException
-  {
-    FileOutputStream fileOut = new FileOutputStream(fileName);
-    ObjectOutputStream write = new ObjectOutputStream(fileOut);
-    for (int i = 0; i < obj.length; i++)
+    try
     {
-      write.writeObject(obj[i]);
+      FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+      objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+      objectOutputStream.writeObject(object);
     }
-    write.close();
+    finally
+    {
+      if (objectOutputStream != null)
+      {
+        try
+        {
+          objectOutputStream.close();
+        }
+        catch (IOException e)
+        {
+          System.out.println("IO error when closing the file: " + fileName);
+        }
+      }
+    }
   }
 
+  // When reading from a file the object type needs to be casted
   public Object readObjectFromFile(String fileName)
       throws FileNotFoundException, IOException, ClassNotFoundException
   {
-    FileInputStream fileIn = new FileInputStream(fileName);
-    ObjectInputStream read = new ObjectInputStream(fileIn);
-    return (Object) read.readObject();
-  }
+    Object object = null;
+    ObjectInputStream objectInputStream = null;
 
-  public Object[] readArrayFromFile(String fileName)
-      throws FileNotFoundException, IOException, ClassNotFoundException
-  {
-    FileInputStream fileIn = new FileInputStream(fileName);
-    ObjectInputStream read = new ObjectInputStream(fileIn);
-    ArrayList<Object> tempArray = new ArrayList<Object>();
-    while (true)
+    try
     {
+      FileInputStream fileInputStream = new FileInputStream(fileName);
+      objectInputStream = new ObjectInputStream(fileInputStream);
+
       try
       {
-        Object object = (Object) read.readObject();
-        tempArray.add(object);
+        object = objectInputStream.readObject();
       }
       catch (EOFException e)
       {
-        System.out.println("End of file.");
-        break;
+        System.out.println("Done reading");
       }
     }
-    read.close();
-    Object[] temp = new Object[tempArray.size()];
-    temp = tempArray.toArray(temp);
-    return temp;
+    finally
+    {
+      if (objectInputStream != null)
+      {
+        try
+        {
+          objectInputStream.close();
+        }
+        catch (IOException e)
+        {
+          System.out.println("IO error when closing file: " + fileName);
+        }
+      }
+    }
+    return object;
   }
 }

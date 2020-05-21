@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Instructor extends Person
+public class Instructor extends Person implements Serializable
 {
   private ArrayList<String> classes;
 

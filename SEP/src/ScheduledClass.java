@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ScheduledClass
+public class ScheduledClass implements Serializable
 {
   private ArrayList<Member> members;
   private Instructor instructor;

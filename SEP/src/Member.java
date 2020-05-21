@@ -1,4 +1,6 @@
-public class Member extends Person
+import java.io.Serializable;
+
+public class Member extends Person implements Serializable
 {
   private boolean premiumMembership;
 
