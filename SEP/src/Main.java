@@ -225,5 +225,8 @@ public class Main
     System.out.println(scheduledClassesInTimeInterval);
 
     Application.launch(GUI.class);
+
+
+    // my push
   }
 }
