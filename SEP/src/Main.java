@@ -12,12 +12,16 @@ public class Main
   {
     FitnessCenter viaFit = new FitnessCenter();
 
+    ArrayList<String> classesList1 = new ArrayList<String>();
+    classesList1.add("Spinning");
+    ArrayList<String> classesList2 = new ArrayList<String>();
+    classesList2.add("Yoga");
     Instructor instructor1 = new Instructor("Bob", "Sixpack", "Horsens",
-        "box.sixpack@viafit.com", "45856829", "Spinning");
+        "box.sixpack@viafit.com", "45856829", classesList1);
     Instructor instructor2 = new Instructor("Ionut", "Sixpack", "Horsens",
-        "box.sixpack@viafit.com", "353356745", "Spinning");
+        "box.sixpack@viafit.com", "353356745", classesList1);
     Instructor instructor3 = new Instructor("Claudiu", "Sixpack", "Horsens",
-        "box.sixpack@viafit.com", "122585674", "Yoga");
+        "box.sixpack@viafit.com", "122585674", classesList2);
 
     viaFit.addInstructor(instructor1);
 
