@@ -2,11 +2,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.fxml.FXML;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class GUI extends Application
 {
+
+
   public void start(Stage window) throws IOException
   {
     window.setTitle("VIAFit");
@@ -15,5 +20,9 @@ public class GUI extends Application
     Scene scene = new Scene(loader.load());
     window.setScene(scene);
     window.show();
+
   }
+
 }
+
+

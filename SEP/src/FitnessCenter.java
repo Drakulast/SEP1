@@ -54,9 +54,10 @@ public class FitnessCenter
       if (scheduledClasses.get(i).getClassItem().getName().equals(className))
       {
         indexToRemove = i;
+        scheduledClasses.remove(indexToRemove);
       }
     }
-    scheduledClasses.remove(indexToRemove);
+
   }
 
   public Class getClassItem(String className)
