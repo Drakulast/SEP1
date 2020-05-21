@@ -154,7 +154,7 @@ public class Main
 
     System.out.println("Done writing classes");
 
-    // loading data for scheduled classes
+    // loading data for scheduled classess
     MyFileIO myFileIO3 = new MyFileIO();
     ArrayList<ScheduledClass> scheduledClasses1 = new ArrayList<ScheduledClass>();
     scheduledClasses1.add(scheduledClass1);
