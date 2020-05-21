@@ -6,14 +6,6 @@ public class Instructor extends Person implements Serializable
   private ArrayList<String> classes;
 
   public Instructor(String firstName, String lastName, String address,
-      String email, String phoneNumber, String className)
-  {
-    super(firstName, lastName, address, email, phoneNumber);
-    classes = new ArrayList<String>();
-    classes.add(className);
-  }
-
-  public Instructor(String firstName, String lastName, String address,
       String email, String phoneNumber, ArrayList<String> classes)
   {
     super(firstName, lastName, address, email, phoneNumber);

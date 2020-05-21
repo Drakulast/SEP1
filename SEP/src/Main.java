@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javafx.application.Application;
+
 public class Main
 {
   public static void main(String[] args)
@@ -222,5 +224,6 @@ public class Main
     
     System.out.println(scheduledClassesInTimeInterval);
 
+    Application.launch(GUI.class);
   }
 }
