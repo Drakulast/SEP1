@@ -7,6 +7,7 @@ public class FitnessCenterFileAdapter
   private MyFileIO myFileIO;
   private String fileName;
 
+
   public FitnessCenterFileAdapter(String fileName)
   {
     myFileIO = new MyFileIO();
@@ -180,7 +181,7 @@ public class FitnessCenterFileAdapter
   }
 
   // MyFileIO to retrieve an ArrayList with scheduled classes within interval of time
-  /*
+
   public ArrayList<ScheduledClass> getScheduledClassesInTimeInterval(
       DateTime from, DateTime to)
   {
@@ -197,5 +198,41 @@ public class FitnessCenterFileAdapter
     }
     return scheduledClassesFromTo;
   }
-   */
+
+  public String displayScheduledClassesInTimeInterval(
+      DateTime from, DateTime to)
+  {
+    ArrayList<ScheduledClass> scheduledClassesFromTo = getScheduledClassesInTimeInterval(from, to);
+
+
+    String stringToReturn = "";
+    for (int i = 0; i < scheduledClassesFromTo.size(); i++)
+    {
+      String tempStringToReturn = "";
+      tempStringToReturn += "ScheduledClass: " + scheduledClassesFromTo.get(i).getClassItem() + " on " + scheduledClassesFromTo.get(i).getDateTime();
+      if (scheduledClassesFromTo.get(i).getInstructor() != null)
+      {
+        tempStringToReturn += "\n\tInstructor: " + scheduledClassesFromTo.get(i).getInstructor();
+      }
+      else
+      {
+        tempStringToReturn += "\n\tNo instructor assignded yet.";
+      }
+      if (scheduledClassesFromTo.get(i).getMembers().size() == 0)
+      {
+        tempStringToReturn += "\n\tNo members attending the class yet.";
+      }
+      else
+      {
+        tempStringToReturn += "\n\tMembers: ";
+        for (int j = 0; j < scheduledClassesFromTo.get(j).getMembers().size(); j++)
+        {
+          tempStringToReturn += "\n\t\t" + scheduledClassesFromTo.get(i).getMembers().get(j);
+        }
+      }
+      stringToReturn += tempStringToReturn + "\n";
+    }
+
+    return stringToReturn;
+  }
 }

@@ -64,7 +64,20 @@ public class Instructor extends Person implements Serializable
 
   public String toString()
   {
-    return "Instructor{" + "classes=" + classes + '}';
+    String stringToReturn = "";
+    stringToReturn += super.toString() + ", can teach: ";
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (i == classes.size() - 1)
+      {
+        stringToReturn += classes.get(i) + ".";
+      }
+      else
+      {
+        stringToReturn += classes.get(i) + ", ";
+      }
+    }
+    return stringToReturn;
   }
 
   public Instructor copy()

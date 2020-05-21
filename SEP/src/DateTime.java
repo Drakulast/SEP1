@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class DateTime implements Serializable
 {
@@ -105,7 +106,8 @@ public class DateTime implements Serializable
             "The date and time has not been created. Enter correct values");
       }
     }
-    else {
+    else
+    {
       System.out.println(
           "The date and time has not been created. Enter correct values");
     }
@@ -163,8 +165,10 @@ public class DateTime implements Serializable
 
   public String toString()
   {
-    return "DateTime{" + "day=" + day + ", month=" + month + ", year=" + year
-        + ", hour=" + hour + ", minute=" + minute + '}';
+    DecimalFormat formatter = new DecimalFormat("00");
+    return formatter.format(day) + "/" + formatter.format(month) + "/"
+        + formatter.format(year) + " " + formatter.format(hour) + ":"
+        + formatter.format(minute);
   }
 
   public boolean equals(Object obj)

@@ -154,7 +154,7 @@ public class Main
 
     System.out.println("Done writing classes");
 
-    // loading data for scheduled classess
+    // loading data for scheduled classes
     MyFileIO myFileIO3 = new MyFileIO();
     ArrayList<ScheduledClass> scheduledClasses1 = new ArrayList<ScheduledClass>();
     scheduledClasses1.add(scheduledClass1);
@@ -210,7 +210,17 @@ public class Main
     {
       System.out.println(scheduledClass);
     }
-    System.out.println("\n" + adapter3.getScheduledClass(dateTime4,"Stretching"));
+    System.out
+        .println("\n" + adapter3.getScheduledClass(dateTime4, "Stretching"));
     //System.out.println(adapter3.getScheduledClassesInTimeInterval(dateTime1, dateTime2));
+
+
+    String scheduledClassesInTimeInterval = adapter3
+        .displayScheduledClassesInTimeInterval(new DateTime(18, 5, 2020, 1, 1),
+            new DateTime(24, 5, 2020, 23, 4));
+
+    
+    System.out.println(scheduledClassesInTimeInterval);
+
   }
 }

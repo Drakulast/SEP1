@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Person implements Serializable
+public abstract class Person implements Serializable
 {
   private String firstName;
   private String lastName;
@@ -31,6 +31,11 @@ public class Person implements Serializable
   public String getLastName()
   {
     return lastName;
+  }
+
+  public String getFullName()
+  {
+    return firstName + " " + lastName;
   }
 
   public void setLastName(String lastName)
@@ -70,14 +75,9 @@ public class Person implements Serializable
 
   public String toString()
   {
-    return "Person{" + "firstName='" + firstName + '\'' + ", lastName='"
-        + lastName + '\'' + ", address='" + address + '\'' + ", email='" + email
-        + '\'' + ", phoneNumber='" + phoneNumber + '\'' + '}';
-  }
-
-  public Person copy()
-  {
-    return new Person(firstName, lastName, address, email, phoneNumber);
+    return "First name: " + firstName + ", Last name: "
+        + lastName + ", Address: " + address + ", Email: " + email
+        + ", Phone number: " + phoneNumber + " ";
   }
 
   public boolean equals(Object obj)

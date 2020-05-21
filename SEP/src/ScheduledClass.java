@@ -50,7 +50,10 @@ public class ScheduledClass implements Serializable
 
   public void setInstructor(Instructor instructor)
   {
-    this.instructor = instructor;
+    if (instructor.hasClass(classItem.getName()))
+    {
+      this.instructor = instructor;
+    }
   }
 
   public Class getClassItem()
@@ -98,9 +101,29 @@ public class ScheduledClass implements Serializable
 
   public String toString()
   {
-    return "ScheduledClass{" + "members=" + members + ", instructor="
-        + instructor + ", classItem=" + classItem + ", dateTime=" + dateTime
-        + '}';
+    String stringToReturn = "";
+    stringToReturn += "ScheduledClass: " + classItem + " on " + dateTime;
+    if (instructor != null)
+    {
+      stringToReturn += "\n\tInstructor: " + instructor;
+    }
+    else
+    {
+      stringToReturn += "\n\tNo instructor assignded yet.";
+    }
+    if (members.size() == 0)
+    {
+      stringToReturn += "\n\tNo members attending the class yet.";
+    }
+    else
+    {
+      stringToReturn += "\n\tMembers: ";
+      for (int i = 0; i < members.size(); i++)
+      {
+        stringToReturn += "\n\t\t" + members.get(i);
+      }
+    }
+    return stringToReturn;
   }
 
   public boolean equals(Object obj)

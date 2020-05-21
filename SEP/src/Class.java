@@ -33,8 +33,7 @@ public class Class implements Serializable
 
   public String toString()
   {
-    return "Class{" + "name='" + name + '\'' + ", maxCapacity=" + maxCapacity
-        + '}';
+    return name + " with a max capacity of " + maxCapacity + " members";
   }
 
   public boolean equals(Object  obj)

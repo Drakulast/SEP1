@@ -115,7 +115,8 @@ public class FitnessCenter
 
   public void addMember(Member member)
   {
-    members.add(member);
+    if (getMember(member.getPhoneNumber()) == null)
+      members.add(member);
   }
 
   public void removeMember(String phoneNumber)
