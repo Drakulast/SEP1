@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javafx.scene.control.Button;
@@ -94,7 +95,8 @@ public class GUIController
   @FXML private Label dateLabel;
 
   private FitnessCenterFileAdapter adapter;
-
+ private ArrayList<String> instrAddClasses = new ArrayList<String>();
+ private int instructorIndicator = 0;
   public void initialize()
   {
     adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
@@ -375,6 +377,119 @@ public class GUIController
   }
 
   // Members functionality for members UI
+//------------------------------------------------------------------------------------
+  public void mouseClickOnAdd()
+  {
+    instrAddClasses.add(registerInstructorClassInput.getText());
+    registerInstructorClassInput.setText("");
 
+  }
 
+  public void saveAndRegisterInstructor()
+  {
+    Instructor tempInstructor = new Instructor(
+        registerInstructorFirstNameInput.getText(),
+        registerInstructorLastNameInput.getText(),
+        registerInstructorAddressInput.getText(),
+        registerInstructorEmailInput.getText(),
+        registerInstructorPhoneInput.getText(), instrAddClasses);
+    adapter.saveInstructors("Instructors.bin", tempInstructor);
+    instrAddClasses.clear();
+    registerInstructorFirstNameInput.setText("");
+    registerInstructorLastNameInput.setText("");
+    registerInstructorAddressInput.setText("");
+    registerInstructorEmailInput.setText("");
+    registerInstructorPhoneInput.setText("");
+    System.out.println(tempInstructor);
+
+  }
+
+  public void searchInstructorByName()
+  {
+    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+    {
+      if (searchInstructorByNameFirstNameInput.getText()
+          .equals(adapter.getAllInstructors().get(i).getFirstName())
+          && searchInstructorByNameLastNameInput.getText()
+          .equals(adapter.getAllInstructors().get(i).getLastName()))
+      {
+        instructorIndicator = i;
+        editInstructorFirstNameInput
+            .setText(adapter.getAllInstructors().get(i).getFirstName());
+        editInstructorLastNameInput
+            .setText(adapter.getAllInstructors().get(i).getLastName());
+        editInstructorAddressInput
+            .setText(adapter.getAllInstructors().get(i).getAddress());
+        editInstructorEmailInput
+            .setText(adapter.getAllInstructors().get(i).getEmail());
+        editInstructorPhoneInput
+            .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
+        for (int b = 0; b < instrAddClasses.size(); b++)
+          editInstructorClassesInput.getItems().add(instrAddClasses.get(b));
+      }
+      else
+      {
+        System.out.println("SAY THAT THREE TIMES AND YOU ARE A CUNT");
+
+      }
+
+    }
+  }
+
+  public void searchInstructorByPhoneNumber()
+  {
+    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+    {
+      if (searchInstructorByPhoneInput.getText()
+          .equals(adapter.getAllInstructors().get(i).getPhoneNumber()))
+      {
+        instructorIndicator = i;
+        editInstructorFirstNameInput
+            .setText(adapter.getAllInstructors().get(i).getFirstName());
+        editInstructorLastNameInput
+            .setText(adapter.getAllInstructors().get(i).getLastName());
+        editInstructorAddressInput
+            .setText(adapter.getAllInstructors().get(i).getAddress());
+        editInstructorEmailInput
+            .setText(adapter.getAllInstructors().get(i).getEmail());
+        editInstructorPhoneInput
+            .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
+        for (int b = 0; b < instrAddClasses.size(); b++)
+          editInstructorClassesInput.getItems().add(instrAddClasses.get(b));
+      }
+      else
+      {
+        System.out.println("SAY THAT THREE TIMES AND YOU ARE A CUNT");
+        System.out.println(searchInstructorByPhoneInput.getText());
+        System.out.println(adapter.getAllInstructors().get(i).getPhoneNumber());
+        System.out.println(adapter.getAllInstructors());
+      }
+
+    }
+  }
+
+  public void addInstructorClassListView()
+  {
+
+  }
+
+  public void removeInstructorClassListView()
+  {
+
+  }
+
+  public void saveEditedInstructor()
+  {
+    Instructor tempInstructor2 = adapter.getAllInstructors().get(instructorIndicator);
+    tempInstructor2.setFirstName(editInstructorFirstNameInput.getText());
+    tempInstructor2.setLastName(editInstructorLastNameInput.getText());
+    tempInstructor2.setAddress(editInstructorAddressInput.getText());
+    tempInstructor2.setEmail(editInstructorEmailInput.getText());
+    tempInstructor2.setPhoneNumber(editInstructorPhoneInput.getText());
+    System.out.println(adapter.getAllInstructors());
+    adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
+    System.out.println(adapter.getAllInstructors());
+    adapter.saveInstructors("Instructors.bin", tempInstructor2);
+    System.out.println(adapter.getAllInstructors());
+  }
 }
