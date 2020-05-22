@@ -1,6 +1,8 @@
 import com.sun.javafx.scene.control.InputField;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -53,7 +55,7 @@ public class GUIController
   @FXML private TextField editMemberLastNameInput;
   @FXML private TextField editMemberAddressInput;
   @FXML private TextField editMemberEmailInput;
-  @FXML private ComboBox editMemberMembershipInput;
+  @FXML private ComboBox<String> editMemberMembershipInput;
   @FXML private TextField editMemberPhoneInput;
   @FXML private TextField searchMemberByPhoneInput;
   @FXML private TextField searchMemberByNameFirstNameInput;
@@ -108,8 +110,9 @@ public class GUIController
     setCurrentInstructors();
     setCurrentClasses();
     setTodayDate();
+    addMembership();
 
-    System.out.println(adapter.getAllMembers());
+    //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
     //    {
     //      setNumberOfMembers();
@@ -500,4 +503,22 @@ public class GUIController
     adapter.saveInstructors("Instructors.bin", tempInstructor2);
     System.out.println(adapter.getAllInstructors());
   }
+// -------------------------Members----------------------------------
+
+  public void addMembership()
+  {
+    editMemberMembershipInput.getItems().add("sfdnj");
+  }
+
+
+  public void saveMember(ActionEvent e)
+  {
+    String FirstName = registerMemberFirstNameInput.getText();
+    String LastName = registerMemberLastNameInput.getText();
+    String Address = registerMemberAddressInput.getText();
+    String Email = registerMemberEmailInput.getText();
+    String PhoneNumber = registerMemberPhoneInput.getText();
+
+  }
+
 }

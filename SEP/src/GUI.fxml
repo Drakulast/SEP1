@@ -146,7 +146,7 @@
             </GridPane>
          </children>
       </Pane>
-      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button fx:id="RegisterInstructorButton" mnemonicParsing="false" onAction="#loadRegisterInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -355,7 +355,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
             <Button fx:id="RegisterInstructorButton1" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -424,7 +424,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="registerMemberMembershipInput" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="registerMemberMembershipInput" onAction="#addMembership" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                   <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
