@@ -84,8 +84,12 @@ public class GUIController
   @FXML private Pane searchMemberByPhonePane;
   @FXML private Pane editMemberPane;
   @FXML private Pane classesPane;
+  @FXML private Pane addClassPane;
+  @FXML private Pane searchClassPane;
+  @FXML private Pane editClassPane;
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
+
 
   @FXML private Label dateLabel;
 
@@ -335,6 +339,18 @@ public class GUIController
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
     scheduleButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+  }
+
+  public void loadAddClassPane()
+  {
+    addClassPane.setVisible(true);
+    searchClassPane.setVisible(false);
+  }
+
+  public void loadSearchClassPane()
+  {
+    addClassPane.setVisible(false);
+    searchClassPane.setVisible(true);
   }
 
   //SCHEDULE PANE METHODS
