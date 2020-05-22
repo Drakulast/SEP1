@@ -47,6 +47,29 @@ public class GUIController
   @FXML private TextField editInstructorPhoneInput;
   @FXML private ListView editInstructorClassesInput;
 
+  @FXML private TextField editMemberFirstNameInput;
+  @FXML private TextField editMemberLastNameInput;
+  @FXML private TextField editMemberAddressInput;
+  @FXML private TextField editMemberEmailInput;
+  @FXML private TextField editMemberMembershipInput;
+  @FXML private TextField editMemberPhoneInput;
+  @FXML private TextField searchMemberByPhoneInput;
+  @FXML private TextField searchMemberByNameFirstNameInput;
+  @FXML private TextField searchMemberByNameLastNameInput;
+  @FXML private TextField registerMemberPhoneInput;
+  @FXML private TextField registerMemberEmailInput;
+  @FXML private TextField registerMemberFirstNameInput;
+  @FXML private TextField registerMemberLastNameInput;
+  @FXML private TextField registerMemberAddressInput;
+  @FXML private ComboBox registerMemberMembershipInput;
+  @FXML private Button editMemberSaveButton;
+  @FXML private Button editMemberDeleteButton;
+  @FXML private Button registerMemberSaveButton;
+  @FXML private Button editInstructorDeleteButton;
+  @FXML private Button editInstructorSaveButton;
+  @FXML private Button editInstructorAddButton;
+
+
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane registerInstructorPane;
@@ -334,5 +357,8 @@ public class GUIController
     scheduleButton.setStyle(
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
   }
+
+  // Members functionality for members UI
+
 
 }
