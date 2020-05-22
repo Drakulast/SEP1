@@ -516,14 +516,22 @@ public class GUIController
   }
 // -------------------------Members----------------------------------
 
-  public void saveMember(ActionEvent e)
+  public void SaveAndRegisterMember()
   {
-    String FirstName = registerMemberFirstNameInput.getText();
-    String LastName = registerMemberLastNameInput.getText();
-    String Address = registerMemberAddressInput.getText();
-    String Email = registerMemberEmailInput.getText();
-    String PhoneNumber = registerMemberPhoneInput.getText();
-
+    Member newMember = new Member(registerMemberFirstNameInput.getText(),
+        registerMemberLastNameInput.getText(), registerMemberAddressInput.getText(),
+        registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
+    adapter.saveMembers("TestMembers.bin", newMember);
+    registerMemberFirstNameInput.setText("");
+    registerMemberLastNameInput.setText("");
+    registerMemberAddressInput.setText("");
+    registerMemberEmailInput.setText("");
+    registerMemberPhoneInput.setText("");
+    if(registerMemberMembershipInput.getValue().equals("Premium"))
+    {
+      newMember.upgradeMembership();
+    }
+    System.out.println(newMember);
   }
 
 }
