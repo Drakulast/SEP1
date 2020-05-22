@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
@@ -45,13 +46,13 @@ public class GUIController
   @FXML private TextField editInstructorAddressInput;
   @FXML private TextField editInstructorEmailInput;
   @FXML private TextField editInstructorPhoneInput;
-  @FXML private ListView editInstructorClassesInput;
+  @FXML private TextArea editInstructorClassesInput;
 
   @FXML private TextField editMemberFirstNameInput;
   @FXML private TextField editMemberLastNameInput;
   @FXML private TextField editMemberAddressInput;
   @FXML private TextField editMemberEmailInput;
-  @FXML private TextField editMemberMembershipInput;
+  @FXML private ComboBox editMemberMembershipInput;
   @FXML private TextField editMemberPhoneInput;
   @FXML private TextField searchMemberByPhoneInput;
   @FXML private TextField searchMemberByNameFirstNameInput;
@@ -328,6 +329,7 @@ public class GUIController
     instructorsPane.setVisible(false);
     membersPane.setVisible(false);
     classesPane.setVisible(true);
+    loadAddClassPane();
     schedulePane.setVisible(false);
     overviewButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
