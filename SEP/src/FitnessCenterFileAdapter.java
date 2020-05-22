@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +12,9 @@ public class FitnessCenterFileAdapter
   private String classesFilename;
   private String scheduledClassesFilename;
 
-
-  public FitnessCenterFileAdapter(String membersFileName, String instructorsFilename, String classesFilename, String scheduledClassesFilename)
+  public FitnessCenterFileAdapter(String membersFileName,
+      String instructorsFilename, String classesFilename,
+      String scheduledClassesFilename)
   {
     myFileIO = new MyFileIO();
     this.membersFileName = membersFileName;
@@ -27,7 +29,8 @@ public class FitnessCenterFileAdapter
     ArrayList<Member> members = new ArrayList<Member>();
     try
     {
-      members = (ArrayList<Member>) myFileIO.readObjectFromFile(membersFileName);
+      members = (ArrayList<Member>) myFileIO
+          .readObjectFromFile(membersFileName);
     }
     catch (FileNotFoundException e)
     {
@@ -60,6 +63,27 @@ public class FitnessCenterFileAdapter
     }
     return member;
   }
+
+  // save members
+  public void saveMembers(String membersFileName, Object object)
+  {
+    ArrayList<Member> oldMembers = getAllMembers();
+    oldMembers.add((Member) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(membersFileName, oldMembers);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
 
   // MyFileIO to retrieve an ArrayList with instructors
   public ArrayList<Instructor> getAllInstructors()
@@ -103,6 +127,25 @@ public class FitnessCenterFileAdapter
     return instructor;
   }
 
+  public void saveInstructors(String instructorsFilename, Object object)
+  {
+    ArrayList<Instructor> oldInstructors = getAllInstructors();
+    oldInstructors.add((Instructor) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(instructorsFilename, oldInstructors);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
   // MyFileIO to retrieve an ArrayList with classes
   public ArrayList<Class> getAllClasses()
   {
@@ -141,6 +184,26 @@ public class FitnessCenterFileAdapter
       }
     }
     return classByName;
+  }
+
+  // save classes
+  public void saveClasses(String classesFilename, Object object)
+  {
+    ArrayList<Class> oldClasses = getAllClasses();
+    oldClasses.add((Class) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(classesFilename, oldClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
   }
 
   // MyFileIO to retrieve an ArrayList with scheduled classes
@@ -206,20 +269,43 @@ public class FitnessCenterFileAdapter
     return scheduledClassesFromTo;
   }
 
-  public String displayScheduledClassesInTimeInterval(
-      DateTime from, DateTime to)
+  // save schedules classes
+  public void saveScheduleClasses(String scheduledClassesFilename, Object object)
   {
-    ArrayList<ScheduledClass> scheduledClassesFromTo = getScheduledClassesInTimeInterval(from, to);
+    ArrayList<ScheduledClass> oldScheduleClasses = getAllScheduledClasses();
+    oldScheduleClasses.add((ScheduledClass) object);
 
+    try
+    {
+      myFileIO.writeObjectToFile(scheduledClassesFilename, oldScheduleClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
+  public String displayScheduledClassesInTimeInterval(DateTime from,
+      DateTime to)
+  {
+    ArrayList<ScheduledClass> scheduledClassesFromTo = getScheduledClassesInTimeInterval(
+        from, to);
 
     String stringToReturn = "";
     for (int i = 0; i < scheduledClassesFromTo.size(); i++)
     {
       String tempStringToReturn = "";
-      tempStringToReturn += "ScheduledClass: " + scheduledClassesFromTo.get(i).getClassItem() + " on " + scheduledClassesFromTo.get(i).getDateTime();
+      tempStringToReturn +=
+          "ScheduledClass: " + scheduledClassesFromTo.get(i).getClassItem()
+              + " on " + scheduledClassesFromTo.get(i).getDateTime();
       if (scheduledClassesFromTo.get(i).getInstructor() != null)
       {
-        tempStringToReturn += "\n\tInstructor: " + scheduledClassesFromTo.get(i).getInstructor();
+        tempStringToReturn +=
+            "\n\tInstructor: " + scheduledClassesFromTo.get(i).getInstructor();
       }
       else
       {
@@ -232,9 +318,11 @@ public class FitnessCenterFileAdapter
       else
       {
         tempStringToReturn += "\n\tMembers: ";
-        for (int j = 0; j < scheduledClassesFromTo.get(j).getMembers().size(); j++)
+        for (int j = 0;
+             j < scheduledClassesFromTo.get(j).getMembers().size(); j++)
         {
-          tempStringToReturn += "\n\t\t" + scheduledClassesFromTo.get(i).getMembers().get(j);
+          tempStringToReturn +=
+              "\n\t\t" + scheduledClassesFromTo.get(i).getMembers().get(j);
         }
       }
       stringToReturn += tempStringToReturn + "\n";

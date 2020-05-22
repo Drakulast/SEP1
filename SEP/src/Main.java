@@ -184,55 +184,72 @@ public class Main
     System.out.println("Done writing schedules classes");
 
     // retrieve member and ArrayList of members from bin
-    FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
-        "Classes.bin", "ScheduledClasses.bin");
+    FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter(
+        "TestMembers.bin", "Instructors.bin", "Classes.bin",
+        "ScheduledClasses.bin");
     System.out.println(adapter.getAllMembers());
     System.out.println(adapter.getMember("45123456").getFirstName());
 
     // retrieve instructor and ArrayList of instructors from bin
-    FitnessCenterFileAdapter adapter1 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
-        "Classes.bin", "ScheduledClasses.bin");
-    ArrayList<Instructor> myInstructors = adapter1.getAllInstructors();
+    ArrayList<Instructor> myInstructors = adapter.getAllInstructors();
     System.out.println("Instructors: ");
     for (Instructor instructor : myInstructors)
     {
       System.out.println(instructor.getFirstName());
     }
     System.out.println(
-        "\n" + adapter1.getInstructor("122585674").hasClass("Spinning"));
+        "\n" + adapter.getInstructor("122585674").hasClass("Spinning"));
 
     // retrieve class and ArrayList of classes from bin
-    FitnessCenterFileAdapter adapter2 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
-        "Classes.bin", "ScheduledClasses.bin");
-    System.out.println(adapter2.getAllClasses());
-    System.out.println(adapter2.getClassByName("Zumba"));
+    System.out.println(adapter.getAllClasses());
+    System.out.println(adapter.getClassByName("Zumba"));
 
     // retrieve scheduled class and ArrayList of scheduled classes from bin
-    FitnessCenterFileAdapter adapter3 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
-        "Classes.bin", "ScheduledClasses.bin");
-    ArrayList<ScheduledClass> scheduledClasses2 = adapter3
+    ArrayList<ScheduledClass> scheduledClasses2 = adapter
         .getAllScheduledClasses();
     for (ScheduledClass scheduledClass : scheduledClasses2)
     {
       System.out.println(scheduledClass);
     }
     System.out
-        .println("\n" + adapter3.getScheduledClass(dateTime4, "Stretching"));
+        .println("\n" + adapter.getScheduledClass(dateTime4, "Stretching"));
     //System.out.println(adapter3.getScheduledClassesInTimeInterval(dateTime1, dateTime2));
 
-
-    String scheduledClassesInTimeInterval = adapter3
+    String scheduledClassesInTimeInterval = adapter
         .displayScheduledClassesInTimeInterval(new DateTime(18, 5, 2020, 1, 1),
             new DateTime(24, 5, 2020, 23, 4));
 
-    
     System.out.println(scheduledClassesInTimeInterval);
 
-//    Application.launch(GUI.class);
+    //    Application.launch(GUI.class);
     System.out.println();
     System.out.println(adapter.getAllMembers().size());
 
+    // testing adding and saving to bin
+    Instructor instructor10 = new Instructor("mariaaaa", "Sixpack", "Horsens",
+        "box.sixpack@viafit.com", "45856829", classesList1);
 
-    // my push
+    System.out.println(adapter.getAllInstructors());
+    adapter.saveInstructors("Instructors.bin",instructor10);
+    System.out.println(adapter.getAllInstructors());
+    System.out.println();
+
+    Member member10 = new Member("Anastasiaaaa", "mimi", "mimi", "mimi",
+        "23");
+    System.out.println(adapter.getAllMembers());
+    adapter.saveMembers("TestMembers.bin", member10);
+    System.out.println(adapter.getAllMembers());
+
+    Class class10 = new Class("dancing", 159);
+    System.out.println(adapter.getAllClasses());
+    adapter.saveClasses("Classes.bin",class10);
+    System.out.println(adapter.getAllClasses());
+
+
+    ScheduledClass scheduledClass10 = new ScheduledClass(class1, instructor1,
+        dateTime1, 60);
+    System.out.println(adapter.getAllScheduledClasses());
+
+
   }
 }
