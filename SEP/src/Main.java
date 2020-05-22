@@ -186,7 +186,7 @@ public class Main
     // retrieve member and ArrayList of members from bin
     FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter(
         "TestMembers.bin", "Instructors.bin", "Classes.bin",
-        "ScheduledClasses.bin");
+        "SchedulesClasses.bin");
     System.out.println(adapter.getAllMembers());
     System.out.println(adapter.getMember("45123456").getFirstName());
 
@@ -248,6 +248,12 @@ public class Main
 
     ScheduledClass scheduledClass10 = new ScheduledClass(class1, instructor1,
         dateTime1, 60);
+    System.out.println(adapter.getAllScheduledClasses());
+    adapter.saveScheduleClasses("SchedulesClasses.bin", scheduledClass10);
+    System.out.println();
+    System.out.println();
+    System.out.println();
+    System.out.println();
     System.out.println(adapter.getAllScheduledClasses());
 
 
