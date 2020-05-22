@@ -230,21 +230,19 @@ public class Main
         "box.sixpack@viafit.com", "45856829", classesList1);
 
     System.out.println(adapter.getAllInstructors());
-    adapter.saveInstructors("Instructors.bin",instructor10);
+    adapter.saveInstructors("Instructors.bin", instructor10);
     System.out.println(adapter.getAllInstructors());
     System.out.println();
 
-    Member member10 = new Member("Anastasiaaaa", "mimi", "mimi", "mimi",
-        "23");
+    Member member10 = new Member("Anastasiaaaa", "mimi", "mimi", "mimi", "23");
     System.out.println(adapter.getAllMembers());
     adapter.saveMembers("TestMembers.bin", member10);
     System.out.println(adapter.getAllMembers());
 
     Class class10 = new Class("dancing", 159);
     System.out.println(adapter.getAllClasses());
-    adapter.saveClasses("Classes.bin",class10);
+    adapter.saveClasses("Classes.bin", class10);
     System.out.println(adapter.getAllClasses());
-
 
     ScheduledClass scheduledClass10 = new ScheduledClass(class1, instructor1,
         dateTime1, 60);
@@ -256,6 +254,21 @@ public class Main
     System.out.println();
     System.out.println(adapter.getAllScheduledClasses());
 
+    System.out.println();
+    System.out.println(adapter.getAllMembers());
+    adapter.removeMember("TestMembers.bin", member10);
+    System.out.println(adapter.getAllMembers());
+    System.out.println();
+
+    System.out.println(adapter.getAllInstructors());
+    adapter.removeInstructor("Instructors.bin", instructor10);
+    System.out.println(adapter.getAllInstructors());
+
+    System.out.println();
+    System.out.println(adapter.getAllScheduledClasses());
+    adapter.removeScheduledClass("SchedulesClasses.bin", scheduledClass10);
+    System.out.println("\n" + adapter.getAllScheduledClasses());
+    // end of testing writing and removing to bin
 
   }
 }

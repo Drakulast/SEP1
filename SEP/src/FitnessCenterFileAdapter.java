@@ -84,6 +84,31 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  // remove member
+  public void removeMember(String membersFileName, Member member)
+  {
+    ArrayList<Member> oldMembers = getAllMembers();
+    for (int i = 0; i < oldMembers.size(); i++)
+    {
+      if (oldMembers.get(i).equals(member))
+      {
+        oldMembers.remove(oldMembers.get(i));
+      }
+    }
+
+    try
+    {
+      myFileIO.writeObjectToFile(membersFileName, oldMembers);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
 
   // MyFileIO to retrieve an ArrayList with instructors
   public ArrayList<Instructor> getAllInstructors()
@@ -146,6 +171,33 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  // remove instructor
+  public void removeInstructor(String instructorsFilename,
+      Instructor instructor)
+  {
+    ArrayList<Instructor> oldInstructors = getAllInstructors();
+    for (int i = 0; i < oldInstructors.size(); i++)
+    {
+      if (oldInstructors.get(i).equals(instructor))
+      {
+        oldInstructors.remove(oldInstructors.get(i));
+      }
+    }
+
+    try
+    {
+      myFileIO.writeObjectToFile(instructorsFilename, oldInstructors);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
   // MyFileIO to retrieve an ArrayList with classes
   public ArrayList<Class> getAllClasses()
   {
@@ -191,6 +243,32 @@ public class FitnessCenterFileAdapter
   {
     ArrayList<Class> oldClasses = getAllClasses();
     oldClasses.add((Class) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(classesFilename, oldClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
+  // remove class
+  public void removeClass(String classesFilename, Class oldClass)
+  {
+    ArrayList<Class> oldClasses = getAllClasses();
+    for (int i = 0; i < oldClasses.size(); i++)
+    {
+      if (oldClasses.get(i).equals(oldClass))
+      {
+        oldClasses.remove(oldClasses.get(i));
+      }
+    }
 
     try
     {
@@ -270,7 +348,8 @@ public class FitnessCenterFileAdapter
   }
 
   // save schedules classes
-  public void saveScheduleClasses(String scheduledClassesFilename, Object object)
+  public void saveScheduleClasses(String scheduledClassesFilename,
+      Object object)
   {
     ArrayList<ScheduledClass> oldScheduleClasses = getAllScheduledClasses();
     oldScheduleClasses.add((ScheduledClass) object);
@@ -278,6 +357,33 @@ public class FitnessCenterFileAdapter
     try
     {
       myFileIO.writeObjectToFile(scheduledClassesFilename, oldScheduleClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
+  // remove scheduled class
+  public void removeScheduledClass(String scheduledClassesFilename,
+      ScheduledClass scheduledClass)
+  {
+    ArrayList<ScheduledClass> oldScheduledCLasses = getAllScheduledClasses();
+    for (int i = 0; i < oldScheduledCLasses.size(); i++)
+    {
+      if (oldScheduledCLasses.get(i).equals(scheduledClass))
+      {
+        oldScheduledCLasses.remove(oldScheduledCLasses.get(i));
+      }
+    }
+
+    try
+    {
+      myFileIO.writeObjectToFile(scheduledClassesFilename, oldScheduledCLasses);
     }
     catch (FileNotFoundException e)
     {
