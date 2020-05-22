@@ -3,110 +3,77 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIcontroller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUController">
    <children>
-      <HBox prefHeight="53.0" prefWidth="1000.0" style="-fx-background-color: #12123A;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="53.0" prefWidth="1000.0" style="-fx-background-color: #12123A;">
          <children>
-            <Label prefHeight="35.0" prefWidth="150.0" text="20/5/2020" textFill="WHITE">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <padding>
-                  <Insets left="15.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </Label>
-            <ImageView fitHeight="36.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logoLight.png" />
-               </image>
-               <HBox.margin>
-                  <Insets left="730.0" top="10.0" />
-               </HBox.margin>
-            </ImageView>
+            <Pane prefHeight="53.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="dateLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="9.0" prefHeight="35.0" prefWidth="150.0" text="20/5/2020" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="800.0" layoutY="1.0" prefHeight="53.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="161.0" layoutX="40.0" layoutY="8.0" onMouseClicked="#loadScreenSaver" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logoLight.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
-      </HBox>
-      <AnchorPane layoutX="190.0" layoutY="53.0" prefHeight="536.0" prefWidth="809.0">
+      </Pane>
+      <VBox fx:id="menuVBox" layoutY="53.0" prefHeight="547.0" prefWidth="200.0" style="-fx-background-color: #12123A;">
          <children>
-            <Text layoutX="90.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to VIAFit" wrappingWidth="352.71728515625">
+            <Button fx:id="overviewButton" mnemonicParsing="false" onAction="#loadOverviewPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Overview" textFill="#f24900">
                <font>
-                  <Font name="System Bold" size="40.0" />
-               </font>
-            </Text>
-            <TextArea editable="false" layoutX="550.0" layoutY="231.0" prefHeight="86.0" prefWidth="200.0" AnchorPane.rightAnchor="59.0" />
-            <TextArea editable="false" layoutX="550.0" layoutY="377.0" prefHeight="86.0" prefWidth="200.0" AnchorPane.rightAnchor="59.0" />
-            <Label alignment="CENTER" layoutX="550.0" layoutY="67.0" prefHeight="27.0" prefWidth="200.0" text="Current members:" AnchorPane.rightAnchor="59.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="550.0" layoutY="350.0" prefHeight="27.0" prefWidth="200.0" text="Next class:" AnchorPane.rightAnchor="59.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="550.0" layoutY="204.0" prefHeight="27.0" prefWidth="200.0" text="Classes in progress:" AnchorPane.rightAnchor="59.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="64.0" fitWidth="239.0" layoutX="165.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/logo.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="area1" layoutX="585.0" layoutY="125.0" />
-         </children>
-      </AnchorPane>
-      <VBox layoutY="53.0" prefHeight="536.0" prefWidth="200.0">
-         <children>
-            <Button fx:id="b1" mnemonicParsing="false" onAction="#handleClick" prefHeight="70.0" prefWidth="200.0" text="Overview">
-               <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="Instructors">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadInstructorsPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Instructors" textFill="#f24900">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="Members">
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadMembersPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Members" textFill="#f24900">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="Classes">
+            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadClassesPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Classes" textFill="#f24900">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="200.0" text="Schedule">
+            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadSchedulePane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Schedule" textFill="#f24900">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -114,5 +81,87 @@
             </Button>
          </children>
       </VBox>
+      <Pane fx:id="screenSaverPane" layoutY="47.0" onMouseClicked="#loadOverviewPane" prefHeight="553.0" prefWidth="1000.0" style="-fx-background-color: #12123A;" visible="false">
+         <children>
+            <ImageView fitHeight="86.0" fitWidth="416.0" layoutX="365.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoLight.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="240.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click anywhere to continue" wrappingWidth="520.71728515625">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="overviewPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+         <children>
+            <Text layoutX="48.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to VIAFit" wrappingWidth="352.71728515625">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+            <Label alignment="CENTER" layoutX="560.0" layoutY="64.0" prefHeight="27.0" prefWidth="200.0" text="Current members:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="560.0" layoutY="338.0" prefHeight="27.0" prefWidth="200.0" text="Next class:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="558.0" layoutY="177.0" prefHeight="27.0" prefWidth="200.0" text="Classes in progress:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="64.0" fitWidth="239.0" layoutX="123.0" layoutY="265.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="area1" editable="false" focusTraversable="false" layoutX="560.0" layoutY="91.0" prefHeight="25.0" prefWidth="200.0" />
+            <ListView focusTraversable="false" layoutX="560.0" layoutY="204.0" prefHeight="86.0" prefWidth="200.0" />
+            <ListView focusTraversable="false" layoutX="558.0" layoutY="365.0" prefHeight="86.0" prefWidth="200.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+         <children>
+            <Text layoutX="297.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructors" wrappingWidth="208.71728515625">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+         <children>
+            <Text layoutX="312.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Members" wrappingWidth="177.71728515625">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+         <children>
+            <Text layoutX="326.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classes" wrappingWidth="149.99999999999994">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+         <children>
+            <Text layoutX="312.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule" wrappingWidth="177.71728515625">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
