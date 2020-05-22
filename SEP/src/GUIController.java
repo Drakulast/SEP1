@@ -55,7 +55,7 @@ public class GUIController
   @FXML private TextField editMemberLastNameInput;
   @FXML private TextField editMemberAddressInput;
   @FXML private TextField editMemberEmailInput;
-  @FXML private ComboBox<String> editMemberMembershipInput;
+  @FXML private ComboBox editMemberMembershipInput;
   @FXML private TextField editMemberPhoneInput;
   @FXML private TextField searchMemberByPhoneInput;
   @FXML private TextField searchMemberByNameFirstNameInput;
@@ -65,7 +65,7 @@ public class GUIController
   @FXML private TextField registerMemberFirstNameInput;
   @FXML private TextField registerMemberLastNameInput;
   @FXML private TextField registerMemberAddressInput;
-  @FXML private ComboBox registerMemberMembershipInput;
+  @FXML private ComboBox<String> registerMemberMembershipInput;
   @FXML private Button editMemberSaveButton;
   @FXML private Button editMemberDeleteButton;
   @FXML private Button registerMemberSaveButton;
@@ -120,7 +120,6 @@ public class GUIController
     setCurrentInstructors();
     setCurrentClasses();
     setTodayDate();
-    addMembership();
 
     //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
@@ -291,6 +290,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+    registerMemberMembershipInput.getItems().add("Standard");
+    registerMemberMembershipInput.getItems().add("Premium");
   }
 
   public void loadFindMemberPane()
@@ -514,12 +515,6 @@ public class GUIController
     System.out.println(adapter.getAllInstructors());
   }
 // -------------------------Members----------------------------------
-
-  public void addMembership()
-  {
-    editMemberMembershipInput.getItems().add("sfdnj");
-  }
-
 
   public void saveMember(ActionEvent e)
   {

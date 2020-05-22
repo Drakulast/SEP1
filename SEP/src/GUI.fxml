@@ -424,7 +424,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="registerMemberMembershipInput" onAction="#addMembership" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="registerMemberMembershipInput" onMouseClicked="#addMembership" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
                   <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
