@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class GUController
+public class GUIController
 {
   @FXML private Button overviewButton;
   @FXML private Button instructorsButton;
