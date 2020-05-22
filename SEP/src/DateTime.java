@@ -1,6 +1,13 @@
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+/**
+ * A class containing a constructor for date & time and also the methods for using this data
+ * @author Ionut, Claudiu, Maria, Cezary
+ * @version 1.0
+ * Also the date it's going to be stored in a binary document so the class is Serialized
+ */
+
 public class DateTime implements Serializable
 {
   private int day;
@@ -9,6 +16,14 @@ public class DateTime implements Serializable
   private int hour;
   private int minute;
 
+  /**
+   * Five-argument constructor which initialize a date & time
+   * @param day the day to add to the date
+   * @param month the month to add to the date
+   * @param year the year to add to the date
+   * @param hour the hour to add to the time of the date
+   * @param minute the minute to add to the time of the date
+   */
   public DateTime(int day, int month, int year, int hour, int minute)
   {
     boolean isLeapYear = false;
@@ -113,56 +128,100 @@ public class DateTime implements Serializable
     }
   }
 
+  /**
+   * Gets the day of the date
+   * @return the day of the date
+   */
   public int getDay()
   {
     return day;
   }
 
+  /**
+   * Sets the day of the Date
+   * @param day the day of the date that we want to set
+   */
   public void setDay(int day)
   {
     this.day = day;
   }
 
+  /**
+   * Gets the month of the date
+   * @return the month of the date
+   */
   public int getMonth()
   {
     return month;
   }
 
+  /**
+   * Sets the month of the Date
+   * @param month the month of the date that we want to set
+   */
   public void setMonth(int month)
   {
     this.month = month;
   }
 
+  /**
+   * Gets the year of the date
+   * @return the year of the date
+   */
   public int getYear()
   {
     return year;
   }
 
+  /**
+   * Sets the year of the Date
+   * @param year the year of the date that we want to set
+   */
   public void setYear(int year)
   {
     this.year = year;
   }
 
+  /**
+   * Gets the hour of the time in that date
+   * @return the hour of the time in that date
+   */
   public int getHour()
   {
     return hour;
   }
 
+  /**
+   * Sets the hour of the Time in that date
+   * @param hour the hour of the Time in that Date
+   */
   public void setHour(int hour)
   {
     this.hour = hour;
   }
 
+  /**
+   * Gets the minute of the time in that date
+   * @return the minute of the time in that date
+   */
   public int getMinute()
   {
     return minute;
   }
 
+  /**
+   * Sets the minute of the Time in that date
+   * @param minute the minute of the time in that Date
+   */
   public void setMinute(int minute)
   {
     this.minute = minute;
   }
 
+  /**
+   * Returns a string representation of the Date & Time
+   * @return a string representation of the Date & Time in the format: "day/month/year hour:minute"
+   */
   public String toString()
   {
     DecimalFormat formatter = new DecimalFormat("00");
@@ -171,6 +230,11 @@ public class DateTime implements Serializable
         + formatter.format(minute);
   }
 
+  /**
+   * Compares day, month, year, hour & minute of two DateTime objects
+   * @param obj the object to compare with
+   * @return true if the given object is equal to this DateTime object
+   */
   public boolean equals(Object obj)
   {
     if (!(obj instanceof DateTime))
