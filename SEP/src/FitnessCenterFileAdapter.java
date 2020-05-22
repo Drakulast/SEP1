@@ -5,13 +5,19 @@ import java.util.ArrayList;
 public class FitnessCenterFileAdapter
 {
   private MyFileIO myFileIO;
-  private String fileName;
+  private String membersFileName;
+  private String instructorsFilename;
+  private String classesFilename;
+  private String scheduledClassesFilename;
 
 
-  public FitnessCenterFileAdapter(String fileName)
+  public FitnessCenterFileAdapter(String membersFileName, String instructorsFilename, String classesFilename, String scheduledClassesFilename)
   {
     myFileIO = new MyFileIO();
-    this.fileName = fileName;
+    this.membersFileName = membersFileName;
+    this.instructorsFilename = instructorsFilename;
+    this.classesFilename = classesFilename;
+    this.scheduledClassesFilename = scheduledClassesFilename;
   }
 
   // MyFileIO to retrieve an ArrayList with members
@@ -20,7 +26,7 @@ public class FitnessCenterFileAdapter
     ArrayList<Member> members = new ArrayList<Member>();
     try
     {
-      members = (ArrayList<Member>) myFileIO.readObjectFromFile(fileName);
+      members = (ArrayList<Member>) myFileIO.readObjectFromFile(membersFileName);
     }
     catch (FileNotFoundException e)
     {
@@ -62,7 +68,7 @@ public class FitnessCenterFileAdapter
     try
     {
       instructors = (ArrayList<Instructor>) myFileIO
-          .readObjectFromFile(fileName);
+          .readObjectFromFile(instructorsFilename);
     }
     catch (FileNotFoundException e)
     {
@@ -103,7 +109,7 @@ public class FitnessCenterFileAdapter
 
     try
     {
-      classes = (ArrayList<Class>) myFileIO.readObjectFromFile(fileName);
+      classes = (ArrayList<Class>) myFileIO.readObjectFromFile(classesFilename);
     }
     catch (FileNotFoundException e)
     {
@@ -144,7 +150,7 @@ public class FitnessCenterFileAdapter
     try
     {
       scheduledClasses = (ArrayList<ScheduledClass>) myFileIO
-          .readObjectFromFile(fileName);
+          .readObjectFromFile(scheduledClassesFilename);
     }
     catch (FileNotFoundException e)
     {

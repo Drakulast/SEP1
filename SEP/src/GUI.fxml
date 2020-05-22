@@ -47,7 +47,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadInstructorsPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Instructors" textFill="#f24900">
+            <Button fx:id="instructorsButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadInstructorsPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Instructors" textFill="#f24900">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -55,7 +55,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadMembersPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Members" textFill="#f24900">
+            <Button fx:id="membersButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadMembersPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Members" textFill="#f24900">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -63,7 +63,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadClassesPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Classes" textFill="#f24900">
+            <Button fx:id="classesButton" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadClassesPane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Classes" textFill="#f24900">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -71,7 +71,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadSchedulePane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Schedule" textFill="#f24900">
+            <Button fx:id="scheduleButton" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#loadSchedulePane" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #12123A;" text="Schedule" textFill="#f24900">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

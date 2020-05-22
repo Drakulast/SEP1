@@ -184,14 +184,14 @@ public class Main
     System.out.println("Done writing schedules classes");
 
     // retrieve member and ArrayList of members from bin
-    FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter(
-        "TestMembers.bin");
+    FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+        "Classes.bin", "ScheduledClasses.bin");
     System.out.println(adapter.getAllMembers());
     System.out.println(adapter.getMember("45123456").getFirstName());
 
     // retrieve instructor and ArrayList of instructors from bin
-    FitnessCenterFileAdapter adapter1 = new FitnessCenterFileAdapter(
-        "Instructors.bin");
+    FitnessCenterFileAdapter adapter1 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+        "Classes.bin", "ScheduledClasses.bin");
     ArrayList<Instructor> myInstructors = adapter1.getAllInstructors();
     System.out.println("Instructors: ");
     for (Instructor instructor : myInstructors)
@@ -202,14 +202,14 @@ public class Main
         "\n" + adapter1.getInstructor("122585674").hasClass("Spinning"));
 
     // retrieve class and ArrayList of classes from bin
-    FitnessCenterFileAdapter adapter2 = new FitnessCenterFileAdapter(
-        "Classes.bin");
+    FitnessCenterFileAdapter adapter2 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+        "Classes.bin", "ScheduledClasses.bin");
     System.out.println(adapter2.getAllClasses());
     System.out.println(adapter2.getClassByName("Zumba"));
 
     // retrieve scheduled class and ArrayList of scheduled classes from bin
-    FitnessCenterFileAdapter adapter3 = new FitnessCenterFileAdapter(
-        "SchedulesClasses.bin");
+    FitnessCenterFileAdapter adapter3 = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+        "Classes.bin", "ScheduledClasses.bin");
     ArrayList<ScheduledClass> scheduledClasses2 = adapter3
         .getAllScheduledClasses();
     for (ScheduledClass scheduledClass : scheduledClasses2)
@@ -228,7 +228,9 @@ public class Main
     
     System.out.println(scheduledClassesInTimeInterval);
 
-    Application.launch(GUI.class);
+//    Application.launch(GUI.class);
+    System.out.println();
+    System.out.println(adapter.getAllMembers().size());
 
 
     // my push

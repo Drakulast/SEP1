@@ -4,8 +4,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -13,26 +15,37 @@ import javafx.scene.layout.Pane;
 public class GUController
 {
   @FXML private Button overviewButton;
+  @FXML private Button instructorsButton;
+  @FXML private Button membersButton;
+  @FXML private Button classesButton;
+  @FXML private Button scheduleButton;
+
   @FXML private TextField area1;
+
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane membersPane;
   @FXML private Pane classesPane;
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
+
   @FXML private Label dateLabel;
 
+  private FitnessCenterFileAdapter adapter;
 
-
-  public void init()
+  public void initialize()
   {
+    adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+        "Classes.bin", "ScheduledClasses.bin");
     loadOverviewPane();
     setNumberOfMembers();
     setTodayDate();
-//    Platform.runLater(() ->
-//    {
-//      setNumberOfMembers();
-//    });
+
+    System.out.println(adapter.getAllMembers());
+    //    Platform.runLater(() ->
+    //    {
+    //      setNumberOfMembers();
+    //    });
   }
 
   //SCREEN SAVER PANE METHODS
@@ -49,19 +62,29 @@ public class GUController
   //OVERVIEW PANE METHODS
   public void loadOverviewPane()
   {
-    //overviewButton.setStyle("-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
     screenSaverPane.setVisible(false);
     overviewPane.setVisible(true);
     instructorsPane.setVisible(false);
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
-
+    overviewButton.setStyle(
+        "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+    instructorsButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    membersButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    classesButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    scheduleButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
   public void setNumberOfMembers()
   {
-    area1.setText("545");
+
+    String numberOfMembers = String.valueOf(adapter.getAllMembers().size());
+    area1.setText(numberOfMembers);
   }
 
   public void setTodayDate()
@@ -78,6 +101,16 @@ public class GUController
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
+    overviewButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    instructorsButton.setStyle(
+        "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+    membersButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    classesButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    scheduleButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
   //MEMBERS PANE METHODS
@@ -89,6 +122,16 @@ public class GUController
     membersPane.setVisible(true);
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
+    overviewButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    instructorsButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    membersButton.setStyle(
+        "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+    classesButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    scheduleButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
   //CLASSES PANE METHODS
@@ -100,6 +143,16 @@ public class GUController
     membersPane.setVisible(false);
     classesPane.setVisible(true);
     schedulePane.setVisible(false);
+    overviewButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    instructorsButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    membersButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    classesButton.setStyle(
+        "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+    scheduleButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
   //SCHEDULE PANE METHODS
@@ -111,10 +164,16 @@ public class GUController
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(true);
+    overviewButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    instructorsButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    membersButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    classesButton.setStyle(
+        "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+    scheduleButton.setStyle(
+        "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
   }
-
-
-
-
 
 }
