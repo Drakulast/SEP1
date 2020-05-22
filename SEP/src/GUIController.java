@@ -97,6 +97,7 @@ public class GUIController
 
   private FitnessCenterFileAdapter adapter;
  private ArrayList<String> instrAddClasses = new ArrayList<String>();
+ private ArrayList<String> indicatorArray = new ArrayList<String>();
  private int instructorIndicator = 0;
   public void initialize()
   {
@@ -426,8 +427,11 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0; b < instrAddClasses.size(); b++)
-          editInstructorClassesInput.getItems().add(instrAddClasses.get(b));
+        for (int b = 0; b < adapter.getAllInstructors().get(instructorIndicator)
+            .getNumberOfClasses(); b++)
+        {
+          //          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(instructorIndicator).);
+        }
       }
       else
       {
@@ -456,9 +460,11 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0; b < instrAddClasses.size(); b++)
-          editInstructorClassesInput.getItems().add(instrAddClasses.get(b));
+        for (int b = 0; b < adapter.getAllInstructors().get(i).getNumberOfClasses(); b++){
+          editInstructorClassesInput.setPrefColumnCount(1);
+          editInstructorClassesInput.setPrefRowCount(adapter.getAllInstructors().get(i).getNumberOfClasses());
       }
+    }
       else
       {
         System.out.println("SAY THAT THREE TIMES AND YOU ARE A CUNT");
