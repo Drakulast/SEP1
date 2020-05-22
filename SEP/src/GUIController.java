@@ -72,6 +72,17 @@ public class GUIController
   @FXML private Button editInstructorAddButton;
 
 
+  @FXML private TextField addClassNameInput;
+  @FXML private TextField addClassCapacityInput;
+  @FXML private TextField searchClassNameInput;
+  @FXML private TextField ediClassNameInput;
+  @FXML private TextField editClassCapacityInput;
+  @FXML private Button addClassSaveButton;
+  @FXML private Button searchClassButton;
+  @FXML private Button editClassSaveButton;
+  @FXML private Button editClassRemoveButton;
+
+
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane registerInstructorPane;
@@ -88,7 +99,6 @@ public class GUIController
   @FXML private Pane classesPane;
   @FXML private Pane addClassPane;
   @FXML private Pane searchClassPane;
-  @FXML private Pane editClassPane;
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
 
