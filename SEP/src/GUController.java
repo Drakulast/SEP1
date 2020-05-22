@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.GregorianCalendar;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -16,6 +17,8 @@ public class GUController
 {
   @FXML private Button overviewButton;
   @FXML private Button instructorsButton;
+  @FXML private Button searchInstructorByNameButton;
+  @FXML private Button searchInstructorByPhoneButton;
   @FXML private Button membersButton;
   @FXML private Button classesButton;
   @FXML private Button scheduleButton;
@@ -24,6 +27,10 @@ public class GUController
 
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
+  @FXML private Pane registerInstructorPane;
+  @FXML private Pane findInstructorPane;
+  @FXML private Pane searchInstructorByNamePane;
+  @FXML private Pane searchInstructorByPhonePane;
   @FXML private Pane membersPane;
   @FXML private Pane classesPane;
   @FXML private Pane schedulePane;
@@ -89,8 +96,10 @@ public class GUController
 
   public void setTodayDate()
   {
-    dateLabel.setText("21/05/2020");
+    dateLabel.setText(adapter.today());
   }
+
+
 
   //INSTRUCTORS PANE METHODS
   public void loadInstructorsPane()
@@ -98,6 +107,9 @@ public class GUController
     screenSaverPane.setVisible(false);
     overviewPane.setVisible(false);
     instructorsPane.setVisible(true);
+    registerInstructorPane.setVisible(true);
+    searchInstructorByNameButton.setVisible(false);
+    searchInstructorByPhoneButton.setVisible(false);
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
@@ -111,6 +123,36 @@ public class GUController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
     scheduleButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
+  }
+
+  public void loadRegisterInstructorPane()
+  {
+    registerInstructorPane.setVisible(true);
+    findInstructorPane.setVisible(false);
+
+    searchInstructorByNameButton.setVisible(false);
+    searchInstructorByPhoneButton.setVisible(false);
+  }
+
+  public void loadFindInstructorPane()
+  {
+    registerInstructorPane.setVisible(false);
+    findInstructorPane.setVisible(true);
+
+    searchInstructorByNameButton.setVisible(true);
+    searchInstructorByPhoneButton.setVisible(true);
+  }
+
+  public void loadSearchInstructorByNamePane()
+  {
+    searchInstructorByNamePane.setVisible(true);
+    searchInstructorByPhonePane.setVisible(false);
+  }
+
+  public void loadSearchInstructorByPhonePane()
+  {
+    searchInstructorByNamePane.setVisible(false);
+    searchInstructorByPhonePane.setVisible(true);
   }
 
   //MEMBERS PANE METHODS

@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class FitnessCenterFileAdapter
 {
@@ -240,5 +241,17 @@ public class FitnessCenterFileAdapter
     }
 
     return stringToReturn;
+  }
+
+  //Get the current date
+  public static String today()
+  {
+    GregorianCalendar currentDate = new GregorianCalendar();
+    int currentDay = currentDate.get(GregorianCalendar.DATE);
+    int currentMonth = currentDate.get(GregorianCalendar.MONTH) + 1;
+    int currentYear = currentDate.get(GregorianCalendar.YEAR);
+
+    return String.valueOf(currentDay) + "/" + String.valueOf(currentMonth) + "/"
+        + String.valueOf(currentYear);
   }
 }
