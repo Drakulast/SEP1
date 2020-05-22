@@ -26,6 +26,8 @@ public class GUIController
   @FXML private Button registerInstructorAddClassButton;
 
   @FXML private TextField area1;
+  @FXML private TextField area2;
+  @FXML private TextField area3;
   @FXML private TextField registerInstructorFirstNameInput;
   @FXML private TextField registerInstructorLastNameInput;
   @FXML private TextField registerInstructorAddressInput;
@@ -64,6 +66,8 @@ public class GUIController
         "Classes.bin", "ScheduledClasses.bin");
     loadOverviewPane();
     setNumberOfMembers();
+    setCurrentInstructors();
+    setCurrentClasses();
     setTodayDate();
 
     System.out.println(adapter.getAllMembers());
@@ -111,6 +115,17 @@ public class GUIController
     String numberOfMembers = String.valueOf(adapter.getAllMembers().size());
     area1.setText(numberOfMembers);
   }
+  public void setCurrentInstructors()
+  {
+
+    area2.setText(String.valueOf(adapter.getAllInstructors().size()));
+  }
+
+  public void setCurrentClasses()
+  {
+    area3.setText(String.valueOf(adapter.getAllClasses().size()));
+  }
+
 
   public void setTodayDate()
   {
