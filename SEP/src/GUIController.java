@@ -2,14 +2,14 @@ import com.sun.javafx.scene.control.InputField;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.GregorianCalendar;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -22,8 +22,25 @@ public class GUIController
   @FXML private Button membersButton;
   @FXML private Button classesButton;
   @FXML private Button scheduleButton;
+  @FXML private Button registerInstructorSaveButton;
+  @FXML private Button registerInstructorAddClassButton;
 
   @FXML private TextField area1;
+  @FXML private TextField registerInstructorFirstNameInput;
+  @FXML private TextField registerInstructorLastNameInput;
+  @FXML private TextField registerInstructorAddressInput;
+  @FXML private TextField registerInstructorEmailInput;
+  @FXML private TextField registerInstructorPhoneInput;
+  @FXML private TextField registerInstructorClassInput;
+  @FXML private TextField searchInstructorByNameFirstNameInput;
+  @FXML private TextField searchInstructorByNameLastNameInput;
+  @FXML private TextField searchInstructorByPhoneInput;
+  @FXML private TextField editInstructorFirstNameInput;
+  @FXML private TextField editInstructorLastNameInput;
+  @FXML private TextField editInstructorAddressInput;
+  @FXML private TextField editInstructorEmailInput;
+  @FXML private TextField editInstructorPhoneInput;
+  @FXML private ListView editInstructorClassesInput;
 
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
@@ -31,6 +48,7 @@ public class GUIController
   @FXML private Pane findInstructorPane;
   @FXML private Pane searchInstructorByNamePane;
   @FXML private Pane searchInstructorByPhonePane;
+  @FXML private Pane editInstructorPane;
   @FXML private Pane membersPane;
   @FXML private Pane classesPane;
   @FXML private Pane schedulePane;
@@ -138,6 +156,9 @@ public class GUIController
   {
     registerInstructorPane.setVisible(false);
     findInstructorPane.setVisible(true);
+    searchInstructorByNamePane.setVisible(true);
+    searchInstructorByPhonePane.setVisible(false);
+    editInstructorPane.setVisible(false);
 
     searchInstructorByNameButton.setVisible(true);
     searchInstructorByPhoneButton.setVisible(true);
@@ -147,12 +168,30 @@ public class GUIController
   {
     searchInstructorByNamePane.setVisible(true);
     searchInstructorByPhonePane.setVisible(false);
+    editInstructorPane.setVisible(false);
   }
 
   public void loadSearchInstructorByPhonePane()
   {
     searchInstructorByNamePane.setVisible(false);
     searchInstructorByPhonePane.setVisible(true);
+    editInstructorPane.setVisible(false);
+  }
+
+  public void loadEditInstructorPane()
+  {
+    editInstructorPane.setVisible(true);
+    searchInstructorByNamePane.setVisible(false);
+    searchInstructorByPhonePane.setVisible(false);
+
+
+    searchInstructorByNameButton.setVisible(false);
+    searchInstructorByPhoneButton.setVisible(false);
+  }
+
+  public void searchInstructor()
+  {
+    loadEditInstructorPane();
   }
 
   //MEMBERS PANE METHODS
