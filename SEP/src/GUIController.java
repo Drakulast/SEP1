@@ -21,6 +21,8 @@ public class GUIController
   @FXML private Button searchInstructorByNameButton;
   @FXML private Button searchInstructorByPhoneButton;
   @FXML private Button membersButton;
+  @FXML private Button searchMemberByNameButton;
+  @FXML private Button searchMemberByPhoneButton;
   @FXML private Button classesButton;
   @FXML private Button scheduleButton;
   @FXML private Button registerInstructorSaveButton;
@@ -53,6 +55,11 @@ public class GUIController
   @FXML private Pane searchInstructorByPhonePane;
   @FXML private Pane editInstructorPane;
   @FXML private Pane membersPane;
+  @FXML private Pane registerMemberPane;
+  @FXML private Pane findMemberPane;
+  @FXML private Pane searchMemberByNamePane;
+  @FXML private Pane searchMemberByPhonePane;
+  @FXML private Pane editMemberPane;
   @FXML private Pane classesPane;
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
@@ -144,6 +151,7 @@ public class GUIController
     registerInstructorPane.setVisible(true);
     searchInstructorByNameButton.setVisible(false);
     searchInstructorByPhoneButton.setVisible(false);
+    editInstructorPane.setVisible(false);
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
@@ -217,6 +225,7 @@ public class GUIController
     overviewPane.setVisible(false);
     instructorsPane.setVisible(false);
     membersPane.setVisible(true);
+    loadRegisterMemberPane();
     classesPane.setVisible(false);
     schedulePane.setVisible(false);
     overviewButton.setStyle(
@@ -230,6 +239,59 @@ public class GUIController
     scheduleButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
+
+  public void loadRegisterMemberPane()
+  {
+    registerMemberPane.setVisible(true);
+    findMemberPane.setVisible(false);
+
+    searchMemberByNameButton.setVisible(false);
+    searchMemberByPhoneButton.setVisible(false);
+  }
+
+  public void loadFindMemberPane()
+  {
+    registerMemberPane.setVisible(false);
+    findMemberPane.setVisible(true);
+    searchMemberByNamePane.setVisible(true);
+    searchMemberByPhonePane.setVisible(false);
+    editMemberPane.setVisible(false);
+
+    searchMemberByNameButton.setVisible(true);
+    searchMemberByPhoneButton.setVisible(true);
+  }
+
+  public void loadSearchMemberByNamePane()
+  {
+    searchMemberByNamePane.setVisible(true);
+    searchMemberByPhonePane.setVisible(false);
+    editMemberPane.setVisible(false);
+  }
+
+  public void loadSearchMemberByPhonePane()
+  {
+    searchMemberByNamePane.setVisible(false);
+    searchMemberByPhonePane.setVisible(true);
+    editMemberPane.setVisible(false);
+  }
+
+  public void loadEditMemberPane()
+  {
+    editMemberPane.setVisible(true);
+    searchMemberByNamePane.setVisible(false);
+    searchMemberByPhonePane.setVisible(false);
+
+
+    searchMemberByNameButton.setVisible(false);
+    searchMemberByPhoneButton.setVisible(false);
+  }
+
+  public void searchMember()
+  {
+    loadEditMemberPane();
+  }
+
+
 
   //CLASSES PANE METHODS
   public void loadClassesPane()
