@@ -71,6 +71,7 @@ public class GUIController
   @FXML private Button editInstructorSaveButton;
   @FXML private Button editInstructorAddButton;
 
+
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane registerInstructorPane;
@@ -87,7 +88,6 @@ public class GUIController
   @FXML private Pane classesPane;
   @FXML private Pane addClassPane;
   @FXML private Pane searchClassPane;
-  @FXML private Pane editClassPane;
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
 
