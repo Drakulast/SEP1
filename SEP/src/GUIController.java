@@ -47,7 +47,7 @@ public class GUIController
   @FXML private TextField editInstructorAddressInput;
   @FXML private TextField editInstructorEmailInput;
   @FXML private TextField editInstructorPhoneInput;
-  @FXML private TextArea editInstructorClassesInput;
+  @FXML private ListView editInstructorClassesInput;
 
   @FXML private TextField editMemberFirstNameInput;
   @FXML private TextField editMemberLastNameInput;
@@ -71,7 +71,6 @@ public class GUIController
   @FXML private Button editInstructorSaveButton;
   @FXML private Button editInstructorAddButton;
 
-
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane registerInstructorPane;
@@ -92,13 +91,13 @@ public class GUIController
   @FXML private Pane schedulePane;
   @FXML private Pane screenSaverPane;
 
-
   @FXML private Label dateLabel;
 
   private FitnessCenterFileAdapter adapter;
- private ArrayList<String> instrAddClasses = new ArrayList<String>();
- private ArrayList<String> indicatorArray = new ArrayList<String>();
- private int instructorIndicator = 0;
+  private ArrayList<String> instrAddClasses = new ArrayList<String>();
+  private ArrayList<String> indicatorArray = new ArrayList<String>();
+  private int instructorIndicator = 0;
+
   public void initialize()
   {
     adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
@@ -154,6 +153,7 @@ public class GUIController
     String numberOfMembers = String.valueOf(adapter.getAllMembers().size());
     area1.setText(numberOfMembers);
   }
+
   public void setCurrentInstructors()
   {
 
@@ -165,13 +165,10 @@ public class GUIController
     area3.setText(String.valueOf(adapter.getAllClasses().size()));
   }
 
-
   public void setTodayDate()
   {
     dateLabel.setText(adapter.today());
   }
-
-
 
   //INSTRUCTORS PANE METHODS
   public void loadInstructorsPane()
@@ -238,7 +235,6 @@ public class GUIController
     editInstructorPane.setVisible(true);
     searchInstructorByNamePane.setVisible(false);
     searchInstructorByPhonePane.setVisible(false);
-
 
     searchInstructorByNameButton.setVisible(false);
     searchInstructorByPhoneButton.setVisible(false);
@@ -312,7 +308,6 @@ public class GUIController
     searchMemberByNamePane.setVisible(false);
     searchMemberByPhonePane.setVisible(false);
 
-
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
   }
@@ -321,8 +316,6 @@ public class GUIController
   {
     loadEditMemberPane();
   }
-
-
 
   //CLASSES PANE METHODS
   public void loadClassesPane()
@@ -380,7 +373,7 @@ public class GUIController
   }
 
   // Members functionality for members UI
-//------------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------------
   public void mouseClickOnAdd()
   {
     instrAddClasses.add(registerInstructorClassInput.getText());
@@ -417,6 +410,7 @@ public class GUIController
           .equals(adapter.getAllInstructors().get(i).getLastName()))
       {
         instructorIndicator = i;
+
         editInstructorFirstNameInput
             .setText(adapter.getAllInstructors().get(i).getFirstName());
         editInstructorLastNameInput
@@ -427,15 +421,14 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0; b < adapter.getAllInstructors().get(instructorIndicator)
-            .getNumberOfClasses(); b++)
+        for (int b = 0; b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
         {
-          //          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(instructorIndicator).);
+          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(i).getClasses().get(b));
         }
       }
       else
       {
-        System.out.println("SAY THAT THREE TIMES AND YOU ARE A CUNT");
+        System.out.println("Wrong");
 
       }
 
@@ -450,6 +443,8 @@ public class GUIController
           .equals(adapter.getAllInstructors().get(i).getPhoneNumber()))
       {
         instructorIndicator = i;
+
+
         editInstructorFirstNameInput
             .setText(adapter.getAllInstructors().get(i).getFirstName());
         editInstructorLastNameInput
@@ -460,17 +455,14 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0; b < adapter.getAllInstructors().get(i).getNumberOfClasses(); b++){
-          editInstructorClassesInput.setPrefColumnCount(1);
-          editInstructorClassesInput.setPrefRowCount(adapter.getAllInstructors().get(i).getNumberOfClasses());
+        for (int b = 0; b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
+        {
+          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(i).getClasses().get(b));
+        }
       }
-    }
       else
       {
-        System.out.println("SAY THAT THREE TIMES AND YOU ARE A CUNT");
-        System.out.println(searchInstructorByPhoneInput.getText());
-        System.out.println(adapter.getAllInstructors().get(i).getPhoneNumber());
-        System.out.println(adapter.getAllInstructors());
+        System.out.println("Wrong");
       }
 
     }
@@ -478,7 +470,8 @@ public class GUIController
 
   public void addInstructorClassListView()
   {
-
+    Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
+    tempInstructor.getClasses().add("Hmmm");
   }
 
   public void removeInstructorClassListView()
@@ -488,14 +481,16 @@ public class GUIController
 
   public void saveEditedInstructor()
   {
-    Instructor tempInstructor2 = adapter.getAllInstructors().get(instructorIndicator);
+    Instructor tempInstructor2 = adapter.getAllInstructors()
+        .get(instructorIndicator);
     tempInstructor2.setFirstName(editInstructorFirstNameInput.getText());
     tempInstructor2.setLastName(editInstructorLastNameInput.getText());
     tempInstructor2.setAddress(editInstructorAddressInput.getText());
     tempInstructor2.setEmail(editInstructorEmailInput.getText());
     tempInstructor2.setPhoneNumber(editInstructorPhoneInput.getText());
     System.out.println(adapter.getAllInstructors());
-    adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
+    adapter.removeInstructor("Instructors.bin",
+        adapter.getAllInstructors().get(instructorIndicator));
     System.out.println(adapter.getAllInstructors());
     adapter.saveInstructors("Instructors.bin", tempInstructor2);
     System.out.println(adapter.getAllInstructors());

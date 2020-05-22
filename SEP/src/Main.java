@@ -14,8 +14,14 @@ public class Main
 
     ArrayList<String> classesList1 = new ArrayList<String>();
     classesList1.add("Spinning");
+    classesList1.add("Do");
+    classesList1.add("Fucking");
+    classesList1.add("Work");
     ArrayList<String> classesList2 = new ArrayList<String>();
     classesList2.add("Yoga");
+    classesList2.add("Do");
+    classesList2.add("Fucking");
+    classesList2.add("Work");
     Instructor instructor1 = new Instructor("Bob", "Sixpack", "Horsens",
         "box.sixpack@viafit.com", "45856829", classesList1);
     Instructor instructor2 = new Instructor("Ionut", "Sixpack", "Horsens",

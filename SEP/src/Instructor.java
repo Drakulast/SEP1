@@ -11,7 +11,9 @@ public class Instructor extends Person implements Serializable
     super(firstName, lastName, address, email, phoneNumber);
     this.classes = classes;
   }
-
+public ArrayList<String> getClasses(){
+    return classes;
+}
   public void addClass(String className)
   {
     boolean exists = false;
@@ -87,4 +89,5 @@ public class Instructor extends Person implements Serializable
     Instructor other = (Instructor) obj;
     return super.equals(other) && classes.equals(other.classes);
   }
+
 }
