@@ -14,6 +14,7 @@ public class MyTextFileIO
     PrintWriter write = new PrintWriter(fileOut);
     write.println(str);
     write.close();
+    System.out.println("Done writing to file.");
   }
 
   public void appendToFile(String fileName, String str)
@@ -23,6 +24,7 @@ public class MyTextFileIO
     PrintWriter write = new PrintWriter(fileOut);
     write.println(str);
     write.close();
+    System.out.println("Done appending to file.");
   }
 
   public void writeToFile(String fileName, String[] str)
@@ -35,6 +37,7 @@ public class MyTextFileIO
       write.println(string);
     }
     write.close();
+    System.out.println("Done writing to file.");
   }
 
   public void appendToFile(String fileName, String[] str)
@@ -48,6 +51,7 @@ public class MyTextFileIO
       write.println(string);
     }
     write.close();
+    System.out.println("Done appending to file.");
   }
 
   public String readStringFromFile(String fileName) throws FileNotFoundException
@@ -55,6 +59,7 @@ public class MyTextFileIO
     FileInputStream fileIn = new FileInputStream(fileName);
     Scanner read = new Scanner(fileIn);
     read.close();
+    System.out.println("Done reading to file.");
     return read.nextLine();
   }
 
@@ -71,6 +76,7 @@ public class MyTextFileIO
     read.close();
     String[] temp = new String[tempArray.size()];
     temp = tempArray.toArray(temp);
+    System.out.println("Done reading to file.");
     return temp;
   }
 }

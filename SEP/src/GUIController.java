@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -1158,6 +1159,44 @@ public class GUIController
       }
     }
   }
+
+  // Exporting to xml
+  public void exportToXml(ArrayList<ScheduledClass> scheduledClasses)
+  {
+    MyTextFileIO textFileIO = new MyTextFileIO();
+    String xmlFile = "scheduleExport.xml";
+    String stringToAppend = "";
+    try
+    {
+      textFileIO
+          .writeToFile(xmlFile, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+      textFileIO.appendToFile(xmlFile, "<schedule>");
+      for (ScheduledClass scheduledClass : scheduledClasses)
+      {
+        stringToAppend +=
+            "<scheduledClass>" + "<class>" + "<name>" + scheduledClass
+                .getClassItem().getName() + "</name>" + "<capacity>"
+                + scheduledClass.getClassItem().getMaxCapacity() + "</capacity>"
+                + "</class>" + "<instructor>" + "<firstName>" + scheduledClass
+                .getInstructor().getFirstName() + "</firstName>" + "<lastName>"
+                + scheduledClass.getInstructor().getLastName() + "</lastName>"
+                + "</instructor>" + "<date>" + "<day>" + scheduledClass
+                .getDateTime().getDay() + "</day>" + "<month>" + scheduledClass
+                .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
+                + "<hour>" + scheduledClass.getDateTime().getMinute()
+                + "</hour>" + "<minute>" + scheduledClass.getDateTime()
+                .getMinute() + "</minute>" + "</time>" + "</scheduledClass>";
+        textFileIO.appendToFile(xmlFile, stringToAppend);
+      }
+      textFileIO.appendToFile(xmlFile, "</schedule>");
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found.");
+      System.exit(1);
+    }
+  }
+
 }
 //  String tempString = scheduleClassClassInput.getSelectionModel()
 //      .getSelectedItem();
