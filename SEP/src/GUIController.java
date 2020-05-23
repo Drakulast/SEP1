@@ -84,6 +84,25 @@ public class GUIController
   @FXML private Button editClassSaveButton;
   @FXML private Button editClassRemoveButton;
 
+  @FXML private TextField scheduleClassHourInput;
+  @FXML private TextField scheduleClassMinuteInput;
+  @FXML private TextField scheduleClassDurationInput;
+  @FXML private TextField editScheduledClassHourInput;
+  @FXML private TextField editScheduledClassMinuteInput;
+  @FXML private TextField editScheduledClassDurationInput;
+  @FXML private TextArea searchScheduledClassTextArea;
+  @FXML private DatePicker scheduleClassDateInput;
+  @FXML private DatePicker searchScheduledClassFromInput;
+  @FXML private DatePicker searchScheduledClassToInput;
+  @FXML private DatePicker editScheduledClassDateInput;
+  @FXML private ComboBox scheduleClassClassInput;
+  @FXML private ComboBox scheduleClassInstructorInput;
+  @FXML private ComboBox editScheduledClassClassInput;
+  @FXML private ComboBox editScheduledClassInstructorInput;
+  @FXML private Button scheduleClassSaveButton;
+  @FXML private Button searchScheduledClassButton;
+  @FXML private Button editScheduledClassSaveButton;
+
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
   @FXML private Pane registerInstructorPane;
@@ -104,6 +123,7 @@ public class GUIController
   @FXML private Pane scheduleClassPane;
   @FXML private Pane scheduleDisplayEditExportPane;
   @FXML private Pane scheduleDisplayPane;
+  @FXML private Pane scheduleEditPane;
   @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
 
@@ -197,6 +217,7 @@ public class GUIController
     overviewPane.setVisible(false);
     instructorsPane.setVisible(true);
     registerInstructorPane.setVisible(true);
+    loadRegisterInstructorPane();
     searchInstructorByNameButton.setVisible(false);
     searchInstructorByPhoneButton.setVisible(false);
     editInstructorPane.setVisible(false);
@@ -403,8 +424,16 @@ public class GUIController
     scheduleClassPane.setVisible(false);
     scheduleDisplayEditExportPane.setVisible(true);
     scheduleDisplayPane.setVisible(true);
+    scheduleEditPane.setVisible(false);
     scheduleLogoPane.setVisible(true);
   }
+
+  public void loadScheduleEditPane()
+  {
+    scheduleEditPane.setVisible(true);
+    scheduleLogoPane.setVisible(false);
+  }
+
 
   //------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
