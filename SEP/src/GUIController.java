@@ -90,7 +90,14 @@ public class GUIController
   @FXML private TextField editScheduledClassHourInput;
   @FXML private TextField editScheduledClassMinuteInput;
   @FXML private TextField editScheduledClassDurationInput;
+  @FXML private TextField scheduledClassNameOutput;
+  @FXML private TextField scheduledClassDateOutput;
+  @FXML private TextField scheduledClassDurationOutput;
+  @FXML private TextField scheduledClassInstructorOutput;
+  @FXML private TextField scheduledClassTimeOutput;
+  @FXML private TextField scheduledClassCapacityOutput;
   @FXML private TextArea searchScheduledClassTextArea;
+  @FXML private TextArea scheduledClassMembersOutput;
   @FXML private DatePicker scheduleClassDateInput;
   @FXML private DatePicker searchScheduledClassFromInput;
   @FXML private DatePicker searchScheduledClassToInput;
@@ -102,6 +109,7 @@ public class GUIController
   @FXML private Button scheduleClassSaveButton;
   @FXML private Button searchScheduledClassButton;
   @FXML private Button editScheduledClassSaveButton;
+  @FXML private Button removeScheduledClassButton;
 
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
@@ -124,6 +132,7 @@ public class GUIController
   @FXML private Pane scheduleDisplayEditExportPane;
   @FXML private Pane scheduleDisplayPane;
   @FXML private Pane scheduleEditPane;
+  @FXML private Pane scheduleRemovePane;
   @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
 
@@ -425,6 +434,7 @@ public class GUIController
     scheduleDisplayEditExportPane.setVisible(true);
     scheduleDisplayPane.setVisible(true);
     scheduleEditPane.setVisible(false);
+    scheduleRemovePane.setVisible(false);
     scheduleLogoPane.setVisible(true);
   }
 
@@ -432,6 +442,14 @@ public class GUIController
   {
     scheduleEditPane.setVisible(true);
     scheduleLogoPane.setVisible(false);
+    scheduleRemovePane.setVisible(false);
+  }
+
+  public void loadScheduleRemovePane()
+  {
+    scheduleEditPane.setVisible(false);
+    scheduleLogoPane.setVisible(false);
+    scheduleRemovePane.setVisible(true);
   }
 
 
