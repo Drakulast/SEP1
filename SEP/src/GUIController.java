@@ -303,7 +303,6 @@ public class GUIController
     searchMemberByNamePane.setVisible(true);
     searchMemberByPhonePane.setVisible(false);
     editMemberPane.setVisible(false);
-
     searchMemberByNameButton.setVisible(true);
     searchMemberByPhoneButton.setVisible(true);
   }
@@ -669,12 +668,14 @@ public class GUIController
     adapter.saveMembers("TestMembers.bin", tempMember);
     if (searchMemberBy)
     {
+      loadFindMemberPane();
       loadSearchMemberByNamePane();
       searchMemberByNameFirstNameInput.setText("");
       searchMemberByNameLastNameInput.setText("");
     }
     else
     {
+      loadFindMemberPane();
       loadSearchMemberByPhonePane();
       searchMemberByPhoneInput.setText("");
     }
@@ -687,65 +688,19 @@ public class GUIController
 
     if (searchMemberBy)
     {
+      loadFindMemberPane();
       loadSearchMemberByNamePane();
       searchMemberByNameFirstNameInput.setText("");
       searchMemberByNameLastNameInput.setText("");
     }
     else
     {
+      loadFindMemberPane();
       loadSearchMemberByPhonePane();
       searchMemberByPhoneInput.setText("");
     }
   }
-/*
-  public void SaveAndRegisterMember()
-  {
-    Member newMember = new Member(registerMemberFirstNameInput.getText(),
-        registerMemberLastNameInput.getText(),
-        registerMemberAddressInput.getText(),
-        registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
-    adapter.saveMembers("TestMembers.bin", newMember);
-    registerMemberFirstNameInput.setText("");
-    registerMemberLastNameInput.setText("");
-    registerMemberAddressInput.setText("");
-    registerMemberEmailInput.setText("");
-    registerMemberPhoneInput.setText("");
-    if (registerMemberMembershipInput.getValue().equals("Premium"))
-    {
-      newMember.upgradeMembership();
-    }
-    System.out.println(newMember);
-  }
 
-  public void searchMemberByName()
-  {
-    String firstName = searchMemberByNameFirstNameInput.getText();
-    String lastName = searchMemberByNameLastNameInput.getText();
-
-    ArrayList<Member> members = adapter.getAllMembers();
-    for (int i = 0; i < members.size(); i++)
-    {
-      if (members.get(i).getFirstName().equals(firstName) && members.get(i)
-          .getLastName().equals(lastName))
-      {
-        editMemberFirstNameInput.setText(members.get(i).getFirstName());
-        editMemberLastNameInput.setText(members.get(i).getLastName());
-        editMemberAddressInput.setText(members.get(i).getAddress());
-        editMemberEmailInput.setText(members.get(i).getEmail());
-        editMemberMembershipInput.setEditable(true);
-        if (registerMemberMembershipInput.getValue().equals("Premium"))
-        {
-          editMemberMembershipInput.getSelectionModel().select("Premium");
-        }
-        else
-        {
-          editMemberMembershipInput.getSelectionModel().select("Standard");
-        }
-        editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
-      }
-    }
-  }
-  */
 // -------------------------Classes----------------------------------
 public void saveAddedClasses(){
     System.out.println(adapter.getAllClasses());
