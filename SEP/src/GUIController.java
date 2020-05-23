@@ -8,15 +8,21 @@ import javafx.scene.control.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Optional;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import org.w3c.dom.ls.LSOutput;
+
+import javax.swing.*;
 
 public class GUIController
 {
@@ -135,6 +141,7 @@ public class GUIController
   @FXML private Pane scheduleRemovePane;
   @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
+  @FXML private DatePicker test;
 
   @FXML private Label dateLabel;
 
@@ -437,6 +444,60 @@ public class GUIController
     scheduleRemovePane.setVisible(false);
     scheduleLogoPane.setVisible(true);
   }
+  //------------------------------------Alert Panel-----------------------------------------------
+
+  public void messageWarning(String message)
+  {
+    Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
+    alert.setContentText(message);
+    alert.setHeaderText("Warning!");
+    alert.setTitle(null);
+    alert.showAndWait();
+  }
+
+  public void messageError(String message)
+  {
+    Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
+    alert.setContentText(message);
+    alert.setTitle(null);
+    alert.setHeaderText("Error!");
+    alert.showAndWait();
+  }
+
+  public void messageNone(String message)
+  {
+    Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.OK);
+    alert.setContentText(message);
+    alert.setHeaderText(null);
+    alert.setTitle(null);
+    alert.showAndWait();
+  }
+
+  public void messageInformation(String message)
+  {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+    alert.setContentText(message);
+    alert.setHeaderText(null);
+    alert.setTitle(null);
+    alert.showAndWait();
+  }
+
+  public boolean messageConfirmation(String message, Alert.AlertType alertType)
+  {
+    Alert alert = new Alert(alertType, "", ButtonType.OK, ButtonType.CANCEL);
+    alert.setContentText(message);
+    alert.setTitle(null);
+    alert.setHeaderText("Confirmation");
+    alert.showAndWait();
+    if (alert.getResult() == ButtonType.CANCEL)
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
 
   public void loadScheduleEditPane()
   {
@@ -451,7 +512,6 @@ public class GUIController
     scheduleLogoPane.setVisible(false);
     scheduleRemovePane.setVisible(true);
   }
-
 
   //------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
@@ -470,6 +530,7 @@ public class GUIController
         registerInstructorEmailInput.getText(),
         registerInstructorPhoneInput.getText(), instrAddClasses);
     adapter.saveInstructors("Instructors.bin", tempInstructor);
+    messageInformation("Instructor Added!");
     instrAddClasses.clear();
     registerInstructorFirstNameInput.setText("");
     registerInstructorLastNameInput.setText("");
@@ -477,20 +538,22 @@ public class GUIController
     registerInstructorEmailInput.setText("");
     registerInstructorPhoneInput.setText("");
     System.out.println(tempInstructor);
-
+    setCurrentInstructors();
   }
 
   public void searchInstructorByName()
   {
+    int ex = 0;
     for (int i = 0; i < adapter.getAllInstructors().size(); i++)
     {
+
       if (searchInstructorByNameFirstNameInput.getText()
           .equals(adapter.getAllInstructors().get(i).getFirstName())
           && searchInstructorByNameLastNameInput.getText()
           .equals(adapter.getAllInstructors().get(i).getLastName()))
       {
         instructorIndicator = i;
-
+        ex = 1;
         editInstructorFirstNameInput
             .setText(adapter.getAllInstructors().get(i).getFirstName());
         editInstructorLastNameInput
@@ -507,6 +570,8 @@ public class GUIController
           editInstructorClassesInput.getItems()
               .add(adapter.getAllInstructors().get(i).getClasses().get(b));
         }
+        loadEditInstructorPane();
+        break;
       }
       else
       {
@@ -515,15 +580,21 @@ public class GUIController
       }
 
     }
+    if (ex == 0)
+    {
+      messageWarning("Instructor not found!");
+    }
   }
 
   public void searchInstructorByPhoneNumber()
   {
+    int ex = 0;
     for (int i = 0; i < adapter.getAllInstructors().size(); i++)
     {
       if (searchInstructorByPhoneInput.getText()
           .equals(adapter.getAllInstructors().get(i).getPhoneNumber()))
       {
+        ex = 1;
         instructorIndicator = i;
 
         editInstructorFirstNameInput
@@ -542,12 +613,18 @@ public class GUIController
           editInstructorClassesInput.getItems()
               .add(adapter.getAllInstructors().get(i).getClasses().get(b));
         }
+        loadEditInstructorPane();
+        break;
       }
       else
       {
-        System.out.println("Wrong");
+
       }
 
+    }
+    if (ex == 0)
+    {
+      messageWarning("Instructor not found!");
     }
   }
 
@@ -588,32 +665,44 @@ public class GUIController
 
   public void saveEditedInstructor()
   {
-    Instructor tempInstructor = adapter.getAllInstructors()
-        .get(instructorIndicator);
-    tempInstructor.setFirstName(editInstructorFirstNameInput.getText());
-    tempInstructor.setLastName(editInstructorLastNameInput.getText());
-    tempInstructor.setAddress(editInstructorAddressInput.getText());
-    tempInstructor.setEmail(editInstructorEmailInput.getText());
-    tempInstructor.setPhoneNumber(editInstructorPhoneInput.getText());
-    System.out.println(adapter.getAllInstructors().get(instructorIndicator));
-    adapter
-        .editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
-    System.out.println(adapter.getAllInstructors().get(instructorIndicator));
+    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    {
+      Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
+      tempInstructor.setFirstName(editInstructorFirstNameInput.getText());
+      tempInstructor.setLastName(editInstructorLastNameInput.getText());
+      tempInstructor.setAddress(editInstructorAddressInput.getText());
+      tempInstructor.setEmail(editInstructorEmailInput.getText());
+      tempInstructor.setPhoneNumber(editInstructorPhoneInput.getText());
+      System.out.println(adapter.getAllInstructors().get(instructorIndicator));
+      adapter.editInstructor("Instructors.bin", instructorIndicator,
+          tempInstructor);
+
+      System.out.println(adapter.getAllInstructors().get(instructorIndicator));
+      loadFindInstructorPane();
+      loadSearchInstructorByNamePane();
+      setCurrentInstructors();
+    }
   }
 
   public void deleteInstructor()
   {
-    System.out.println(adapter.getAllInstructors().size());
-    adapter.removeInstructor("Instructors.bin",
-        adapter.getAllInstructors().get(instructorIndicator));
-    editInstructorFirstNameInput.setText("");
-    editInstructorLastNameInput.setText("");
-    editInstructorAddressInput.setText("");
-    editInstructorEmailInput.setText("");
-    editInstructorPhoneInput.setText("");
-    editInstructorClassesInput.getItems().clear();
-    System.out.println(adapter.getAllInstructors().size());
-
+    if (messageConfirmation("Do you want to delete this instructor?", Alert.AlertType.WARNING))
+    {
+      System.out.println(adapter.getAllInstructors().size());
+      adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
+      editInstructorFirstNameInput.setText("");
+      editInstructorLastNameInput.setText("");
+      editInstructorAddressInput.setText("");
+      editInstructorEmailInput.setText("");
+      editInstructorPhoneInput.setText("");
+      editInstructorClassesInput.getItems().clear();
+      System.out.println(adapter.getAllInstructors().size());
+      loadFindInstructorPane();
+      searchInstructorByNameFirstNameInput.setText("");
+      searchInstructorByNameLastNameInput.setText("");
+      loadSearchInstructorByNamePane();
+      setCurrentInstructors();
+    }
   }
   // -------------------------Members----------------------------------
 
@@ -633,19 +722,22 @@ public class GUIController
       newMember.upgradeMembership();
     }
     adapter.saveMembers("TestMembers.bin", newMember);
+    setNumberOfMembers();
+    messageInformation("Member Added!");
   }
 
   public void searchMemberByName()
   {
     String firstName = searchMemberByNameFirstNameInput.getText();
     String lastName = searchMemberByNameLastNameInput.getText();
-
+    int ex = 0;
     ArrayList<Member> members = adapter.getAllMembers();
     for (int i = 0; i < members.size(); i++)
     {
       if (members.get(i).getFirstName().equals(firstName) && members.get(i)
           .getLastName().equals(lastName))
       {
+        ex = 1;
         memberIndicator = i;
         searchMemberBy = true;
         editMemberFirstNameInput.setText(members.get(i).getFirstName());
@@ -663,17 +755,22 @@ public class GUIController
         }
       }
     }
+    if (ex == 0)
+    {
+      messageWarning("Member not found!");
+    }
   }
 
   public void searchMemberByPhoneNumber()
   {
     String phoneNumber = searchMemberByPhoneInput.getText();
-
+    int ex = 0;
     ArrayList<Member> members = adapter.getAllMembers();
     for (int i = 0; i < members.size(); i++)
     {
       if (members.get(i).getPhoneNumber().equals(phoneNumber))
       {
+        ex = 1;
         memberIndicator = i;
         searchMemberBy = false;
         editMemberFirstNameInput.setText(members.get(i).getFirstName());
@@ -691,101 +788,178 @@ public class GUIController
         }
       }
     }
+    if (ex == 0)
+    {
+      messageWarning("Member not found!");
+    }
   }
 
   public void saveMember()
   {
-    Member tempMember = adapter.getAllMembers().get(memberIndicator);
-    adapter.removeMember("TestMembers.bin", tempMember);
+    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    {
+      Member tempMember = adapter.getAllMembers().get(memberIndicator);
+      adapter.removeMember("TestMembers.bin", tempMember);
 
-    tempMember.setFirstName(editMemberFirstNameInput.getText());
-    tempMember.setLastName(editMemberLastNameInput.getText());
-    tempMember.setAddress(editMemberAddressInput.getText());
-    tempMember.setEmail(editMemberEmailInput.getText());
-    tempMember.setPhoneNumber(editMemberPhoneInput.getText());
+      tempMember.setFirstName(editMemberFirstNameInput.getText());
+      tempMember.setLastName(editMemberLastNameInput.getText());
+      tempMember.setAddress(editMemberAddressInput.getText());
+      tempMember.setEmail(editMemberEmailInput.getText());
+      tempMember.setPhoneNumber(editMemberPhoneInput.getText());
 
-    if (editMemberMembershipInput.getValue().equals("Premium"))
-    {
-      tempMember.upgradeMembership();
-    }
-    else
-    {
-      tempMember.downgradeMembership();
-    }
-    adapter.saveMembers("TestMembers.bin", tempMember);
-    if (searchMemberBy)
-    {
-      loadFindMemberPane();
-      loadSearchMemberByNamePane();
-      searchMemberByNameFirstNameInput.setText("");
-      searchMemberByNameLastNameInput.setText("");
-    }
-    else
-    {
-      loadFindMemberPane();
-      loadSearchMemberByPhonePane();
-      searchMemberByPhoneInput.setText("");
+      if (editMemberMembershipInput.getValue().equals("Premium"))
+      {
+        tempMember.upgradeMembership();
+      }
+      else
+      {
+        tempMember.downgradeMembership();
+      }
+      adapter.saveMembers("TestMembers.bin", tempMember);
+      setNumberOfMembers();
+      if (searchMemberBy)
+      {
+        loadFindMemberPane();
+        loadSearchMemberByNamePane();
+        searchMemberByNameFirstNameInput.setText("");
+        searchMemberByNameLastNameInput.setText("");
+      }
+      else
+      {
+        loadFindMemberPane();
+        loadSearchMemberByPhonePane();
+        searchMemberByPhoneInput.setText("");
+      }
     }
   }
 
   public void deleteMember()
   {
-    adapter.removeMember("TestMembers.bin",
-        adapter.getAllMembers().get(memberIndicator));
+    if (messageConfirmation("Do you want to delete this member?", Alert.AlertType.WARNING))
+    {
+      adapter.removeMember("TestMembers.bin", adapter.getAllMembers().get(memberIndicator));
+      setNumberOfMembers();
 
-    if (searchMemberBy)
-    {
-      loadFindMemberPane();
-      loadSearchMemberByNamePane();
-      searchMemberByNameFirstNameInput.setText("");
-      searchMemberByNameLastNameInput.setText("");
-    }
-    else
-    {
-      loadFindMemberPane();
-      loadSearchMemberByPhonePane();
-      searchMemberByPhoneInput.setText("");
+      if (searchMemberBy)
+      {
+        loadFindMemberPane();
+        loadSearchMemberByNamePane();
+        searchMemberByNameFirstNameInput.setText("");
+        searchMemberByNameLastNameInput.setText("");
+      }
+      else
+      {
+        loadFindMemberPane();
+        loadSearchMemberByPhonePane();
+        searchMemberByPhoneInput.setText("");
+      }
     }
   }
 
-// -------------------------Classes----------------------------------
-public void saveAddedClasses(){
-    System.out.println(adapter.getAllClasses());
-    Class tempClass=new Class("No Name",0);
-    tempClass.setName(addClassNameInput.getText());
-    int a=Integer.parseInt(addClassCapacityInput.getText());
-    tempClass.setMaxCapacity(a);
-    adapter.saveClasses("Classes.bin",tempClass);
-    addClassNameInput.clear();
-    addClassCapacityInput.clear();
-    System.out.println(adapter.getAllClasses());
+  // -------------------------Classes----------------------------------
+  public void saveAddedClasses()
+  {
+    if (addClassCapacityInput.getText().matches("[0-9]+"))
+    {
+      System.out.println(adapter.getAllClasses());
+      Class tempClass = new Class("No Name", 0);
+      tempClass.setName(addClassNameInput.getText());
+      int a = Integer.parseInt(addClassCapacityInput.getText());
+      tempClass.setMaxCapacity(a);
+      adapter.saveClasses("Classes.bin", tempClass);
+      setCurrentClasses();
+      addClassNameInput.clear();
+      addClassCapacityInput.clear();
+      System.out.println(adapter.getAllClasses());
+      addClassNameInput.setText("");
+      addClassCapacityInput.setText("");
     }
-public void searchClassesByName(){
-    for(int i=0;i<adapter.getAllClasses().size();i++){
-    if(searchClassNameInput.getText().equals(adapter.getAllClasses().get(i).getName())){
-    classIndicator=i;
-    ediClassNameInput.setText(adapter.getAllClasses().get(i).getName());
-    editClassCapacityInput.setText(String.valueOf(adapter.getAllClasses().get(i).getMaxCapacity()));
+    else
+    {
+      messageWarning("Maximum capacity needs to be a number!");
     }
-    else{
+  }
 
-    System.out.println("If this message appears "+adapter.getAllClasses().size()+" then it didnt find class");
+  public void searchClassesByName()
+  {
+    int ex = 0;
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      if (searchClassNameInput.getText()
+          .equals(adapter.getAllClasses().get(i).getName()))
+      {
+        ex = 1;
+        classIndicator = i;
+        ediClassNameInput.setText(adapter.getAllClasses().get(i).getName());
+        editClassCapacityInput.setText(
+            String.valueOf(adapter.getAllClasses().get(i).getMaxCapacity()));
+      }
+      else
+      {
+
+        System.out.println(
+            "If this message appears " + adapter.getAllClasses().size()
+                + " then it didnt find class");
+      }
     }
+    if (ex == 0)
+    {
+      messageWarning("Class not found!");
     }
+  }
+
+  public void saveEditedClass()
+  {
+    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    {
+      System.out.println(adapter.getAllClasses());
+      Class tempClass = new Class(ediClassNameInput.getText(), Integer.parseInt(editClassCapacityInput.getText()));
+      adapter.editClass("Classes.bin", classIndicator, tempClass);
+      setCurrentClasses();
+      System.out.println(adapter.getAllClasses());
     }
-public void saveEditedClass(){
-    System.out.println(adapter.getAllClasses());
-    Class tempClass=new Class(ediClassNameInput.getText(),Integer.parseInt(editClassCapacityInput.getText()));
-    adapter.editClass("Classes.bin",classIndicator,tempClass);
-    System.out.println(adapter.getAllClasses());
+  }
+
+  public void removeClass()
+  {
+    if (messageConfirmation("Do you want to delete this class?", Alert.AlertType.WARNING))
+    {
+      System.out.println(adapter.getAllClasses());
+      adapter.removeClass("Classes.bin", adapter.getAllClasses().get(classIndicator));
+      setCurrentClasses();
+      ediClassNameInput.clear();
+      editClassCapacityInput.clear();
+      searchClassNameInput.clear();
+      System.out.println(adapter.getAllClasses());
     }
-public void removeClass(){
-    System.out.println(adapter.getAllClasses());
-    adapter.removeClass("Classes.bin",adapter.getAllClasses().get(classIndicator));
-    ediClassNameInput.clear();
-    editClassCapacityInput.clear();
-    searchClassNameInput.clear();
-    System.out.println(adapter.getAllClasses());
-    }
-    }
+  }
+}
+
+// -------------------------Schedule----------------------------------
+//  public void Schedule()
+//  {
+//    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+//    tempDateTime.setMinute(1);
+//    tempDateTime.setHour(1);
+//    tempDateTime.setYear(test.getValue().getYear());
+//    tempDateTime.setMonth(test.getValue().getMonthValue());
+//    tempDateTime.setDay(test.getValue().getDayOfMonth());
+//    Class tempClass = new Class();
+//    Instructor tempInstructor = new Instructor();
+//    ArrayList<Member> tempMembers = new ArrayList<Member>();
+//    ScheduledClass tempScheduledClass = new ScheduledClass(tempClass, tempInstructor, tempDateTime, tempMembers, Integer.parseInt(.getText()));
+//    adapter.saveScheduleClasses("ScheduledClass.bin", tempScheduledClass);
+//  }
+//  public void searchForScheduledClasses(){
+//    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+//    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
+//    tempDateTime.setYear(test.getValue().getYear());
+//    tempDateTime.setMonth(test.getValue().getMonthValue());
+//    tempDateTime.setDay(test.getValue().getDayOfMonth());
+//    tempDateTime.setYear(test.getValue().getYear());
+//    tempDateTime.setMonth(test.getValue().getMonthValue());
+//    tempDateTime.setDay(test.getValue().getDayOfMonth());
+//  }
+
+
 
