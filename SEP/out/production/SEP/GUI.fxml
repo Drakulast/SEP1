@@ -759,7 +759,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="640.0" mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Export" textFill="#12123a">
+                  <Button layoutX="640.0" mnemonicParsing="false" onAction="#loadScheduleExportPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Export" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -767,7 +767,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Pane fx:id="scheduleDisplayPane" layoutY="39.0" prefHeight="459.0" prefWidth="320.0">
+                  <Pane fx:id="scheduleDisplayPane" layoutY="39.0" prefHeight="459.0" prefWidth="320.0" visible="false">
                      <children>
                         <Label layoutX="29.0" layoutY="93.0" prefHeight="27.0" prefWidth="70.0" text="To:">
                            <font>
@@ -906,7 +906,7 @@
                   </Pane>
                   <Pane fx:id="scheduleSignUpMemberPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">
                      <children>
-                        <ComboBox fx:id="ignUpScheduledClassPremiumMembersInput" layoutX="165.0" layoutY="185.0" prefWidth="150.0" />
+                        <ComboBox fx:id="signUpScheduledClassPremiumMembersInput" layoutX="165.0" layoutY="185.0" prefWidth="150.0" />
                         <Label layoutX="160.0" layoutY="158.0" prefHeight="27.0" prefWidth="160.0" text="Premium members:">
                            <font>
                               <Font size="18.0" />
@@ -920,7 +920,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="scheduleCancelMemberPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0">
+                  <Pane fx:id="scheduleCancelMemberPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">
                      <children>
                         <ComboBox fx:id="cancelScheduledClassAttendingMemberInput" layoutX="165.0" layoutY="185.0" prefWidth="150.0" />
                         <Label layoutX="158.0" layoutY="158.0" prefHeight="27.0" prefWidth="165.0" text="Attending members:">
@@ -934,6 +934,25 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="scheduleExportPane" layoutX="-2.0" layoutY="39.0" prefHeight="459.0" prefWidth="802.0">
+                     <children>
+                        <ComboBox fx:id="scheduleExportMonthInput" layoutX="90.0" layoutY="33.0" prefWidth="150.0" />
+                        <Label layoutX="25.0" layoutY="32.0" prefHeight="27.0" prefWidth="65.0" text="Month:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="scheduleExportGetScheduleButton" layoutX="599.0" layoutY="33.0" mnemonicParsing="false" text="Get schedule" />
+                        <TextField fx:id="scheduleExportYearInput" layoutX="358.0" layoutY="33.0" />
+                        <Label layoutX="296.0" layoutY="32.0" prefHeight="27.0" prefWidth="65.0" text="Year:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="scheduleExportScheduleOutput" layoutX="25.0" layoutY="93.0" prefHeight="279.0" prefWidth="751.0" />
+                        <Button fx:id="scheduleExportButton" layoutX="350.0" layoutY="400.0" mnemonicParsing="false" text="Export Schedule" />
                      </children>
                   </Pane>
                </children>

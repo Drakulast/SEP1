@@ -102,8 +102,10 @@ public class GUIController
   @FXML private TextField scheduledClassInstructorOutput;
   @FXML private TextField scheduledClassTimeOutput;
   @FXML private TextField scheduledClassCapacityOutput;
+  @FXML private TextField scheduleExportYearInput;
   @FXML private TextArea searchScheduledClassTextArea;
   @FXML private TextArea scheduledClassMembersOutput;
+  @FXML private TextArea scheduleExportScheduleOutput;
   @FXML private DatePicker scheduleClassDateInput;
   @FXML private DatePicker searchScheduledClassFromInput;
   @FXML private DatePicker searchScheduledClassToInput;
@@ -113,11 +115,14 @@ public class GUIController
   @FXML private ComboBox editScheduledClassClassInput;
   @FXML private ComboBox editScheduledClassInstructorInput;
   @FXML private ComboBox signUpScheduledClassPremiumMembersInput;
+  @FXML private ComboBox scheduleExportMonthInput;
   @FXML private Button scheduleClassSaveButton;
   @FXML private Button searchScheduledClassButton;
   @FXML private Button editScheduledClassSaveButton;
   @FXML private Button removeScheduledClassButton;
   @FXML private Button signUpMemberButton;
+  @FXML private Button scheduleExportGetScheduleButton;
+  @FXML private Button scheduleExportButton;
 
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
@@ -143,6 +148,7 @@ public class GUIController
   @FXML private Pane scheduleRemovePane;
   @FXML private Pane scheduleSignUpMemberPane;
   @FXML private Pane scheduleCancelMemberPane;
+  @FXML private Pane scheduleExportPane;
   @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
 
@@ -447,7 +453,63 @@ public class GUIController
     scheduleRemovePane.setVisible(false);
     scheduleSignUpMemberPane.setVisible(false);
     scheduleCancelMemberPane.setVisible(false);
+    scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(true);
+  }
+
+  public void loadScheduleEditPane()
+  {
+    scheduleDisplayPane.setVisible(true);
+    scheduleEditPane.setVisible(true);
+    scheduleRemovePane.setVisible(false);
+    scheduleSignUpMemberPane.setVisible(false);
+    scheduleCancelMemberPane.setVisible(false);
+    scheduleExportPane.setVisible(false);
+    scheduleLogoPane.setVisible(false);
+  }
+
+  public void loadScheduleRemovePane()
+  {
+    scheduleDisplayPane.setVisible(true);
+    scheduleEditPane.setVisible(false);
+    scheduleRemovePane.setVisible(true);
+    scheduleSignUpMemberPane.setVisible(false);
+    scheduleCancelMemberPane.setVisible(false);
+    scheduleExportPane.setVisible(false);
+    scheduleLogoPane.setVisible(false);
+  }
+
+  public void loadScheduleSignUpMemberPane()
+  {
+    scheduleDisplayPane.setVisible(true);
+    scheduleEditPane.setVisible(false);
+    scheduleRemovePane.setVisible(false);
+    scheduleSignUpMemberPane.setVisible(true);
+    scheduleCancelMemberPane.setVisible(false);
+    scheduleExportPane.setVisible(false);
+    scheduleLogoPane.setVisible(false);
+  }
+
+  public void loadScheduleCancelMemberPane()
+  {
+    scheduleDisplayPane.setVisible(true);
+    scheduleEditPane.setVisible(false);
+    scheduleRemovePane.setVisible(false);
+    scheduleSignUpMemberPane.setVisible(false);
+    scheduleCancelMemberPane.setVisible(true);
+    scheduleExportPane.setVisible(false);
+    scheduleLogoPane.setVisible(false);
+  }
+
+  public void loadScheduleExportPane()
+  {
+    scheduleDisplayPane.setVisible(false);
+    scheduleEditPane.setVisible(false);
+    scheduleRemovePane.setVisible(false);
+    scheduleSignUpMemberPane.setVisible(false);
+    scheduleCancelMemberPane.setVisible(false);
+    scheduleExportPane.setVisible(true);
+    scheduleLogoPane.setVisible(false);
   }
   //------------------------------------Alert Panel-----------------------------------------------
 
@@ -504,41 +566,7 @@ public class GUIController
     }
   }
 
-  public void loadScheduleEditPane()
-  {
-    scheduleEditPane.setVisible(true);
-    scheduleRemovePane.setVisible(false);
-    scheduleSignUpMemberPane.setVisible(false);
-    scheduleCancelMemberPane.setVisible(false);
-    scheduleLogoPane.setVisible(false);
-  }
 
-  public void loadScheduleRemovePane()
-  {
-    scheduleEditPane.setVisible(false);
-    scheduleRemovePane.setVisible(true);
-    scheduleSignUpMemberPane.setVisible(false);
-    scheduleCancelMemberPane.setVisible(false);
-    scheduleLogoPane.setVisible(false);
-  }
-
-  public void loadScheduleSignUpMemberPane()
-  {
-    scheduleEditPane.setVisible(false);
-    scheduleRemovePane.setVisible(false);
-    scheduleSignUpMemberPane.setVisible(true);
-    scheduleCancelMemberPane.setVisible(false);
-    scheduleLogoPane.setVisible(false);
-  }
-
-  public void loadScheduleCancelMemberPane()
-  {
-    scheduleEditPane.setVisible(false);
-    scheduleRemovePane.setVisible(false);
-    scheduleSignUpMemberPane.setVisible(false);
-    scheduleCancelMemberPane.setVisible(true);
-    scheduleLogoPane.setVisible(false);
-  }
 
   //------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
