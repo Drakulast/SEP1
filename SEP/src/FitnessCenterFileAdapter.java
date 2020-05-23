@@ -239,7 +239,24 @@ public class FitnessCenterFileAdapter
     }
     return classes;
   }
+  public void editClass(String classesFilename, int index, Object object)
+  {
+    ArrayList<Class> oldClasses = getAllClasses();
+    oldClasses.set(index, (Class) object);
 
+    try
+    {
+      myFileIO.writeObjectToFile(classesFilename, oldClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
   // MyFileIO to retrieve a classes
   public Class getClassByName(String name)
   {

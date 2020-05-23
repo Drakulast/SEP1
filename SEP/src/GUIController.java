@@ -74,6 +74,7 @@ public class GUIController
   @FXML private Button editInstructorSaveButton;
   @FXML private Button editInstructorAddButton;
 
+
   @FXML private TextField addClassNameInput;
   @FXML private TextField addClassCapacityInput;
   @FXML private TextField searchClassNameInput;
@@ -83,6 +84,7 @@ public class GUIController
   @FXML private Button searchClassButton;
   @FXML private Button editClassSaveButton;
   @FXML private Button editClassRemoveButton;
+
 
   @FXML private Pane overviewPane;
   @FXML private Pane instructorsPane;
@@ -101,6 +103,10 @@ public class GUIController
   @FXML private Pane addClassPane;
   @FXML private Pane searchClassPane;
   @FXML private Pane schedulePane;
+  @FXML private Pane scheduleClassPane;
+  @FXML private Pane scheduleDisplayEditExportPane;
+  @FXML private Pane scheduleDisplayPane;
+  @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
 
   @FXML private Label dateLabel;
@@ -109,8 +115,7 @@ public class GUIController
   private ArrayList<String> instrAddClasses = new ArrayList<String>();
   private ArrayList<String> indicatorArray = new ArrayList<String>();
   private int instructorIndicator = 0;
-  private int memberIndicator;
-  private boolean searchMemberBy;
+  private int classIndicator = 0;
 
   public void initialize()
   {
@@ -121,10 +126,6 @@ public class GUIController
     setCurrentInstructors();
     setCurrentClasses();
     setTodayDate();
-    editMemberMembershipInput.getItems().add("Standard");
-    editMemberMembershipInput.getItems().add("Premium");
-    registerMemberMembershipInput.getItems().add("Standard");
-    registerMemberMembershipInput.getItems().add("Premium");
 
     //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
@@ -193,7 +194,6 @@ public class GUIController
     overviewPane.setVisible(false);
     instructorsPane.setVisible(true);
     registerInstructorPane.setVisible(true);
-    loadRegisterInstructorPane();
     searchInstructorByNameButton.setVisible(false);
     searchInstructorByPhoneButton.setVisible(false);
     editInstructorPane.setVisible(false);
@@ -291,6 +291,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+    registerMemberMembershipInput.getItems().add("Standard");
+    registerMemberMembershipInput.getItems().add("Premium");
   }
 
   public void loadFindMemberPane()
@@ -327,6 +329,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+    editMemberMembershipInput.getItems().add("Standard");
+    editMemberMembershipInput.getItems().add("Premium");
   }
 
   public void searchMember()
@@ -377,6 +381,7 @@ public class GUIController
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(true);
+    loadScheduleClassPane();
     overviewButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
     instructorsButton.setStyle(
@@ -389,7 +394,22 @@ public class GUIController
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
-  //------------------------------------Instructor------------------------------------------------
+  public void loadScheduleClassPane()
+  {
+    scheduleClassPane.setVisible(true);
+    scheduleDisplayEditExportPane.setVisible(false);
+  }
+
+  public void loadScheduleDisplayEditExportPane()
+  {
+    scheduleClassPane.setVisible(false);
+    scheduleDisplayEditExportPane.setVisible(true);
+    scheduleDisplayPane.setVisible(true);
+    scheduleLogoPane.setVisible(true);
+  }
+
+
+//------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
   {
     instrAddClasses.add(registerInstructorClassInput.getText());
@@ -437,11 +457,9 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0;
-             b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
+        for (int b = 0; b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
         {
-          editInstructorClassesInput.getItems()
-              .add(adapter.getAllInstructors().get(i).getClasses().get(b));
+          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(i).getClasses().get(b));
         }
       }
       else
@@ -462,6 +480,7 @@ public class GUIController
       {
         instructorIndicator = i;
 
+
         editInstructorFirstNameInput
             .setText(adapter.getAllInstructors().get(i).getFirstName());
         editInstructorLastNameInput
@@ -472,11 +491,9 @@ public class GUIController
             .setText(adapter.getAllInstructors().get(i).getEmail());
         editInstructorPhoneInput
             .setText(adapter.getAllInstructors().get(i).getPhoneNumber());
-        for (int b = 0;
-             b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
+        for (int b = 0; b < adapter.getAllInstructors().get(i).getClasses().size(); b++)
         {
-          editInstructorClassesInput.getItems()
-              .add(adapter.getAllInstructors().get(i).getClasses().get(b));
+          editInstructorClassesInput.getItems().add(adapter.getAllInstructors().get(i).getClasses().get(b));
         }
       }
       else
@@ -489,33 +506,24 @@ public class GUIController
 
   public void addInstructorClassListView()
   {
-    Instructor tempInstructor = adapter.getAllInstructors()
-        .get(instructorIndicator);
+    Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
     tempInstructor.getClasses().add(addClassToInstructorInput.getText());
-    editInstructorClassesInput.getItems()
-        .add(addClassToInstructorInput.getText());
-    adapter
-        .editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
+    editInstructorClassesInput.getItems().add(addClassToInstructorInput.getText());
+    adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
     addClassToInstructorInput.setText("");
 
   }
 
   public void removeInstructorClassListView()
   {
-    for (int i = 0;
-         i < adapter.getAllInstructors().get(instructorIndicator).getClasses()
-             .size(); i++)
+    for (int i = 0; i < adapter.getAllInstructors().get(instructorIndicator).getClasses()
+        .size(); i++)
     {
-      if (addClassToInstructorInput.getText().equals(
-          adapter.getAllInstructors().get(instructorIndicator).getClasses()
-              .get(i)))
-      {
-        Instructor tempInstructor = adapter.getAllInstructors()
-            .get(instructorIndicator);
+      if (addClassToInstructorInput.getText().equals(adapter.getAllInstructors().get(instructorIndicator).getClasses().get(i))){
+        Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
         tempInstructor.getClasses().remove(i);
 
-        adapter.editInstructor("Instructors.bin", instructorIndicator,
-            tempInstructor);
+        adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
         editInstructorClassesInput.getItems().remove(i);
         addClassToInstructorInput.setText("");
       }
@@ -532,16 +540,12 @@ public class GUIController
     tempInstructor.setEmail(editInstructorEmailInput.getText());
     tempInstructor.setPhoneNumber(editInstructorPhoneInput.getText());
     System.out.println(adapter.getAllInstructors().get(instructorIndicator));
-    adapter
-        .editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
+    adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
     System.out.println(adapter.getAllInstructors().get(instructorIndicator));
   }
-
-  public void deleteInstructor()
-  {
+  public void deleteInstructor(){
     System.out.println(adapter.getAllInstructors().size());
-    adapter.removeInstructor("Instructors.bin",
-        adapter.getAllInstructors().get(instructorIndicator));
+    adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
     editInstructorFirstNameInput.setText("");
     editInstructorLastNameInput.setText("");
     editInstructorAddressInput.setText("");
@@ -553,12 +557,13 @@ public class GUIController
   }
   // -------------------------Members----------------------------------
 
-  public void registerMember()
+  public void SaveAndRegisterMember()
   {
     Member newMember = new Member(registerMemberFirstNameInput.getText(),
         registerMemberLastNameInput.getText(),
         registerMemberAddressInput.getText(),
         registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
+    adapter.saveMembers("TestMembers.bin", newMember);
     registerMemberFirstNameInput.setText("");
     registerMemberLastNameInput.setText("");
     registerMemberAddressInput.setText("");
@@ -568,7 +573,7 @@ public class GUIController
     {
       newMember.upgradeMembership();
     }
-    adapter.saveMembers("TestMembers.bin", newMember);
+    System.out.println(newMember);
   }
 
   public void searchMemberByName()
@@ -582,14 +587,12 @@ public class GUIController
       if (members.get(i).getFirstName().equals(firstName) && members.get(i)
           .getLastName().equals(lastName))
       {
-        memberIndicator = i;
-        searchMemberBy = true;
         editMemberFirstNameInput.setText(members.get(i).getFirstName());
         editMemberLastNameInput.setText(members.get(i).getLastName());
         editMemberAddressInput.setText(members.get(i).getAddress());
         editMemberEmailInput.setText(members.get(i).getEmail());
-        editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
-        if (members.get(i).hasPremiumMembership())
+        editMemberMembershipInput.setEditable(true);
+        if (registerMemberMembershipInput.getValue().equals("Premium"))
         {
           editMemberMembershipInput.getSelectionModel().select("Premium");
         }
@@ -597,87 +600,48 @@ public class GUIController
         {
           editMemberMembershipInput.getSelectionModel().select("Standard");
         }
-      }
-    }
-  }
-
-  public void searchMemberByPhoneNumber()
-  {
-    String phoneNumber = searchMemberByPhoneInput.getText();
-
-    ArrayList<Member> members = adapter.getAllMembers();
-    for (int i = 0; i < members.size(); i++)
-    {
-      if (members.get(i).getPhoneNumber().equals(phoneNumber))
-      {
-        memberIndicator = i;
-        searchMemberBy = false;
-        editMemberFirstNameInput.setText(members.get(i).getFirstName());
-        editMemberLastNameInput.setText(members.get(i).getLastName());
-        editMemberAddressInput.setText(members.get(i).getAddress());
-        editMemberEmailInput.setText(members.get(i).getEmail());
         editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
-        if (members.get(i).hasPremiumMembership())
-        {
-          editMemberMembershipInput.getSelectionModel().select("Premium");
-        }
-        else
-        {
-          editMemberMembershipInput.getSelectionModel().select("Standard");
-        }
       }
     }
   }
+  // -------------------------Classes----------------------------------
+  public void saveAddedClasses() {
+    System.out.println(adapter.getAllClasses());
+    Class tempClass = new Class("No Name", 0);
+    tempClass.setName(addClassNameInput.getText());
+    int a = Integer.parseInt(addClassCapacityInput.getText());
+    tempClass.setMaxCapacity(a);
+    adapter.saveClasses("Classes.bin", tempClass);
+    addClassNameInput.clear();
+    addClassCapacityInput.clear();
+    System.out.println(adapter.getAllClasses());
+  }
+  public void searchClassesByName(){
+    for (int i = 0; i<adapter.getAllClasses().size(); i++){
+      if (searchClassNameInput.getText().equals(adapter.getAllClasses().get(i).getName())){
+        classIndicator = i;
+        ediClassNameInput.setText(adapter.getAllClasses().get(i).getName());
+        editClassCapacityInput.setText(String.valueOf(adapter.getAllClasses().get(i).getMaxCapacity()));
+      }
+      else {
 
-  public void saveMember()
-  {
-    Member tempMember = adapter.getAllMembers().get(memberIndicator);
-    adapter.removeMember("TestMembers.bin", tempMember);
-
-    tempMember.setFirstName(editMemberFirstNameInput.getText());
-    tempMember.setLastName(editMemberLastNameInput.getText());
-    tempMember.setAddress(editMemberAddressInput.getText());
-    tempMember.setEmail(editMemberEmailInput.getText());
-    tempMember.setPhoneNumber(editMemberPhoneInput.getText());
-
-    if (editMemberMembershipInput.getValue().equals("Premium"))
-    {
-      tempMember.upgradeMembership();
-    }
-    else
-    {
-      tempMember.downgradeMembership();
-    }
-    adapter.saveMembers("TestMembers.bin", tempMember);
-    if (searchMemberBy)
-    {
-      loadSearchMemberByNamePane();
-      searchMemberByNameFirstNameInput.setText("");
-      searchMemberByNameLastNameInput.setText("");
-    }
-    else
-    {
-      loadSearchMemberByPhonePane();
-      searchMemberByPhoneInput.setText("");
+        System.out.println("If this message appears " + adapter.getAllClasses().size() + " then it didnt find class");
+      }
     }
   }
-
-  public void deleteMember()
-  {
-    adapter.removeMember("TestMembers.bin",
-        adapter.getAllMembers().get(memberIndicator));
-
-    if (searchMemberBy)
-    {
-      loadSearchMemberByNamePane();
-      searchMemberByNameFirstNameInput.setText("");
-      searchMemberByNameLastNameInput.setText("");
-    }
-    else
-    {
-      loadSearchMemberByPhonePane();
-      searchMemberByPhoneInput.setText("");
-    }
+  public void saveEditedClass(){
+    System.out.println(adapter.getAllClasses());
+    Class tempClass = new Class(ediClassNameInput.getText(), Integer.parseInt(editClassCapacityInput.getText()));
+    adapter.editClass("Classes.bin", classIndicator, tempClass);
+    System.out.println(adapter.getAllClasses());
   }
-
+  public void removeClass(){
+    System.out.println(adapter.getAllClasses());
+    adapter.removeClass("Classes.bin", adapter.getAllClasses().get(classIndicator));
+    ediClassNameInput.clear();
+    editClassCapacityInput.clear();
+    searchClassNameInput.clear();
+    System.out.println(adapter.getAllClasses());
+  }
 }
+
