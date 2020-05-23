@@ -111,6 +111,7 @@ public class GUIController
   private ArrayList<String> instrAddClasses = new ArrayList<String>();
   private ArrayList<String> indicatorArray = new ArrayList<String>();
   private int instructorIndicator = 0;
+  private int classIndicator = 0;
 
   public void initialize()
   {
@@ -584,5 +585,44 @@ public class GUIController
       }
     }
   }
+  // -------------------------Classes----------------------------------
+  public void saveAddedClasses() {
+    System.out.println(adapter.getAllClasses());
+    Class tempClass = new Class("No Name", 0);
+    tempClass.setName(addClassNameInput.getText());
+    int a = Integer.parseInt(addClassCapacityInput.getText());
+    tempClass.setMaxCapacity(a);
+    adapter.saveClasses("Classes.bin", tempClass);
+    addClassNameInput.clear();
+    addClassCapacityInput.clear();
+    System.out.println(adapter.getAllClasses());
+  }
+  public void searchClassesByName(){
+    for (int i = 0; i<adapter.getAllClasses().size(); i++){
+      if (searchClassNameInput.getText().equals(adapter.getAllClasses().get(i).getName())){
+        classIndicator = i;
+        ediClassNameInput.setText(adapter.getAllClasses().get(i).getName());
+        editClassCapacityInput.setText(String.valueOf(adapter.getAllClasses().get(i).getMaxCapacity()));
+      }
+      else {
 
+        System.out.println("If this message appears " + adapter.getAllClasses().size() + " then it didnt find class");
+      }
+    }
+  }
+  public void saveEditedClass(){
+    System.out.println(adapter.getAllClasses());
+    Class tempClass = new Class(ediClassNameInput.getText(), Integer.parseInt(editClassCapacityInput.getText()));
+    adapter.editClass("Classes.bin", classIndicator, tempClass);
+    System.out.println(adapter.getAllClasses());
+  }
+  public void removeClass(){
+    System.out.println(adapter.getAllClasses());
+    adapter.removeClass("Classes.bin", adapter.getAllClasses().get(classIndicator));
+    ediClassNameInput.clear();
+    editClassCapacityInput.clear();
+    searchClassNameInput.clear();
+    System.out.println(adapter.getAllClasses());
+  }
 }
+

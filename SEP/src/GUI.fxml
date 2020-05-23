@@ -146,7 +146,7 @@
             </GridPane>
          </children>
       </Pane>
-      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button fx:id="RegisterInstructorButton" mnemonicParsing="false" onAction="#loadRegisterInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -356,7 +356,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button fx:id="RegisterInstructorButton1" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -562,7 +562,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
             <Button mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Add" textFill="#12123a">
                <font>
@@ -606,7 +606,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="addClassSaveButton" layoutX="326.0" layoutY="345.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="38.0" prefWidth="150.0" text="Save" />
+                  <Button fx:id="addClassSaveButton" layoutX="326.0" layoutY="345.0" mnemonicParsing="false" onAction="#searchMember" onMouseClicked="#saveAddedClasses" prefHeight="38.0" prefWidth="150.0" text="Save" />
                </children>
             </Pane>
             <Pane fx:id="searchClassPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
@@ -628,7 +628,7 @@
                         <TextField fx:id="searchClassNameInput" focusTraversable="false" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Button fx:id="searchClassButton" layoutX="565.0" layoutY="84.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="27.0" prefWidth="150.0" text="Search" />
+                  <Button fx:id="searchClassButton" layoutX="565.0" layoutY="84.0" mnemonicParsing="false" onAction="#searchMember" onMouseClicked="#searchClassesByName" prefHeight="27.0" prefWidth="150.0" text="Search" />
                   <GridPane layoutX="56.0" layoutY="272.0" prefHeight="125.0" prefWidth="450.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -653,8 +653,8 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="editClassSaveButton" layoutX="565.0" layoutY="290.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="27.0" prefWidth="150.0" text="Save" />
-                  <Button fx:id="editClassRemoveButton" layoutX="565.0" layoutY="353.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="25.0" prefWidth="150.0" text="Delete" />
+                  <Button fx:id="editClassSaveButton" layoutX="565.0" layoutY="290.0" mnemonicParsing="false" onAction="#searchMember" onMouseClicked="#saveEditedClass" prefHeight="27.0" prefWidth="150.0" text="Save" />
+                  <Button fx:id="editClassRemoveButton" layoutX="565.0" layoutY="353.0" mnemonicParsing="false" onAction="#searchMember" onMouseClicked="#removeClass" prefHeight="25.0" prefWidth="150.0" text="Delete" />
                </children>
             </Pane>
          </children>
