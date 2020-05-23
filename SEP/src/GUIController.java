@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -103,7 +104,7 @@ public class GUIController
   @FXML private TextField scheduledClassTimeOutput;
   @FXML private TextField scheduledClassCapacityOutput;
   @FXML private TextField scheduleExportYearInput;
-  @FXML private TextArea searchScheduledClassTextArea;
+  @FXML private ListView searchScheduledClassListView;
   @FXML private TextArea scheduledClassMembersOutput;
   @FXML private TextArea scheduleExportScheduleOutput;
   @FXML private DatePicker scheduleClassDateInput;
@@ -1005,7 +1006,7 @@ public class GUIController
   }
 
   // -------------------------Schedule----------------------------------
-  public void whatTheHell()
+  public void comboBoxClass()
   {
     if (scheduleClassClassInput.getSelectionModel().getSelectedItem().length()
         > 0)
@@ -1073,12 +1074,21 @@ public class GUIController
   {
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
-    tempDateTime.setYear(scheduleClassDateInput.getValue().getYear());
-    tempDateTime.setMonth(scheduleClassDateInput.getValue().getMonthValue());
-    tempDateTime.setDay(scheduleClassDateInput.getValue().getDayOfMonth());
-    tempDateTime.setYear(scheduleClassDateInput.getValue().getYear());
-    tempDateTime.setMonth(scheduleClassDateInput.getValue().getMonthValue());
-    tempDateTime.setDay(scheduleClassDateInput.getValue().getDayOfMonth());
+    tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
+    tempDateTime.setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
+    tempDateTime.setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
+    tempDateTime2.setYear(searchScheduledClassToInput.getValue().getYear());
+    tempDateTime2.setMonth(searchScheduledClassToInput.getValue().getMonthValue());
+    tempDateTime2.setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+    ArrayList<ScheduledClass> tempScheduledClass = adapter
+        .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
+    for (int i = 0; i < tempScheduledClass.size(); i++)
+    {
+      searchScheduledClassListView.getItems().add(
+          tempScheduledClass.get(i).getClassItem().getName()
+              + ", " + tempScheduledClass.get(i).getDateTime().getHour() + ":"
+              + tempScheduledClass.get(i).getDateTime().getMinute());
+    }
   }
 }
 

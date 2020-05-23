@@ -679,7 +679,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Pane fx:id="scheduleClassPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
+            <Pane fx:id="scheduleClassPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
                   <Label layoutX="80.0" layoutY="42.0" prefHeight="27.0" prefWidth="70.0" text="Date:">
                      <font>
@@ -720,12 +720,12 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="scheduleClassClassInput" layoutX="522.0" layoutY="43.0" onAction="#whatTheHell" prefWidth="150.0" />
+                  <ComboBox fx:id="scheduleClassClassInput" layoutX="522.0" layoutY="43.0" onAction="#comboBoxClass" prefWidth="150.0" />
                   <ComboBox fx:id="scheduleClassInstructorInput" layoutX="522.0" layoutY="113.0" prefWidth="150.0" />
                   <Button fx:id="scheduleClassSaveButton" layoutX="489.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#schedule" prefHeight="38.0" prefWidth="150.0" text="Schedule class" />
                </children>
             </Pane>
-            <Pane fx:id="scheduleDisplayEditExportPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
+            <Pane fx:id="scheduleDisplayEditExportPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#loadScheduleEditPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Edit" textFill="#12123a">
                      <font>
@@ -767,7 +767,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Pane fx:id="scheduleDisplayPane" layoutY="39.0" prefHeight="459.0" prefWidth="320.0" visible="false">
+                  <Pane fx:id="scheduleDisplayPane" layoutY="39.0" prefHeight="459.0" prefWidth="320.0">
                      <children>
                         <Label layoutX="29.0" layoutY="93.0" prefHeight="27.0" prefWidth="70.0" text="To:">
                            <font>
@@ -781,8 +781,7 @@
                            </font>
                         </Label>
                         <DatePicker fx:id="searchScheduledClassFromInput" layoutX="81.0" layoutY="40.0" />
-                        <TextArea fx:id="searchScheduledClassTextArea" editable="false" layoutX="29.0" layoutY="130.0" prefHeight="231.0" prefWidth="225.0" />
-                        <Button fx:id="searchScheduledClassButton" layoutX="62.0" layoutY="383.0" mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Search" textFill="#12123a">
+                        <Button fx:id="searchScheduledClassButton" layoutX="80.0" layoutY="385.0" mnemonicParsing="false" onAction="#loadAddClassPane" onMouseClicked="#searchForScheduledClasses" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Search" textFill="#12123a">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -790,6 +789,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </opaqueInsets>
                         </Button>
+                        <ListView fx:id="searchScheduledClassListView" layoutX="60.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="scheduleLogoPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">
@@ -936,7 +936,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane fx:id="scheduleExportPane" layoutX="-2.0" layoutY="39.0" prefHeight="459.0" prefWidth="802.0">
+                  <Pane fx:id="scheduleExportPane" layoutX="-2.0" layoutY="39.0" prefHeight="459.0" prefWidth="802.0" visible="false">
                      <children>
                         <ComboBox fx:id="scheduleExportMonthInput" layoutX="90.0" layoutY="33.0" prefWidth="150.0" />
                         <Label layoutX="25.0" layoutY="32.0" prefHeight="27.0" prefWidth="65.0" text="Month:">
