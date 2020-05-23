@@ -170,6 +170,24 @@ public class FitnessCenterFileAdapter
       System.out.println("IO error when reading file");
     }
   }
+  public void editInstructor(String instructorsFilename, int index, Object object)
+  {
+    ArrayList<Instructor> oldInstructors = getAllInstructors();
+    oldInstructors.set(index, (Instructor) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(instructorsFilename, oldInstructors);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
 
   // remove instructor
   public void removeInstructor(String instructorsFilename,

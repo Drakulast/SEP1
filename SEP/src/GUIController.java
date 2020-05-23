@@ -50,6 +50,7 @@ public class GUIController
   @FXML private TextField editInstructorEmailInput;
   @FXML private TextField editInstructorPhoneInput;
   @FXML private ListView editInstructorClassesInput;
+  @FXML private TextField addClassToInstructorInput;
 
   @FXML private TextField editMemberFirstNameInput;
   @FXML private TextField editMemberLastNameInput;
@@ -387,8 +388,8 @@ public class GUIController
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
-  // Members functionality for members UI
-//------------------------------------------------------------------------------------
+
+//------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
   {
     instrAddClasses.add(registerInstructorClassInput.getText());
@@ -486,29 +487,53 @@ public class GUIController
   public void addInstructorClassListView()
   {
     Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
-    tempInstructor.getClasses().add("Hmmm");
+    tempInstructor.getClasses().add(addClassToInstructorInput.getText());
+    editInstructorClassesInput.getItems().add(addClassToInstructorInput.getText());
+    adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
+    addClassToInstructorInput.setText("");
+
   }
 
   public void removeInstructorClassListView()
   {
+    for (int i = 0; i < adapter.getAllInstructors().get(instructorIndicator).getClasses()
+        .size(); i++)
+    {
+      if (addClassToInstructorInput.getText().equals(adapter.getAllInstructors().get(instructorIndicator).getClasses().get(i))){
+        Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
+        tempInstructor.getClasses().remove(i);
 
+        adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
+        editInstructorClassesInput.getItems().remove(i);
+        addClassToInstructorInput.setText("");
+      }
+    }
   }
 
   public void saveEditedInstructor()
   {
-    Instructor tempInstructor2 = adapter.getAllInstructors()
+    Instructor tempInstructor = adapter.getAllInstructors()
         .get(instructorIndicator);
-    tempInstructor2.setFirstName(editInstructorFirstNameInput.getText());
-    tempInstructor2.setLastName(editInstructorLastNameInput.getText());
-    tempInstructor2.setAddress(editInstructorAddressInput.getText());
-    tempInstructor2.setEmail(editInstructorEmailInput.getText());
-    tempInstructor2.setPhoneNumber(editInstructorPhoneInput.getText());
-    System.out.println(adapter.getAllInstructors());
-    adapter.removeInstructor("Instructors.bin",
-        adapter.getAllInstructors().get(instructorIndicator));
-    System.out.println(adapter.getAllInstructors());
-    adapter.saveInstructors("Instructors.bin", tempInstructor2);
-    System.out.println(adapter.getAllInstructors());
+    tempInstructor.setFirstName(editInstructorFirstNameInput.getText());
+    tempInstructor.setLastName(editInstructorLastNameInput.getText());
+    tempInstructor.setAddress(editInstructorAddressInput.getText());
+    tempInstructor.setEmail(editInstructorEmailInput.getText());
+    tempInstructor.setPhoneNumber(editInstructorPhoneInput.getText());
+    System.out.println(adapter.getAllInstructors().get(instructorIndicator));
+    adapter.editInstructor("Instructors.bin", instructorIndicator, tempInstructor);
+    System.out.println(adapter.getAllInstructors().get(instructorIndicator));
+  }
+  public void deleteInstructor(){
+    System.out.println(adapter.getAllInstructors().size());
+    adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
+    editInstructorFirstNameInput.setText("");
+    editInstructorLastNameInput.setText("");
+    editInstructorAddressInput.setText("");
+    editInstructorEmailInput.setText("");
+    editInstructorPhoneInput.setText("");
+    editInstructorClassesInput.getItems().clear();
+    System.out.println(adapter.getAllInstructors().size());
+
   }
   // -------------------------Members----------------------------------
 
