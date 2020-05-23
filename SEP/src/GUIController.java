@@ -324,8 +324,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
-    registerMemberMembershipInput.getItems().add("Standard");
-    registerMemberMembershipInput.getItems().add("Premium");
+    editMemberMembershipInput.getItems().add("Standard");
+    editMemberMembershipInput.getItems().add("Premium");
   }
 
   public void searchMember()
@@ -568,13 +568,9 @@ public class GUIController
           .getLastName().equals(lastName))
       {
         editMemberFirstNameInput.setText(members.get(i).getFirstName());
-        editMemberFirstNameInput.setEditable(true);
         editMemberLastNameInput.setText(members.get(i).getLastName());
-        editMemberLastNameInput.setEditable(true);
         editMemberAddressInput.setText(members.get(i).getAddress());
-        editMemberAddressInput.setEditable(true);
         editMemberEmailInput.setText(members.get(i).getEmail());
-        editMemberEmailInput.setEditable(true);
         editMemberMembershipInput.setEditable(true);
         if (registerMemberMembershipInput.getValue().equals("Premium"))
         {
