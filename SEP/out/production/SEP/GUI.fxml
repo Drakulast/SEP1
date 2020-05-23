@@ -789,7 +789,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </opaqueInsets>
                         </Button>
-                        <ListView fx:id="searchScheduledClassListView" layoutX="60.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="searchScheduledClassListView" layoutX="60.0" layoutY="142.0" onMouseClicked="#editSchedule" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </Pane>
                   <Pane fx:id="scheduleLogoPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">

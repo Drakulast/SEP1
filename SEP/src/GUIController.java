@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Optional;
@@ -113,8 +114,8 @@ public class GUIController
   @FXML private DatePicker editScheduledClassDateInput;
   @FXML private ComboBox<String> scheduleClassClassInput;
   @FXML private ComboBox<String> scheduleClassInstructorInput;
-  @FXML private ComboBox editScheduledClassClassInput;
-  @FXML private ComboBox editScheduledClassInstructorInput;
+  @FXML private ComboBox<String> editScheduledClassClassInput;
+  @FXML private ComboBox<String> editScheduledClassInstructorInput;
   @FXML private ComboBox signUpScheduledClassPremiumMembersInput;
   @FXML private ComboBox scheduleExportMonthInput;
   @FXML private Button scheduleClassSaveButton;
@@ -1075,22 +1076,103 @@ public class GUIController
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
-    tempDateTime.setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
-    tempDateTime.setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
+    tempDateTime
+        .setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
+    tempDateTime
+        .setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
     tempDateTime2.setYear(searchScheduledClassToInput.getValue().getYear());
-    tempDateTime2.setMonth(searchScheduledClassToInput.getValue().getMonthValue());
-    tempDateTime2.setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+    tempDateTime2
+        .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
+    tempDateTime2
+        .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
     ArrayList<ScheduledClass> tempScheduledClass = adapter
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     for (int i = 0; i < tempScheduledClass.size(); i++)
     {
       searchScheduledClassListView.getItems().add(
-          tempScheduledClass.get(i).getClassItem().getName()
-              + ", " + tempScheduledClass.get(i).getDateTime().getHour() + ":"
+          tempScheduledClass.get(i).getClassItem().getName() + ", "
+              + tempScheduledClass.get(i).getDateTime().getHour() + ":"
               + tempScheduledClass.get(i).getDateTime().getMinute());
     }
   }
+
+  public void editSchedule()
+  {
+    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
+    tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
+    tempDateTime
+        .setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
+    tempDateTime
+        .setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
+    tempDateTime2.setYear(searchScheduledClassToInput.getValue().getYear());
+    tempDateTime2
+        .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
+    tempDateTime2
+        .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+    ArrayList<ScheduledClass> tempScheduledClass = adapter
+        .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
+    int index = searchScheduledClassListView.getSelectionModel()
+        .getSelectedIndex();
+    tempScheduledClass.get(index);
+
+    LocalDate tempLocal = LocalDate
+        .of(tempScheduledClass.get(index).getDateTime().getYear(),
+            tempScheduledClass.get(index).getDateTime().getMonth(),
+            tempScheduledClass.get(index).getDateTime().getDay());
+    editScheduledClassDateInput.setValue(tempLocal);
+    editScheduledClassHourInput.setText(
+        String.valueOf(tempScheduledClass.get(index).getDateTime().getHour()));
+    editScheduledClassMinuteInput.setText(String
+        .valueOf(tempScheduledClass.get(index).getDateTime().getMinute()));
+    editScheduledClassDurationInput
+        .setText(String.valueOf(tempScheduledClass.get(index).getDuration()));
+
+    //Classes
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      editScheduledClassClassInput.getItems()
+          .add(adapter.getAllClasses().get(i).getName());
+    }
+    for (int b = 0; b < editScheduledClassClassInput.getItems().size(); b++)
+    {
+      if (editScheduledClassClassInput.getItems().get(b)
+          .contains(adapter.getAllClasses().get(index).getName()))
+      {
+        editScheduledClassClassInput.getSelectionModel().select(b);
+      }
+    }
+    //Instructor
+    String tempClass = editScheduledClassClassInput.getSelectionModel()
+        .getSelectedItem();
+    for (int c = 0; c < adapter.getAllInstructors().size(); c++)
+    {
+      if (adapter.getAllInstructors().get(c).hasClass(tempClass))
+      {
+        if (!editScheduledClassInstructorInput.getItems()
+            .contains(adapter.getAllInstructors().get(c).getFullName()))
+        {
+          editScheduledClassInstructorInput.getItems()
+              .add(adapter.getAllInstructors().get(c).getFullName());
+        }
+      }
+    }
+  }
 }
+//  String tempString = scheduleClassClassInput.getSelectionModel()
+//      .getSelectedItem();
+//    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+//    {
+//    if (adapter.getAllInstructors().get(i).hasClass(tempString))
+//    {
+//    String help = adapter.getAllInstructors().get(i).getFullName();
+//    if (!scheduleClassInstructorInput.getItems().contains(help))
+//    {
+//    scheduleClassInstructorInput.getItems()
+//    .add(adapter.getAllInstructors().get(i).getFullName());
+//    }
+//    }
+//    }
 
 
 
