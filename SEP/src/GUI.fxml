@@ -355,7 +355,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
             <Button fx:id="RegisterInstructorButton1" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -427,12 +427,12 @@
                         <ComboBox fx:id="registerMemberMembershipInput" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
+                  <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#SaveAndRegisterMember" prefHeight="25.0" prefWidth="65.0" text="Save" />
                </children>
             </Pane>
             <Pane fx:id="findMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
-                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" onAction="#loadSearchMemberByNamePane" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
+                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -474,7 +474,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button fx:id="searchMemberButton" layoutX="327.0" layoutY="222.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="38.0" prefWidth="150.0" text="Search" />
+                        <Button fx:id="searchMemberButton" layoutX="327.0" layoutY="222.0" mnemonicParsing="false" onAction="#loadEditMemberPane" onMouseClicked="#searchMemberByName" prefHeight="38.0" prefWidth="150.0" text="Search" />
                      </children>
                   </Pane>
                   <Pane fx:id="searchMemberByPhonePane" layoutX="-1.0" layoutY="39.0" prefHeight="459.0" prefWidth="802.0" visible="false">
@@ -561,7 +561,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Add" textFill="#12123a">
                <font>

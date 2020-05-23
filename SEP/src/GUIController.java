@@ -1,6 +1,8 @@
 import com.sun.javafx.scene.control.InputField;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -53,7 +55,7 @@ public class GUIController
   @FXML private TextField editMemberLastNameInput;
   @FXML private TextField editMemberAddressInput;
   @FXML private TextField editMemberEmailInput;
-  @FXML private ComboBox editMemberMembershipInput;
+  @FXML private ComboBox<String> editMemberMembershipInput;
   @FXML private TextField editMemberPhoneInput;
   @FXML private TextField searchMemberByPhoneInput;
   @FXML private TextField searchMemberByNameFirstNameInput;
@@ -63,13 +65,24 @@ public class GUIController
   @FXML private TextField registerMemberFirstNameInput;
   @FXML private TextField registerMemberLastNameInput;
   @FXML private TextField registerMemberAddressInput;
-  @FXML private ComboBox registerMemberMembershipInput;
+  @FXML private ComboBox<String> registerMemberMembershipInput;
   @FXML private Button editMemberSaveButton;
   @FXML private Button editMemberDeleteButton;
   @FXML private Button registerMemberSaveButton;
   @FXML private Button editInstructorDeleteButton;
   @FXML private Button editInstructorSaveButton;
   @FXML private Button editInstructorAddButton;
+
+
+  @FXML private TextField addClassNameInput;
+  @FXML private TextField addClassCapacityInput;
+  @FXML private TextField searchClassNameInput;
+  @FXML private TextField ediClassNameInput;
+  @FXML private TextField editClassCapacityInput;
+  @FXML private Button addClassSaveButton;
+  @FXML private Button searchClassButton;
+  @FXML private Button editClassSaveButton;
+  @FXML private Button editClassRemoveButton;
 
 
   @FXML private Pane overviewPane;
@@ -108,7 +121,7 @@ public class GUIController
     setCurrentClasses();
     setTodayDate();
 
-    System.out.println(adapter.getAllMembers());
+    //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
     //    {
     //      setNumberOfMembers();
@@ -149,14 +162,12 @@ public class GUIController
 
   public void setNumberOfMembers()
   {
-
     String numberOfMembers = String.valueOf(adapter.getAllMembers().size());
     area1.setText(numberOfMembers);
   }
 
   public void setCurrentInstructors()
   {
-
     area2.setText(String.valueOf(adapter.getAllInstructors().size()));
   }
 
@@ -274,6 +285,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+    registerMemberMembershipInput.getItems().add("Standard");
+    registerMemberMembershipInput.getItems().add("Premium");
   }
 
   public void loadFindMemberPane()
@@ -310,6 +323,8 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+    registerMemberMembershipInput.getItems().add("Standard");
+    registerMemberMembershipInput.getItems().add("Premium");
   }
 
   public void searchMember()
@@ -373,7 +388,7 @@ public class GUIController
   }
 
   // Members functionality for members UI
-  //------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
   public void mouseClickOnAdd()
   {
     instrAddClasses.add(registerInstructorClassInput.getText());
@@ -495,4 +510,58 @@ public class GUIController
     adapter.saveInstructors("Instructors.bin", tempInstructor2);
     System.out.println(adapter.getAllInstructors());
   }
+  // -------------------------Members----------------------------------
+
+  public void SaveAndRegisterMember()
+  {
+    Member newMember = new Member(registerMemberFirstNameInput.getText(),
+        registerMemberLastNameInput.getText(),
+        registerMemberAddressInput.getText(),
+        registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
+    adapter.saveMembers("TestMembers.bin", newMember);
+    registerMemberFirstNameInput.setText("");
+    registerMemberLastNameInput.setText("");
+    registerMemberAddressInput.setText("");
+    registerMemberEmailInput.setText("");
+    registerMemberPhoneInput.setText("");
+    if (registerMemberMembershipInput.getValue().equals("Premium"))
+    {
+      newMember.upgradeMembership();
+    }
+    System.out.println(newMember);
+  }
+
+  public void searchMemberByName()
+  {
+    String firstName = searchMemberByNameFirstNameInput.getText();
+    String lastName = searchMemberByNameLastNameInput.getText();
+
+    ArrayList<Member> members = adapter.getAllMembers();
+    for (int i = 0; i < members.size(); i++)
+    {
+      if (members.get(i).getFirstName().equals(firstName) && members.get(i)
+          .getLastName().equals(lastName))
+      {
+        editMemberFirstNameInput.setText(members.get(i).getFirstName());
+        editMemberFirstNameInput.setEditable(true);
+        editMemberLastNameInput.setText(members.get(i).getLastName());
+        editMemberLastNameInput.setEditable(true);
+        editMemberAddressInput.setText(members.get(i).getAddress());
+        editMemberAddressInput.setEditable(true);
+        editMemberEmailInput.setText(members.get(i).getEmail());
+        editMemberEmailInput.setEditable(true);
+        editMemberMembershipInput.setEditable(true);
+        if (registerMemberMembershipInput.getValue().equals("Premium"))
+        {
+          editMemberMembershipInput.getSelectionModel().select("Premium");
+        }
+        else
+        {
+          editMemberMembershipInput.getSelectionModel().select("Standard");
+        }
+        editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
+      }
+    }
+  }
+
 }
