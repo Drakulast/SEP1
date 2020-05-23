@@ -109,7 +109,7 @@ public class ScheduledClass implements Serializable
     }
     else
     {
-      stringToReturn += "\n\tNo instructor assignded yet.";
+      stringToReturn += "\n\tNo instructor assigned yet.";
     }
     if (members.size() == 0)
     {

@@ -176,7 +176,7 @@ public class Main
 
     try
     {
-      myFileIO3.writeObjectToFile("SchedulesClasses.bin", scheduledClasses1);
+      myFileIO3.writeObjectToFile("ScheduledClasses.bin", scheduledClasses1);
     }
     catch (FileNotFoundException e)
     {
@@ -192,7 +192,7 @@ public class Main
     // retrieve member and ArrayList of members from bin
     FitnessCenterFileAdapter adapter = new FitnessCenterFileAdapter(
         "TestMembers.bin", "Instructors.bin", "Classes.bin",
-        "SchedulesClasses.bin");
+        "ScheduledClasses.bin");
     System.out.println(adapter.getAllMembers());
     System.out.println(adapter.getMember("45123456").getFirstName());
 
@@ -253,7 +253,6 @@ public class Main
     ScheduledClass scheduledClass10 = new ScheduledClass(class1, instructor1,
         dateTime1, 60);
     System.out.println(adapter.getAllScheduledClasses());
-    adapter.saveScheduleClasses("SchedulesClasses.bin", scheduledClass10);
     System.out.println();
     System.out.println();
     System.out.println();
@@ -272,7 +271,7 @@ public class Main
 
     System.out.println();
     System.out.println(adapter.getAllScheduledClasses());
-    adapter.removeScheduledClass("SchedulesClasses.bin", scheduledClass10);
+    adapter.removeScheduledClass("ScheduledClasses.bin", scheduledClass10);
     System.out.println("\n" + adapter.getAllScheduledClasses());
     // end of testing writing and removing to bin
 

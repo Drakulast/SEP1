@@ -110,8 +110,8 @@ public class GUIController
   @FXML private DatePicker searchScheduledClassFromInput;
   @FXML private DatePicker searchScheduledClassToInput;
   @FXML private DatePicker editScheduledClassDateInput;
-  @FXML private ComboBox scheduleClassClassInput;
-  @FXML private ComboBox scheduleClassInstructorInput;
+  @FXML private ComboBox<String> scheduleClassClassInput;
+  @FXML private ComboBox<String> scheduleClassInstructorInput;
   @FXML private ComboBox editScheduledClassClassInput;
   @FXML private ComboBox editScheduledClassInstructorInput;
   @FXML private ComboBox signUpScheduledClassPremiumMembersInput;
@@ -175,6 +175,12 @@ public class GUIController
     registerMemberMembershipInput.getItems().add("Premium");
     editMemberMembershipInput.getItems().add("Standard");
     editMemberMembershipInput.getItems().add("Premium");
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      scheduleClassClassInput.getItems()
+          .add(adapter.getAllClasses().get(i).getName());
+    }
+
     //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
     //    {
@@ -566,8 +572,6 @@ public class GUIController
     }
   }
 
-
-
   //------------------------------------Instructor------------------------------------------------
   public void mouseClickOnAdd()
   {
@@ -720,9 +724,11 @@ public class GUIController
 
   public void saveEditedInstructor()
   {
-    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    if (messageConfirmation("Do you want to save?",
+        Alert.AlertType.CONFIRMATION))
     {
-      Instructor tempInstructor = adapter.getAllInstructors().get(instructorIndicator);
+      Instructor tempInstructor = adapter.getAllInstructors()
+          .get(instructorIndicator);
       tempInstructor.setFirstName(editInstructorFirstNameInput.getText());
       tempInstructor.setLastName(editInstructorLastNameInput.getText());
       tempInstructor.setAddress(editInstructorAddressInput.getText());
@@ -741,10 +747,12 @@ public class GUIController
 
   public void deleteInstructor()
   {
-    if (messageConfirmation("Do you want to delete this instructor?", Alert.AlertType.WARNING))
+    if (messageConfirmation("Do you want to delete this instructor?",
+        Alert.AlertType.WARNING))
     {
       System.out.println(adapter.getAllInstructors().size());
-      adapter.removeInstructor("Instructors.bin", adapter.getAllInstructors().get(instructorIndicator));
+      adapter.removeInstructor("Instructors.bin",
+          adapter.getAllInstructors().get(instructorIndicator));
       editInstructorFirstNameInput.setText("");
       editInstructorLastNameInput.setText("");
       editInstructorAddressInput.setText("");
@@ -851,7 +859,8 @@ public class GUIController
 
   public void saveMember()
   {
-    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    if (messageConfirmation("Do you want to save?",
+        Alert.AlertType.CONFIRMATION))
     {
       Member tempMember = adapter.getAllMembers().get(memberIndicator);
       adapter.removeMember("TestMembers.bin", tempMember);
@@ -890,9 +899,11 @@ public class GUIController
 
   public void deleteMember()
   {
-    if (messageConfirmation("Do you want to delete this member?", Alert.AlertType.WARNING))
+    if (messageConfirmation("Do you want to delete this member?",
+        Alert.AlertType.WARNING))
     {
-      adapter.removeMember("TestMembers.bin", adapter.getAllMembers().get(memberIndicator));
+      adapter.removeMember("TestMembers.bin",
+          adapter.getAllMembers().get(memberIndicator));
       setNumberOfMembers();
 
       if (searchMemberBy)
@@ -965,10 +976,12 @@ public class GUIController
 
   public void saveEditedClass()
   {
-    if (messageConfirmation("Do you want to save?", Alert.AlertType.CONFIRMATION))
+    if (messageConfirmation("Do you want to save?",
+        Alert.AlertType.CONFIRMATION))
     {
       System.out.println(adapter.getAllClasses());
-      Class tempClass = new Class(ediClassNameInput.getText(), Integer.parseInt(editClassCapacityInput.getText()));
+      Class tempClass = new Class(ediClassNameInput.getText(),
+          Integer.parseInt(editClassCapacityInput.getText()));
       adapter.editClass("Classes.bin", classIndicator, tempClass);
       setCurrentClasses();
       System.out.println(adapter.getAllClasses());
@@ -977,10 +990,12 @@ public class GUIController
 
   public void removeClass()
   {
-    if (messageConfirmation("Do you want to delete this class?", Alert.AlertType.WARNING))
+    if (messageConfirmation("Do you want to delete this class?",
+        Alert.AlertType.WARNING))
     {
       System.out.println(adapter.getAllClasses());
-      adapter.removeClass("Classes.bin", adapter.getAllClasses().get(classIndicator));
+      adapter.removeClass("Classes.bin",
+          adapter.getAllClasses().get(classIndicator));
       setCurrentClasses();
       ediClassNameInput.clear();
       editClassCapacityInput.clear();
@@ -988,33 +1003,84 @@ public class GUIController
       System.out.println(adapter.getAllClasses());
     }
   }
-}
 
-// -------------------------Schedule----------------------------------
-//  public void Schedule()
-//  {
-//    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
-//    tempDateTime.setMinute(1);
-//    tempDateTime.setHour(1);
-//    tempDateTime.setYear(test.getValue().getYear());
-//    tempDateTime.setMonth(test.getValue().getMonthValue());
-//    tempDateTime.setDay(test.getValue().getDayOfMonth());
-//    Class tempClass = new Class();
-//    Instructor tempInstructor = new Instructor();
-//    ArrayList<Member> tempMembers = new ArrayList<Member>();
-//    ScheduledClass tempScheduledClass = new ScheduledClass(tempClass, tempInstructor, tempDateTime, tempMembers, Integer.parseInt(.getText()));
-//    adapter.saveScheduleClasses("ScheduledClass.bin", tempScheduledClass);
-//  }
-//  public void searchForScheduledClasses(){
-//    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
-//    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
-//    tempDateTime.setYear(test.getValue().getYear());
-//    tempDateTime.setMonth(test.getValue().getMonthValue());
-//    tempDateTime.setDay(test.getValue().getDayOfMonth());
-//    tempDateTime.setYear(test.getValue().getYear());
-//    tempDateTime.setMonth(test.getValue().getMonthValue());
-//    tempDateTime.setDay(test.getValue().getDayOfMonth());
-//  }
+  // -------------------------Schedule----------------------------------
+  public void whatTheHell()
+  {
+    if (scheduleClassClassInput.getSelectionModel().getSelectedItem().length()
+        > 0)
+    {
+      comboBoxDependency();
+    }
+  }
+
+  public void comboBoxDependency()
+  {
+    String tempString = scheduleClassClassInput.getSelectionModel()
+        .getSelectedItem();
+    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+    {
+      if (adapter.getAllInstructors().get(i).hasClass(tempString))
+      {
+        String help = adapter.getAllInstructors().get(i).getFullName();
+        if (!scheduleClassInstructorInput.getItems().contains(help))
+        {
+          scheduleClassInstructorInput.getItems()
+              .add(adapter.getAllInstructors().get(i).getFullName());
+        }
+      }
+    }
+
+  }
+
+  public void schedule()
+  {
+    int test = -1;
+    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+    {
+      if (adapter.getAllInstructors().get(i).getFullName().equals(
+          scheduleClassInstructorInput.getSelectionModel().getSelectedItem()))
+      {
+        test = i;
+      }
+    }
+    System.out.println("test");
+    System.out.println(adapter.getAllScheduledClasses());
+    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+    tempDateTime
+        .setMinute(Integer.parseInt(scheduleClassMinuteInput.getText()));
+    tempDateTime.setHour(Integer.parseInt(scheduleClassHourInput.getText()));
+    tempDateTime.setYear(scheduleClassDateInput.getValue().getYear());
+    tempDateTime.setMonth(scheduleClassDateInput.getValue().getMonthValue());
+    tempDateTime.setDay(scheduleClassDateInput.getValue().getDayOfMonth());
+    Class tempClass = adapter.getAllClasses()
+        .get(scheduleClassClassInput.getSelectionModel().getSelectedIndex());
+    Instructor tempInstructor = adapter.getAllInstructors().get(test);
+
+    ArrayList<Member> tempMembers = new ArrayList<Member>();
+
+    ScheduledClass tempScheduledClass = new ScheduledClass(tempClass,
+        tempInstructor, tempDateTime, tempMembers,
+        Integer.parseInt(scheduleClassDurationInput.getText()));
+    adapter.saveScheduleClasses("ScheduledClasses.bin", tempScheduledClass);
+    messageInformation("Class Scheduled!");
+    System.out.println("test");
+    System.out.println(adapter.getAllScheduledClasses());
+    System.out.println(adapter.getAllInstructors());
+  }
+
+  public void searchForScheduledClasses()
+  {
+    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
+    tempDateTime.setYear(scheduleClassDateInput.getValue().getYear());
+    tempDateTime.setMonth(scheduleClassDateInput.getValue().getMonthValue());
+    tempDateTime.setDay(scheduleClassDateInput.getValue().getDayOfMonth());
+    tempDateTime.setYear(scheduleClassDateInput.getValue().getYear());
+    tempDateTime.setMonth(scheduleClassDateInput.getValue().getMonthValue());
+    tempDateTime.setDay(scheduleClassDateInput.getValue().getDayOfMonth());
+  }
+}
 
 
 
