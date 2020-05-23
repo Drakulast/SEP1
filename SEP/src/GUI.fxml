@@ -432,7 +432,7 @@
             </Pane>
             <Pane fx:id="findMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
-                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" onAction="#loadSearchMemberByNamePane" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
+                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -474,7 +474,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button fx:id="searchMemberButton" layoutX="327.0" layoutY="222.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="38.0" prefWidth="150.0" text="Search" />
+                        <Button fx:id="searchMemberButton" layoutX="327.0" layoutY="222.0" mnemonicParsing="false" onAction="#loadEditMemberPane" onMouseClicked="#searchMemberByName" prefHeight="38.0" prefWidth="150.0" text="Search" />
                      </children>
                   </Pane>
                   <Pane fx:id="searchMemberByPhonePane" layoutX="-1.0" layoutY="39.0" prefHeight="459.0" prefWidth="802.0" visible="false">
