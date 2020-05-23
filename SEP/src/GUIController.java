@@ -103,6 +103,10 @@ public class GUIController
   @FXML private Pane addClassPane;
   @FXML private Pane searchClassPane;
   @FXML private Pane schedulePane;
+  @FXML private Pane scheduleClassPane;
+  @FXML private Pane scheduleDisplayEditExportPane;
+  @FXML private Pane scheduleDisplayPane;
+  @FXML private Pane scheduleLogoPane;
   @FXML private Pane screenSaverPane;
 
   @FXML private Label dateLabel;
@@ -377,6 +381,7 @@ public class GUIController
     membersPane.setVisible(false);
     classesPane.setVisible(false);
     schedulePane.setVisible(true);
+    loadScheduleClassPane();
     overviewButton.setStyle(
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
     instructorsButton.setStyle(
@@ -387,6 +392,20 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
     scheduleButton.setStyle(
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+  }
+
+  public void loadScheduleClassPane()
+  {
+    scheduleClassPane.setVisible(true);
+    scheduleDisplayEditExportPane.setVisible(false);
+  }
+
+  public void loadScheduleDisplayEditExportPane()
+  {
+    scheduleClassPane.setVisible(false);
+    scheduleDisplayEditExportPane.setVisible(true);
+    scheduleDisplayPane.setVisible(true);
+    scheduleLogoPane.setVisible(true);
   }
 
 
