@@ -428,7 +428,7 @@
                         <ComboBox fx:id="registerMemberMembershipInput" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                      </children>
                   </GridPane>
-                  <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#SaveAndRegisterMember" prefHeight="25.0" prefWidth="65.0" text="Save" />
+                  <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#registerMember" prefHeight="25.0" prefWidth="65.0" text="Save" />
                </children>
             </Pane>
             <Pane fx:id="findMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
@@ -554,8 +554,8 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button fx:id="editMemberSaveButton" layoutX="384.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Save" />
-                        <Button fx:id="editMemberDeleteButton" layoutX="487.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Delete" />
+                        <Button fx:id="editMemberSaveButton" layoutX="384.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#saveMember" prefHeight="25.0" prefWidth="65.0" text="Save" />
+                        <Button fx:id="editMemberDeleteButton" layoutX="487.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#deleteMember" prefHeight="25.0" prefWidth="65.0" text="Delete" />
                      </children>
                   </Pane>
                </children>
