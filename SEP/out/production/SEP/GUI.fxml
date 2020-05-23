@@ -358,7 +358,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
             <Button fx:id="RegisterInstructorButton1" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -376,7 +376,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Pane fx:id="registerMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
+            <Pane fx:id="registerMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
                   <GridPane layoutX="201.0" layoutY="45.0" prefHeight="310.0" prefWidth="400.0">
                     <columnConstraints>
@@ -433,9 +433,9 @@
                   <Button fx:id="registerMemberSaveButton" layoutX="369.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#registerMember" prefHeight="25.0" prefWidth="65.0" text="Save" />
                </children>
             </Pane>
-            <Pane fx:id="findMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
+            <Pane fx:id="findMemberPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
                <children>
-                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
+                  <Button fx:id="searchMemberByNameButton" mnemonicParsing="false" onAction="#loadSearchMemberByNamePane" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -499,8 +499,7 @@
                               <TextField fx:id="searchMemberByPhoneInput" focusTraversable="false" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <Button fx:id="searchMemberButton" layoutX="303.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#searchMemberByPhoneNumber" prefHeight="38.0" prefWidth="150.0" text="Search" />
-                        <Button fx:id="searchMemberButton1" layoutX="313.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#searchMemberByPhoneNumber" prefHeight="38.0" prefWidth="150.0" text="Search" />
+                        <Button fx:id="searchMemberButton" layoutX="303.0" layoutY="267.0" mnemonicParsing="false" onAction="#loadEditMemberPane" onMouseClicked="#searchMemberByPhoneNumber" prefHeight="38.0" prefWidth="150.0" text="Search" />
                      </children>
                   </Pane>
                   <Pane fx:id="editMemberPane" prefHeight="497.0" prefWidth="802.0">
@@ -565,7 +564,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Add" textFill="#12123a">
                <font>
@@ -662,7 +661,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button mnemonicParsing="false" onAction="#loadScheduleClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Schedule a class" textFill="#12123a">
                <font>
