@@ -121,6 +121,10 @@ public class GUIController
     setCurrentInstructors();
     setCurrentClasses();
     setTodayDate();
+    editMemberMembershipInput.getItems().add("Standard");
+    editMemberMembershipInput.getItems().add("Premium");
+    registerMemberMembershipInput.getItems().add("Standard");
+    registerMemberMembershipInput.getItems().add("Premium");
 
     //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
@@ -287,8 +291,6 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
-    registerMemberMembershipInput.getItems().add("Standard");
-    registerMemberMembershipInput.getItems().add("Premium");
   }
 
   public void loadFindMemberPane()
@@ -325,8 +327,6 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
-    editMemberMembershipInput.getItems().add("Standard");
-    editMemberMembershipInput.getItems().add("Premium");
   }
 
   public void searchMember()
@@ -584,6 +584,34 @@ public class GUIController
       {
         memberIndicator = i;
         searchMemberBy = true;
+        editMemberFirstNameInput.setText(members.get(i).getFirstName());
+        editMemberLastNameInput.setText(members.get(i).getLastName());
+        editMemberAddressInput.setText(members.get(i).getAddress());
+        editMemberEmailInput.setText(members.get(i).getEmail());
+        editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
+        if (members.get(i).hasPremiumMembership())
+        {
+          editMemberMembershipInput.getSelectionModel().select("Premium");
+        }
+        else
+        {
+          editMemberMembershipInput.getSelectionModel().select("Standard");
+        }
+      }
+    }
+  }
+
+  public void searchMemberByPhoneNumber()
+  {
+    String phoneNumber = searchMemberByPhoneInput.getText();
+
+    ArrayList<Member> members = adapter.getAllMembers();
+    for (int i = 0; i < members.size(); i++)
+    {
+      if (members.get(i).getPhoneNumber().equals(phoneNumber))
+      {
+        memberIndicator = i;
+        searchMemberBy = false;
         editMemberFirstNameInput.setText(members.get(i).getFirstName());
         editMemberLastNameInput.setText(members.get(i).getLastName());
         editMemberAddressInput.setText(members.get(i).getAddress());
