@@ -32,13 +32,26 @@ public class GUIController
 {
   @FXML private Button overviewButton;
   @FXML private Button instructorsButton;
+  @FXML private Button registerInstructorButton;
+  @FXML private Button findEditInstructorButton;
   @FXML private Button searchInstructorByNameButton;
   @FXML private Button searchInstructorByPhoneButton;
   @FXML private Button membersButton;
+  @FXML private Button registerMemberButton;
+  @FXML private Button findEditMemberButton;
   @FXML private Button searchMemberByNameButton;
   @FXML private Button searchMemberByPhoneButton;
   @FXML private Button classesButton;
+  @FXML private Button addClassButton;
+  @FXML private Button findEditClassButton;
   @FXML private Button scheduleButton;
+  @FXML private Button scheduleClassButton;
+  @FXML private Button findEditScheduleButton;
+  @FXML private Button editScheduledClassButton;
+  @FXML private Button removeScheduledClassPaneButton;
+  @FXML private Button signUpMemberScheduledClassButton;
+  @FXML private Button cancelMemberScheduledClassButton;
+  @FXML private Button exportScheduledClassButton;
   @FXML private Button registerInstructorSaveButton;
   @FXML private Button registerInstructorAddClassButton;
 
@@ -165,6 +178,8 @@ public class GUIController
   private int classIndicator = 0;
   private int memberIndicator;
   private boolean searchMemberBy;
+  private String darkBgButton = "-fx-background-color: #717171;";
+  private String lightBgButton = "-fx-background-color: #b8b8b8;";
 
   public void initialize()
   {
@@ -273,18 +288,24 @@ public class GUIController
 
     searchInstructorByNameButton.setVisible(false);
     searchInstructorByPhoneButton.setVisible(false);
+
+    registerInstructorButton.setStyle(darkBgButton);
+    findEditInstructorButton.setStyle(lightBgButton);
   }
 
   public void loadFindInstructorPane()
   {
     registerInstructorPane.setVisible(false);
     findInstructorPane.setVisible(true);
-    searchInstructorByNamePane.setVisible(true);
+    loadSearchInstructorByNamePane();
     searchInstructorByPhonePane.setVisible(false);
     editInstructorPane.setVisible(false);
 
     searchInstructorByNameButton.setVisible(true);
     searchInstructorByPhoneButton.setVisible(true);
+
+    registerInstructorButton.setStyle(lightBgButton);
+    findEditInstructorButton.setStyle(darkBgButton);
   }
 
   public void loadSearchInstructorByNamePane()
@@ -292,6 +313,9 @@ public class GUIController
     searchInstructorByNamePane.setVisible(true);
     searchInstructorByPhonePane.setVisible(false);
     editInstructorPane.setVisible(false);
+
+    searchInstructorByNameButton.setStyle(darkBgButton);
+    searchInstructorByPhoneButton.setStyle(lightBgButton);
   }
 
   public void loadSearchInstructorByPhonePane()
@@ -299,6 +323,9 @@ public class GUIController
     searchInstructorByNamePane.setVisible(false);
     searchInstructorByPhonePane.setVisible(true);
     editInstructorPane.setVisible(false);
+
+    searchInstructorByNameButton.setStyle(lightBgButton);
+    searchInstructorByPhoneButton.setStyle(darkBgButton);
   }
 
   public void loadEditInstructorPane()
@@ -345,17 +372,23 @@ public class GUIController
 
     searchMemberByNameButton.setVisible(false);
     searchMemberByPhoneButton.setVisible(false);
+
+    registerMemberButton.setStyle(darkBgButton);
+    findEditMemberButton.setStyle(lightBgButton);
   }
 
   public void loadFindMemberPane()
   {
     registerMemberPane.setVisible(false);
     findMemberPane.setVisible(true);
-    searchMemberByNamePane.setVisible(true);
+    loadSearchMemberByNamePane();
     searchMemberByPhonePane.setVisible(false);
     editMemberPane.setVisible(false);
     searchMemberByNameButton.setVisible(true);
     searchMemberByPhoneButton.setVisible(true);
+
+    registerMemberButton.setStyle(lightBgButton);
+    findEditMemberButton.setStyle(darkBgButton);
   }
 
   public void loadSearchMemberByNamePane()
@@ -363,6 +396,9 @@ public class GUIController
     searchMemberByNamePane.setVisible(true);
     searchMemberByPhonePane.setVisible(false);
     editMemberPane.setVisible(false);
+
+    searchMemberByNameButton.setStyle(darkBgButton);
+    searchMemberByPhoneButton.setStyle(lightBgButton);
   }
 
   public void loadSearchMemberByPhonePane()
@@ -370,6 +406,9 @@ public class GUIController
     searchMemberByNamePane.setVisible(false);
     searchMemberByPhonePane.setVisible(true);
     editMemberPane.setVisible(false);
+
+    searchMemberByNameButton.setStyle(lightBgButton);
+    searchMemberByPhoneButton.setStyle(darkBgButton);
   }
 
   public void loadEditMemberPane()
@@ -413,12 +452,18 @@ public class GUIController
   {
     addClassPane.setVisible(true);
     searchClassPane.setVisible(false);
+
+    addClassButton.setStyle(darkBgButton);
+    findEditClassButton.setStyle(lightBgButton);
   }
 
   public void loadSearchClassPane()
   {
     addClassPane.setVisible(false);
     searchClassPane.setVisible(true);
+
+    addClassButton.setStyle(lightBgButton);
+    findEditClassButton.setStyle(darkBgButton);
   }
 
   //SCHEDULE PANE METHODS
@@ -471,6 +516,9 @@ public class GUIController
           .add(adapter.getAllClasses().get(i).getName());
     }
     scheduleClassInstructorInput.getItems().clear();
+
+    scheduleClassButton.setStyle(darkBgButton);
+    findEditScheduleButton.setStyle(lightBgButton);
   }
 
   public void loadScheduleDisplayEditExportPane()
@@ -484,6 +532,14 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(false);
     scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(true);
+
+    scheduleClassButton.setStyle(lightBgButton);
+    findEditScheduleButton.setStyle(darkBgButton);
+    editScheduledClassButton.setStyle(darkBgButton);
+    removeScheduledClassButton.setStyle(lightBgButton);
+    signUpMemberButton.setStyle(lightBgButton);
+    cancelMemberScheduledClassButton.setStyle(lightBgButton);
+    exportScheduledClassButton.setStyle(lightBgButton);
   }
 
   public void loadScheduleEditPane()
@@ -495,6 +551,9 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(false);
     scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(false);
+
+    editScheduledClassButton.setStyle(darkBgButton);
+
   }
 
   public void loadScheduleRemovePane()
