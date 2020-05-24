@@ -1245,23 +1245,39 @@ public class GUIController
 
   public void saveEditedScheduledClass()
   {
-    //System.out.println(searchScheduledClassListView);
+    System.out.println(searchScheduledClassListView.getSelectionModel().getSelectedItems());
+    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
+    tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
+    tempDateTime
+        .setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
+    tempDateTime
+        .setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
+    tempDateTime2.setYear(searchScheduledClassToInput.getValue().getYear());
+    tempDateTime2
+        .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
+    tempDateTime2
+        .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+
+    ArrayList<ScheduledClass> tempScheduledClasses = adapter
+        .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
+    int index = searchScheduledClassListView.getSelectionModel()
+        .getSelectedIndex();
+    ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
+
     DateTime tempDate = new DateTime(1,1,1,1,1);
     tempDate.setDay(editScheduledClassDateInput.getValue().getDayOfMonth());
     tempDate.setMonth(editScheduledClassDateInput.getValue().getMonthValue());
     tempDate.setYear(editScheduledClassDateInput.getValue().getYear());
     tempDate.setHour(Integer.parseInt(editScheduledClassHourInput.getText()));
     tempDate.setMinute(Integer.parseInt(editScheduledClassMinuteInput.getText()));
-    String nameOfClass = editScheduledClassClassInput.getSelectionModel().getSelectedItem();
     ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
-    ScheduledClass tempScheduledClass = null;
-    int index = -1;
+    ScheduledClass tempScheduledClass2;
     for(int i=0;i<tempArray.size();i++)
     {
-      if((tempArray.get(i).getClassItem().getName()).equals(nameOfClass) &&
-          (tempArray.get(i).getDateTime()).equals(tempDate))
+      if((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName()) &&
+          (tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
       {
-        tempScheduledClass = tempArray.get(i);
         index = i;
         System.out.println("IT WORKS !");
         break;
@@ -1276,14 +1292,9 @@ public class GUIController
       Instructor tempInstructor = adapter.getAllInstructors()
           .get(editScheduledClassInstructorInput.getSelectionModel().getSelectedIndex());
     System.out.println(tempInstructor);
-      tempScheduledClass.setDateTime(tempDate);
-      tempScheduledClass.setDuration(Integer.parseInt(editScheduledClassDurationInput.getText()));
-      tempScheduledClass.setClassItem(tempClass);
-      tempScheduledClass.setInstructor(tempInstructor);
-      adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass);
+      tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor, tempDate, Integer.parseInt(editScheduledClassDurationInput.getText()));
+      adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass2);
       System.out.println(adapter.getAllScheduledClasses());
-
-
   }
 
   //--------------------------------------------------------------------------------------------
