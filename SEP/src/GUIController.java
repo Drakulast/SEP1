@@ -1074,6 +1074,7 @@ public class GUIController
 
   public void searchForScheduledClasses()
   {
+    searchScheduledClassListView.getItems().clear();
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1115,8 +1116,6 @@ public class GUIController
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
-    // not sure why here and for what
-    //ScheduledClass selectedScheduledClass = tempScheduledClass.get(index);
 
     LocalDate tempLocal = LocalDate
         .of(tempScheduledClass.get(index).getDateTime().getYear(),
@@ -1154,7 +1153,7 @@ public class GUIController
         .getSelectedItem();
     for (int c = 0; c < adapter.getAllInstructors().size(); c++)
     {
-      if (adapter.getAllInstructors().get(c).toString().contains(tempClass))
+      if (adapter.getAllInstructors().get(c).hasClass(tempClass))
       {
         if (!editScheduledClassInstructorInput.getItems()
             .contains(adapter.getAllInstructors().get(c).getFullName()))
@@ -1164,8 +1163,24 @@ public class GUIController
         }
       }
     }
+    for (int i = 0; i < tempScheduledClass.size(); i++)
+    {
+      for (int b = 0;
+           b < editScheduledClassInstructorInput.getItems().size(); b++)
+      {
+        if (tempScheduledClass.get(index).getInstructor().getFullName()
+            .equals(editScheduledClassInstructorInput.getItems().get(b)))
+        {
+          editScheduledClassInstructorInput.getSelectionModel().select(b);
+          break;
+        }
+      }
+      break;
+    }
+
   }
 
+  //--------------------------------------------------------------------------------------------
   // Exporting to xml
   public void exportToXml(ArrayList<ScheduledClass> scheduledClasses)
   {
