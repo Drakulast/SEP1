@@ -538,8 +538,8 @@ public class GUIController
     scheduleClassButton.setStyle(lightBgButton);
     findEditScheduleButton.setStyle(darkBgButton);
     editScheduledClassButton.setStyle(darkBgButton);
-    removeScheduledClassButton.setStyle(lightBgButton);
-    signUpMemberButton.setStyle(lightBgButton);
+    removeScheduledClassPaneButton.setStyle(lightBgButton);
+    signUpMemberScheduledClassButton.setStyle(lightBgButton);
     cancelMemberScheduledClassButton.setStyle(lightBgButton);
     exportScheduledClassButton.setStyle(lightBgButton);
     searchScheduledClassFromInput.setValue(null);
@@ -558,7 +558,10 @@ public class GUIController
     scheduleLogoPane.setVisible(false);
 
     editScheduledClassButton.setStyle(darkBgButton);
-
+    removeScheduledClassPaneButton.setStyle(lightBgButton);
+    signUpMemberScheduledClassButton.setStyle(lightBgButton);
+    cancelMemberScheduledClassButton.setStyle(lightBgButton);
+    exportScheduledClassButton.setStyle(lightBgButton);
     editScheduledClassHourInput.clear();
     editScheduledClassMinuteInput.clear();
     editScheduledClassClassInput.getItems().clear();
@@ -583,6 +586,12 @@ public class GUIController
     scheduledClassInstructorOutput.clear();
     scheduledClassDurationOutput.clear();
     scheduledClassCapacityOutput.clear();
+
+    editScheduledClassButton.setStyle(lightBgButton);
+    removeScheduledClassPaneButton.setStyle(darkBgButton);
+    signUpMemberScheduledClassButton.setStyle(lightBgButton);
+    cancelMemberScheduledClassButton.setStyle(lightBgButton);
+    exportScheduledClassButton.setStyle(lightBgButton);
   }
 
   public void loadScheduleSignUpMemberPane()
@@ -594,6 +603,12 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(false);
     scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(false);
+
+    editScheduledClassButton.setStyle(lightBgButton);
+    removeScheduledClassPaneButton.setStyle(lightBgButton);
+    signUpMemberScheduledClassButton.setStyle(darkBgButton);
+    cancelMemberScheduledClassButton.setStyle(lightBgButton);
+    exportScheduledClassButton.setStyle(lightBgButton);
   }
 
   public void loadScheduleCancelMemberPane()
@@ -605,6 +620,12 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(true);
     scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(false);
+
+    editScheduledClassButton.setStyle(lightBgButton);
+    removeScheduledClassPaneButton.setStyle(lightBgButton);
+    signUpMemberScheduledClassButton.setStyle(lightBgButton);
+    cancelMemberScheduledClassButton.setStyle(darkBgButton);
+    exportScheduledClassButton.setStyle(lightBgButton);
   }
 
   public void loadScheduleExportPane()
@@ -616,6 +637,12 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(false);
     scheduleExportPane.setVisible(true);
     scheduleLogoPane.setVisible(false);
+
+    editScheduledClassButton.setStyle(lightBgButton);
+    removeScheduledClassPaneButton.setStyle(lightBgButton);
+    signUpMemberScheduledClassButton.setStyle(lightBgButton);
+    cancelMemberScheduledClassButton.setStyle(lightBgButton);
+    exportScheduledClassButton.setStyle(darkBgButton);
   }
   //------------------------------------Alert Panel-----------------------------------------------
 
