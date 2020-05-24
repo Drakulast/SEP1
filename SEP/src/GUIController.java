@@ -1149,6 +1149,8 @@ public class GUIController
       }
     }
     //Instructor
+
+    editScheduledClassInstructorInput.getItems().clear();
     String tempClass = editScheduledClassClassInput.getSelectionModel()
         .getSelectedItem();
     for (int c = 0; c < adapter.getAllInstructors().size(); c++)
