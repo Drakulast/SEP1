@@ -150,7 +150,7 @@
       </Pane>
       <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
-            <Button fx:id="RegisterInstructorButton" mnemonicParsing="false" onAction="#loadRegisterInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
+            <Button fx:id="registerInstructorButton" mnemonicParsing="false" onAction="#loadRegisterInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -158,7 +158,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="overviewButton11" layoutX="400.0" mnemonicParsing="false" onAction="#loadFindInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
+            <Button fx:id="findEditInstructorButton" layoutX="400.0" mnemonicParsing="false" onAction="#loadFindInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -360,7 +360,7 @@
       </Pane>
       <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
-            <Button fx:id="RegisterInstructorButton1" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
+            <Button fx:id="registerMemberButton" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -368,7 +368,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="overviewButton111" layoutX="400.0" mnemonicParsing="false" onAction="#loadFindMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
+            <Button fx:id="findEditMemberButton" layoutX="400.0" mnemonicParsing="false" onAction="#loadFindMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -566,7 +566,7 @@
       </Pane>
       <Pane fx:id="classesPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
-            <Button mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Add" textFill="#12123a">
+            <Button fx:id="addClassButton" mnemonicParsing="false" onAction="#loadAddClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Add" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -574,7 +574,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="overviewButton1111" layoutX="400.0" mnemonicParsing="false" onAction="#loadSearchClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
+            <Button fx:id="findEditClassButton" layoutX="400.0" mnemonicParsing="false" onAction="#loadSearchClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Find and edit" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -663,7 +663,7 @@
       </Pane>
       <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#loadScheduleClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Schedule a class" textFill="#12123a">
+            <Button fx:id="scheduleClassButton" mnemonicParsing="false" onAction="#loadScheduleClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Schedule a class" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -671,7 +671,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Button fx:id="overviewButton11111" layoutX="400.0" mnemonicParsing="false" onAction="#loadScheduleDisplayEditExportPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Display, edit and export" textFill="#12123a">
+            <Button fx:id="findEditScheduleButton" layoutX="400.0" mnemonicParsing="false" onAction="#loadScheduleDisplayEditExportPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Display, edit and export" textFill="#12123a">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -727,7 +727,7 @@
             </Pane>
             <Pane fx:id="scheduleDisplayEditExportPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#loadScheduleEditPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Edit" textFill="#12123a">
+                  <Button fx:id="editScheduledClassButton" mnemonicParsing="false" onAction="#loadScheduleEditPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Edit" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -735,7 +735,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="160.0" mnemonicParsing="false" onAction="#loadScheduleRemovePane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Remove" textFill="#12123a">
+                  <Button fx:id="removeScheduledClassButton" layoutX="160.0" mnemonicParsing="false" onAction="#loadScheduleRemovePane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Remove" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -743,7 +743,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="320.0" mnemonicParsing="false" onAction="#loadScheduleSignUpMemberPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Sign up" textFill="#12123a">
+                  <Button fx:id="signUpMemberScheduledClassButton" layoutX="320.0" mnemonicParsing="false" onAction="#loadScheduleSignUpMemberPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Sign up" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -751,7 +751,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="480.0" mnemonicParsing="false" onAction="#loadScheduleCancelMemberPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text=" Cancel" textFill="#12123a">
+                  <Button fx:id="cancelMemberScheduledClassButton" layoutX="480.0" mnemonicParsing="false" onAction="#loadScheduleCancelMemberPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text=" Cancel" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -759,7 +759,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button layoutX="640.0" mnemonicParsing="false" onAction="#loadScheduleExportPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Export" textFill="#12123a">
+                  <Button fx:id="exportScheduledClassButton" layoutX="640.0" mnemonicParsing="false" onAction="#loadScheduleExportPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #B8B8B8;" text="Export" textFill="#12123a">
                      <font>
                         <Font size="18.0" />
                      </font>
