@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 
@@ -178,11 +179,6 @@ public class GUIController
     registerMemberMembershipInput.getItems().add("Premium");
     editMemberMembershipInput.getItems().add("Standard");
     editMemberMembershipInput.getItems().add("Premium");
-    for (int i = 0; i < adapter.getAllClasses().size(); i++)
-    {
-      scheduleClassClassInput.getItems()
-          .add(adapter.getAllClasses().get(i).getName());
-    }
 
     //System.out.println(adapter.getAllMembers());
     //    Platform.runLater(() ->
@@ -445,12 +441,36 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
     scheduleButton.setStyle(
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
+
+    scheduleClassDateInput.getEditor().clear();
+    scheduleClassHourInput.clear();
+    scheduleClassMinuteInput.clear();
+    scheduleClassDurationInput.clear();
+    scheduleClassClassInput.getItems().clear();
+      for (int i = 0; i < adapter.getAllClasses().size(); i++)
+      {
+        scheduleClassClassInput.getItems()
+            .add(adapter.getAllClasses().get(i).getName());
+      }
+
+    scheduleClassInstructorInput.getItems().clear();
   }
 
   public void loadScheduleClassPane()
   {
     scheduleClassPane.setVisible(true);
     scheduleDisplayEditExportPane.setVisible(false);
+    scheduleClassDateInput.getEditor().clear();
+    scheduleClassHourInput.clear();
+    scheduleClassMinuteInput.clear();
+    scheduleClassDurationInput.clear();
+    scheduleClassClassInput.getItems().clear();
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      scheduleClassClassInput.getItems()
+          .add(adapter.getAllClasses().get(i).getName());
+    }
+    scheduleClassInstructorInput.getItems().clear();
   }
 
   public void loadScheduleDisplayEditExportPane()
@@ -605,6 +625,7 @@ public class GUIController
 
   public void searchInstructorByName()
   {
+    editInstructorClassesInput.getItems().clear();
     int ex = 0;
     for (int i = 0; i < adapter.getAllInstructors().size(); i++)
     {
@@ -646,10 +667,13 @@ public class GUIController
     {
       messageWarning("Instructor not found!");
     }
+    searchInstructorByNameFirstNameInput.clear();
+    searchInstructorByNameLastNameInput.clear();
   }
 
   public void searchInstructorByPhoneNumber()
   {
+    editInstructorClassesInput.getItems().clear();
     int ex = 0;
     for (int i = 0; i < adapter.getAllInstructors().size(); i++)
     {
@@ -688,6 +712,7 @@ public class GUIController
     {
       messageWarning("Instructor not found!");
     }
+    searchInstructorByPhoneInput.clear();
   }
 
   public void addInstructorClassListView()
@@ -813,7 +838,7 @@ public class GUIController
         editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
         if (members.get(i).hasPremiumMembership())
         {
-          editMemberMembershipInput.getSelectionModel();
+          editMemberMembershipInput.getSelectionModel().select("Premium");
         }
         else
         {
@@ -825,6 +850,8 @@ public class GUIController
     {
       messageWarning("Member not found!");
     }
+    searchMemberByNameFirstNameInput.clear();
+    searchMemberByNameLastNameInput.clear();
   }
 
   public void searchMemberByPhoneNumber()
@@ -858,6 +885,7 @@ public class GUIController
     {
       messageWarning("Member not found!");
     }
+    searchMemberByPhoneInput.clear();
   }
 
   public void saveMember()
@@ -1010,15 +1038,19 @@ public class GUIController
   // -------------------------Schedule----------------------------------
   public void comboBoxClass()
   {
-    if (scheduleClassClassInput.getSelectionModel().getSelectedItem().length()
-        > 0)
+    if (scheduleClassClassInput.getSelectionModel().getSelectedItem() != null)
     {
       comboBoxDependency();
+    }
+    else
+    {
+      scheduleClassClassInput.getItems().clear();
     }
   }
 
   public void comboBoxDependency()
   {
+    scheduleClassInstructorInput.getItems().clear();
     String tempString = scheduleClassClassInput.getSelectionModel()
         .getSelectedItem();
     for (int i = 0; i < adapter.getAllInstructors().size(); i++)
@@ -1067,6 +1099,17 @@ public class GUIController
         Integer.parseInt(scheduleClassDurationInput.getText()));
     adapter.saveScheduleClasses("ScheduledClasses.bin", tempScheduledClass);
     messageInformation("Class Scheduled!");
+    scheduleClassDateInput.getEditor().clear();
+    scheduleClassHourInput.clear();
+    scheduleClassMinuteInput.clear();
+    scheduleClassDurationInput.clear();
+    scheduleClassClassInput.getItems().clear();
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      scheduleClassClassInput.getItems()
+          .add(adapter.getAllClasses().get(i).getName());
+    }
+    scheduleClassInstructorInput.getItems().clear();
     System.out.println("test");
     System.out.println(adapter.getAllScheduledClasses());
     System.out.println(adapter.getAllInstructors());
@@ -1091,10 +1134,22 @@ public class GUIController
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     for (int i = 0; i < tempScheduledClass.size(); i++)
     {
-      searchScheduledClassListView.getItems().add(
-          tempScheduledClass.get(i).getClassItem().getName() + ", "
-              + tempScheduledClass.get(i).getDateTime().getHour() + ":"
-              + tempScheduledClass.get(i).getDateTime().getMinute());
+      //Remake it later with formatter if you want
+      if(tempScheduledClass.get(i).getDateTime().getMinute()>9)
+      {
+        searchScheduledClassListView.getItems().add(
+            tempScheduledClass.get(i).getClassItem().getName() + ", "
+                + tempScheduledClass.get(i).getDateTime().getHour() + ":"
+                + tempScheduledClass.get(i).getDateTime().getMinute());
+      }
+      else
+      {
+        searchScheduledClassListView.getItems().add(
+            tempScheduledClass.get(i).getClassItem().getName() + ", "
+                + tempScheduledClass.get(i).getDateTime().getHour() + ":"
+                + "0" + tempScheduledClass.get(i).getDateTime().getMinute());
+      }
+
     }
   }
 
@@ -1170,15 +1225,64 @@ public class GUIController
       for (int b = 0;
            b < editScheduledClassInstructorInput.getItems().size(); b++)
       {
-        if (tempScheduledClass.get(index).getInstructor().getFullName()
-            .equals(editScheduledClassInstructorInput.getItems().get(b)))
+        try
         {
-          editScheduledClassInstructorInput.getSelectionModel().select(b);
-          break;
+          if (tempScheduledClass.get(index).getInstructor().getFullName().equals(editScheduledClassInstructorInput.getItems().get(b)))
+          {
+            editScheduledClassInstructorInput.getSelectionModel().select(b);
+            break;
+          }
+        }
+        catch (NullPointerException e)
+        {
+          System.out.println("No instructor assigned");
         }
       }
       break;
     }
+
+  }
+
+  public void saveEditedScheduledClass()
+  {
+    //System.out.println(searchScheduledClassListView);
+    DateTime tempDate = new DateTime(1,1,1,1,1);
+    tempDate.setDay(editScheduledClassDateInput.getValue().getDayOfMonth());
+    tempDate.setMonth(editScheduledClassDateInput.getValue().getMonthValue());
+    tempDate.setYear(editScheduledClassDateInput.getValue().getYear());
+    tempDate.setHour(Integer.parseInt(editScheduledClassHourInput.getText()));
+    tempDate.setMinute(Integer.parseInt(editScheduledClassMinuteInput.getText()));
+    String nameOfClass = editScheduledClassClassInput.getSelectionModel().getSelectedItem();
+    ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
+    ScheduledClass tempScheduledClass = null;
+    int index = -1;
+    for(int i=0;i<tempArray.size();i++)
+    {
+      if((tempArray.get(i).getClassItem().getName()).equals(nameOfClass) &&
+          (tempArray.get(i).getDateTime()).equals(tempDate))
+      {
+        tempScheduledClass = tempArray.get(i);
+        index = i;
+        System.out.println("IT WORKS !");
+        break;
+      }
+    }
+
+    System.out.println(adapter.getAllScheduledClasses());
+
+      Class tempClass = adapter.getAllClasses()
+          .get(editScheduledClassClassInput.getSelectionModel().getSelectedIndex());
+    System.out.println(tempClass);
+      Instructor tempInstructor = adapter.getAllInstructors()
+          .get(editScheduledClassInstructorInput.getSelectionModel().getSelectedIndex());
+    System.out.println(tempInstructor);
+      tempScheduledClass.setDateTime(tempDate);
+      tempScheduledClass.setDuration(Integer.parseInt(editScheduledClassDurationInput.getText()));
+      tempScheduledClass.setClassItem(tempClass);
+      tempScheduledClass.setInstructor(tempInstructor);
+      adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass);
+      System.out.println(adapter.getAllScheduledClasses());
+
 
   }
 

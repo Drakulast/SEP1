@@ -801,9 +801,9 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="scheduleEditPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">
+                  <Pane fx:id="scheduleEditPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0">
                      <children>
-                        <Button fx:id="editScheduledClassSaveButton" layoutX="171.0" layoutY="354.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="38.0" prefWidth="150.0" text="Schedule class" />
+                        <Button fx:id="editScheduledClassSaveButton" layoutX="171.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#saveEditedScheduledClass" prefHeight="38.0" prefWidth="150.0" text="Schedule class" />
                         <Label layoutX="75.0" layoutY="288.0" prefHeight="27.0" prefWidth="86.0" text="Instructor:">
                            <font>
                               <Font size="18.0" />

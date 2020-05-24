@@ -218,6 +218,74 @@ public class DateTime implements Serializable
     this.minute = minute;
   }
 
+  public boolean isBefore(DateTime date2)
+  {
+    int ok=0;
+    if(year<date2.year)
+      ok=1;
+    if(year== date2.year)
+    {
+      if(month< date2.month)
+      {ok=1;}
+      if(month==date2.month)
+      {
+        if(day<date2.day)
+        {
+          ok=1;
+        }
+        if(day== date2.day)
+        {
+          if(hour<date2.hour)
+          {
+            ok=1;
+          }
+          if(hour==date2.hour)
+          {
+            if(minute<date2.minute)
+            {
+              ok=1;
+            }
+          }
+        }
+      }
+    }
+    return ok == 1;
+  }
+
+  public boolean isAfter(DateTime date2)
+  {
+    int ok=0;
+    if(year>date2.year)
+      ok=1;
+    if(year== date2.year)
+    {
+      if(month> date2.month)
+      {ok=1;}
+      if(month==date2.month)
+      {
+        if(day>date2.day)
+        {
+          ok=1;
+        }
+        if(day== date2.day)
+        {
+          if(hour>date2.hour)
+          {
+            ok=1;
+          }
+          if(hour==date2.hour)
+          {
+            if(minute>date2.minute)
+            {
+              ok=1;
+            }
+          }
+        }
+      }
+    }
+    return ok == 1;
+  }
+
   /**
    * Returns a string representation of the Date & Time
    * @return a string representation of the Date & Time in the format: "day/month/year hour:minute"

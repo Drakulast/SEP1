@@ -331,11 +331,11 @@ public class FitnessCenterFileAdapter
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.out.println("File not found from adapter");
     }
     catch (IOException e)
     {
-      System.out.println("IO error when reading file");
+      System.out.println("IO error when reading file from adapter");
     }
     catch (ClassNotFoundException e)
     {
@@ -373,10 +373,11 @@ public class FitnessCenterFileAdapter
 
     for (int i = 0; i < scheduledClasses.size(); i++)
     {
-      if (scheduledClasses.get(i).getDateTime().getDay() >= from.getDay()
-          && scheduledClasses.get(i).getDateTime().getDay() <= to.getDay())
+      if ((scheduledClasses.get(i).getDateTime().isAfter(from))
+          && (scheduledClasses.get(i).getDateTime().isBefore(to)))
       {
         scheduledClassesFromTo.add(scheduledClasses.get(i));
+        System.out.println("it works");
       }
     }
     return scheduledClassesFromTo;
@@ -388,6 +389,27 @@ public class FitnessCenterFileAdapter
   {
     ArrayList<ScheduledClass> oldScheduleClasses = getAllScheduledClasses();
     oldScheduleClasses.add((ScheduledClass) object);
+
+    try
+    {
+      myFileIO.writeObjectToFile(scheduledClassesFilename, oldScheduleClasses);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
+  // edit schedules classes
+  public void editScheduledClasses(String scheduledClassesFilename, int index,
+      Object object)
+  {
+    ArrayList<ScheduledClass> oldScheduleClasses = getAllScheduledClasses();
+    oldScheduleClasses.set(index, (ScheduledClass) object);
 
     try
     {
