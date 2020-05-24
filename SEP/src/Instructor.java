@@ -11,9 +11,12 @@ public class Instructor extends Person implements Serializable
     super(firstName, lastName, address, email, phoneNumber);
     this.classes = classes;
   }
-public ArrayList<String> getClasses(){
+
+  public ArrayList<String> getClasses()
+  {
     return classes;
-}
+  }
+
   public void addClass(String className)
   {
     boolean exists = false;
@@ -41,7 +44,7 @@ public ArrayList<String> getClasses(){
 
   public boolean hasClass(String className)
   {
-    for (String classItem: classes)
+    for (String classItem : classes)
     {
       if (classItem.equals(className))
       {

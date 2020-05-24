@@ -813,7 +813,7 @@ public class GUIController
         editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
         if (members.get(i).hasPremiumMembership())
         {
-          editMemberMembershipInput.getSelectionModel().select("Premium");
+          editMemberMembershipInput.getSelectionModel();
         }
         else
         {
@@ -1115,7 +1115,8 @@ public class GUIController
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
-    tempScheduledClass.get(index);
+    // not sure why here and for what
+    //ScheduledClass selectedScheduledClass = tempScheduledClass.get(index);
 
     LocalDate tempLocal = LocalDate
         .of(tempScheduledClass.get(index).getDateTime().getYear(),
@@ -1132,13 +1133,18 @@ public class GUIController
     //Classes
     for (int i = 0; i < adapter.getAllClasses().size(); i++)
     {
-      editScheduledClassClassInput.getItems()
-          .add(adapter.getAllClasses().get(i).getName());
+      if (!(editScheduledClassClassInput.getItems()
+          .contains(adapter.getAllClasses().get(i).getName())))
+      {
+        editScheduledClassClassInput.getItems()
+            .add(adapter.getAllClasses().get(i).getName());
+      }
+
     }
     for (int b = 0; b < editScheduledClassClassInput.getItems().size(); b++)
     {
       if (editScheduledClassClassInput.getItems().get(b)
-          .contains(adapter.getAllClasses().get(index).getName()))
+          .contains(tempScheduledClass.get(index).getClassItem().getName()))
       {
         editScheduledClassClassInput.getSelectionModel().select(b);
       }
@@ -1148,7 +1154,7 @@ public class GUIController
         .getSelectedItem();
     for (int c = 0; c < adapter.getAllInstructors().size(); c++)
     {
-      if (adapter.getAllInstructors().get(c).hasClass(tempClass))
+      if (adapter.getAllInstructors().get(c).toString().contains(tempClass))
       {
         if (!editScheduledClassInstructorInput.getItems()
             .contains(adapter.getAllInstructors().get(c).getFullName()))
