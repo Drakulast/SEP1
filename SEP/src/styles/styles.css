@@ -1,0 +1,12 @@
+.button {
+    -fx-background-color: #ff0000;
+    -fx-text-fill: #12123a;
+}
+
+.paneSelectorButton {
+    -fx-background-color: #00ff00;
+}
+
+.blueText {
+    -fx-text-fill: #12123a;
+}
