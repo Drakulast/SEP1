@@ -131,7 +131,7 @@ public class GUIController
   @FXML private ComboBox<String> scheduleClassInstructorInput;
   @FXML private ComboBox<String> editScheduledClassClassInput;
   @FXML private ComboBox<String> editScheduledClassInstructorInput;
-  @FXML private ComboBox signUpScheduledClassPremiumMembersInput;
+  @FXML private ComboBox<Member> signUpScheduledClassPremiumMembersInput;
   @FXML private ComboBox scheduleExportMonthInput;
   @FXML private Button scheduleClassSaveButton;
   @FXML private Button searchScheduledClassButton;
@@ -487,16 +487,16 @@ public class GUIController
     scheduleButton.setStyle(
         "-fx-background-color: #000037;-fx-font-size: 24px;fx-font-weight: bold;");
 
-    scheduleClassDateInput.getEditor().clear();
+    scheduleClassDateInput.setValue(null);
     scheduleClassHourInput.clear();
     scheduleClassMinuteInput.clear();
     scheduleClassDurationInput.clear();
     scheduleClassClassInput.getItems().clear();
-      for (int i = 0; i < adapter.getAllClasses().size(); i++)
-      {
-        scheduleClassClassInput.getItems()
-            .add(adapter.getAllClasses().get(i).getName());
-      }
+    for (int i = 0; i < adapter.getAllClasses().size(); i++)
+    {
+      scheduleClassClassInput.getItems()
+          .add(adapter.getAllClasses().get(i).getName());
+    }
 
     scheduleClassInstructorInput.getItems().clear();
   }
@@ -505,7 +505,7 @@ public class GUIController
   {
     scheduleClassPane.setVisible(true);
     scheduleDisplayEditExportPane.setVisible(false);
-    scheduleClassDateInput.getEditor().clear();
+    scheduleClassDateInput.setValue(null);
     scheduleClassHourInput.clear();
     scheduleClassMinuteInput.clear();
     scheduleClassDurationInput.clear();
@@ -565,6 +565,12 @@ public class GUIController
     scheduleCancelMemberPane.setVisible(false);
     scheduleExportPane.setVisible(false);
     scheduleLogoPane.setVisible(false);
+    scheduledClassDateOutput.clear();
+    scheduledClassTimeOutput.clear();
+    scheduledClassNameOutput.clear();
+    scheduledClassInstructorOutput.clear();
+    scheduledClassDurationOutput.clear();
+    scheduledClassCapacityOutput.clear();
   }
 
   public void loadScheduleSignUpMemberPane()
@@ -644,13 +650,13 @@ public class GUIController
     alert.setTitle(null);
     alert.setHeaderText("Confirmation");
     alert.showAndWait();
-    if (alert.getResult() == ButtonType.CANCEL)
+    if (alert.getResult() == ButtonType.OK)
     {
-      return false;
+      return true;
     }
     else
     {
-      return true;
+      return false;
     }
   }
 
@@ -1158,7 +1164,7 @@ public class GUIController
         Integer.parseInt(scheduleClassDurationInput.getText()));
     adapter.saveScheduleClasses("ScheduledClasses.bin", tempScheduledClass);
     messageInformation("Class Scheduled!");
-    scheduleClassDateInput.getEditor().clear();
+    scheduleClassDateInput.setValue(null);
     scheduleClassHourInput.clear();
     scheduleClassMinuteInput.clear();
     scheduleClassDurationInput.clear();
@@ -1246,6 +1252,7 @@ public class GUIController
             tempScheduledClass.get(index).getDateTime().getMonth(),
             tempScheduledClass.get(index).getDateTime().getDay());
     editScheduledClassDateInput.setValue(tempLocal);
+
     editScheduledClassHourInput.setText(
         String.valueOf(tempScheduledClass.get(index).getDateTime().getHour()));
     editScheduledClassMinuteInput.setText(String
@@ -1352,29 +1359,85 @@ public class GUIController
         break;
       }
     }
+    Class tempClass = adapter.getAllClasses()
+        .get(editScheduledClassClassInput.getSelectionModel().getSelectedIndex());
 
-    System.out.println(adapter.getAllScheduledClasses());
+    ArrayList<Instructor> tempInstructors = adapter.getAllInstructors();
+    Instructor tempInstructor = null;
+    String tempInstructorName = editScheduledClassInstructorInput.getSelectionModel().getSelectedItem();
+    for(int j=0;j<tempInstructors.size();j++)
+    {
+      if(tempInstructors.get(j).getFullName().equals(tempInstructorName))
+      {
+        tempInstructor = tempInstructors.get(j);
+        break;
+      }
+    }
+    try{
+        tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor, tempDate, Integer.parseInt(editScheduledClassDurationInput.getText()));
+        adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass2);
+    }
+    catch(NullPointerException e)
+    {
+      System.out.println("Instructor not found (is null), saveEditedScheduledClass method");
+    }
 
-      Class tempClass = adapter.getAllClasses()
-          .get(editScheduledClassClassInput.getSelectionModel().getSelectedIndex());
-    System.out.println(tempClass);
-      Instructor tempInstructor = adapter.getAllInstructors()
-          .get(editScheduledClassInstructorInput.getSelectionModel().getSelectedIndex());
-    System.out.println(tempInstructor);
-      tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor, tempDate, Integer.parseInt(editScheduledClassDurationInput.getText()));
-      adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass2);
-      searchForScheduledClasses();
-      editScheduledClassHourInput.clear();
-      editScheduledClassMinuteInput.clear();
-      editScheduledClassClassInput.getItems().clear();
-      editScheduledClassDurationInput.clear();
-      editScheduledClassInstructorInput.getItems().clear();
-      editScheduledClassDateInput.getEditor().clear();
-      System.out.println(adapter.getAllScheduledClasses());
-
+    searchForScheduledClasses();
+    editScheduledClassHourInput.clear();
+    editScheduledClassMinuteInput.clear();
+    editScheduledClassClassInput.getItems().clear();
+    editScheduledClassDurationInput.clear();
+    editScheduledClassInstructorInput.getItems().clear();
+    editScheduledClassDateInput.setValue(null);
   }
 
-  
+  public void removeScheduledClass()
+  {
+    DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
+    DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
+    tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
+    tempDateTime
+        .setMonth(searchScheduledClassFromInput.getValue().getMonthValue());
+    tempDateTime
+        .setDay(searchScheduledClassFromInput.getValue().getDayOfMonth());
+    tempDateTime2.setYear(searchScheduledClassToInput.getValue().getYear());
+    tempDateTime2
+        .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
+    tempDateTime2
+        .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+    ArrayList<ScheduledClass> tempScheduledClasses = adapter
+        .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
+    int index = searchScheduledClassListView.getSelectionModel()
+        .getSelectedIndex();
+    ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
+    if(messageConfirmation("Are you sure you want to remove this class from the schedule?", Alert.AlertType.CONFIRMATION))
+    {
+      adapter.removeScheduledClass("ScheduledClasses.bin", tempScheduledClass);
+      scheduledClassDateOutput.clear();
+      scheduledClassTimeOutput.clear();
+      scheduledClassNameOutput.clear();
+      scheduledClassInstructorOutput.clear();
+      scheduledClassDurationOutput.clear();
+      scheduledClassCapacityOutput.clear();
+    }
+  }
+
+  public void loadPremiumMembersForSignUp()
+  {
+    ArrayList<Member> premiumMembers = new ArrayList<Member>();
+    ArrayList<Member> allMembers = adapter.getAllMembers();
+    for(int i=0;i<allMembers.size();i++)
+    {
+      if(allMembers.get(i).hasPremiumMembership())
+      {
+        premiumMembers.add(allMembers.get(i));
+      }
+    }
+    for(int j=0;j<premiumMembers.size();j++)
+    {
+      signUpScheduledClassPremiumMembersInput.getItems().add(premiumMembers.get(j));
+    }
+  }
 
   //--------------------------------------------------------------------------------------------
   // Exporting to xml

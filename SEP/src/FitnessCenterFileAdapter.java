@@ -170,6 +170,7 @@ public class FitnessCenterFileAdapter
       System.out.println("IO error when reading file");
     }
   }
+
   public void editInstructor(String instructorsFilename, int index, Object object)
   {
     ArrayList<Instructor> oldInstructors = getAllInstructors();
