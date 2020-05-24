@@ -1172,6 +1172,16 @@ public class GUIController
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
 
+    scheduledClassDateOutput.setText(tempScheduledClass.get(index).getDateTime().getDate());
+    scheduledClassTimeOutput.setText(tempScheduledClass.get(index).getDateTime().getTime());
+    scheduledClassNameOutput.setText(tempScheduledClass.get(index).getClassItem().getName());
+    scheduledClassInstructorOutput.setText(tempScheduledClass.get(index).getInstructor().getFullName());
+    scheduledClassDurationOutput.setText(String.valueOf(tempScheduledClass.get(index).getDuration()));
+    scheduledClassCapacityOutput.setText(String.valueOf(tempScheduledClass.get(index).getClassItem().getMaxCapacity()));
+
+
+
+
     LocalDate tempLocal = LocalDate
         .of(tempScheduledClass.get(index).getDateTime().getYear(),
             tempScheduledClass.get(index).getDateTime().getMonth(),
@@ -1294,8 +1304,18 @@ public class GUIController
     System.out.println(tempInstructor);
       tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor, tempDate, Integer.parseInt(editScheduledClassDurationInput.getText()));
       adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass2);
+      searchForScheduledClasses();
+      editScheduledClassHourInput.clear();
+      editScheduledClassMinuteInput.clear();
+      editScheduledClassClassInput.getItems().clear();
+      editScheduledClassDurationInput.clear();
+      editScheduledClassInstructorInput.getItems().clear();
+      editScheduledClassDateInput.getEditor().clear();
       System.out.println(adapter.getAllScheduledClasses());
+
   }
+
+  
 
   //--------------------------------------------------------------------------------------------
   // Exporting to xml

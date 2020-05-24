@@ -286,6 +286,19 @@ public class DateTime implements Serializable
     return ok == 1;
   }
 
+  public String getDate()
+  {
+    DecimalFormat formatter = new DecimalFormat("00");
+    return formatter.format(day) + "/" + formatter.format(month) + "/"
+        + formatter.format(year);
+  }
+
+  public String getTime()
+  {
+    DecimalFormat formatter = new DecimalFormat("00");
+    return formatter.format(hour) + ":" + formatter.format(minute);
+  }
+
   /**
    * Returns a string representation of the Date & Time
    * @return a string representation of the Date & Time in the format: "day/month/year hour:minute"
