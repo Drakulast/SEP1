@@ -28,14 +28,7 @@ public class Member extends Person implements Serializable
 
   public String toString()
   {
-    if (premiumMembership)
-    {
-      return super.toString() + ", has premium membership.";
-    }
-    else
-    {
-      return super.toString() + ", does not have premium membership.";
-    }
+    return super.toString();
   }
 
   public Member copy()

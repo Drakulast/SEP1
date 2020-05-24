@@ -75,9 +75,7 @@ public abstract class Person implements Serializable
 
   public String toString()
   {
-    return "First name: " + firstName + ", Last name: "
-        + lastName + ", Address: " + address + ", Email: " + email
-        + ", Phone number: " + phoneNumber + " ";
+    return firstName + " " + lastName + ", Phone number: " + phoneNumber;
   }
 
   public boolean equals(Object obj)

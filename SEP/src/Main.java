@@ -49,7 +49,7 @@ public class Main
         "45852123");
     Member Jane = new Member("Jane", "Doe", "Horsens", "janedoe@gmail.com",
         "45123456");
-    Member AnotherCezary = new Member("Cezary", "Doe", "Horsens", "cezary@gmail.com",
+    Member AnotherCezary = new Member("AnotherCezary", "Doe", "Horsens", "cezary@gmail.com",
         "81458963");
     Member MariaMember = new Member("Maria", "Doe", "Horsens", "maria@gmail.com",
         "75312345");
