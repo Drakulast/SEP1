@@ -358,7 +358,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" stylesheets="@styles/styles.css" visible="false">
+      <Pane fx:id="membersPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" stylesheets="@styles/styles.css">
          <children>
             <Button fx:id="registerMemberButton" mnemonicParsing="false" onAction="#loadRegisterMemberPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -556,8 +556,8 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button fx:id="editMemberSaveButton" layoutX="384.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#saveMember" prefHeight="25.0" prefWidth="65.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Save" />
-                        <Button fx:id="editMemberDeleteButton" layoutX="487.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#deleteMember" prefHeight="25.0" prefWidth="65.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Delete" />
+                        <Button fx:id="editMemberSaveButton" layoutX="310.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#saveMember" prefHeight="25.0" prefWidth="65.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Save" />
+                        <Button fx:id="editMemberDeleteButton" layoutX="413.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#deleteMember" prefHeight="39.0" prefWidth="80.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Delete" />
                      </children>
                   </Pane>
                </children>
@@ -661,7 +661,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="schedulePane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Button fx:id="scheduleClassButton" mnemonicParsing="false" onAction="#loadScheduleClassPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Schedule a class" textFill="#12123a">
                <font>
@@ -725,7 +725,7 @@
                   <Button fx:id="scheduleClassSaveButton" layoutX="549.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#schedule" prefHeight="38.0" prefWidth="150.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Schedule class" />
                </children>
             </Pane>
-            <Pane fx:id="scheduleDisplayEditExportPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
+            <Pane fx:id="scheduleDisplayEditExportPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
                   <Button fx:id="editScheduledClassButton" mnemonicParsing="false" onAction="#loadScheduleEditPane" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #b8b8b8;" text="Edit" textFill="#12123a">
                      <font>
@@ -845,7 +845,8 @@
                            </font>
                         </Label>
                         <TextField fx:id="editScheduledClassMinuteInput" focusTraversable="false" layoutX="298.0" layoutY="95.0" prefHeight="25.0" prefWidth="70.0" />
-                     </children></Pane>
+                     </children>
+                  </Pane>
                   <Pane fx:id="scheduleRemovePane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0" visible="false">
                      <children>
                         <GridPane layoutX="25.0" layoutY="31.0" prefHeight="90.0" prefWidth="430.0">
