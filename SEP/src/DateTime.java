@@ -83,7 +83,7 @@ public class DateTime implements Serializable
       {
         if (isLeapYear)
         {
-          if (day > 0 && day < 29)
+          if (day > 0 && day < 30)
           {
             this.day = day;
             this.hour = hour;
@@ -299,6 +299,51 @@ public class DateTime implements Serializable
     return formatter.format(hour) + ":" + formatter.format(minute);
   }
 
+  public static int lastDayOfTheMonth(int month, int year)
+  {
+    boolean isLeapYear = false;
+    if (year % 4 == 0)
+    {
+      if (year % 100 == 0)
+      {
+        if (year % 400 == 0)
+        {isLeapYear = true;}
+        else
+        {isLeapYear = false;}
+      }
+      else
+      {isLeapYear = true;}
+    }
+    else
+    {
+      isLeapYear = false;
+    }
+
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
+        || month == 10 || month == 12)
+    {
+      return 31;
+    }
+    else if (month == 4 || month == 6 || month == 9 || month == 11)
+    {
+      return 30;
+    }
+    else if (month == 2)
+    {
+      if (isLeapYear)
+      {
+        return 29;
+      }
+      else
+      {
+        return 28;
+      }
+    }
+    else {
+      return 0;
+    }
+  }
+
   /**
    * Returns a string representation of the Date & Time
    * @return a string representation of the Date & Time in the format: "day/month/year hour:minute"
@@ -309,6 +354,17 @@ public class DateTime implements Serializable
     return formatter.format(day) + "/" + formatter.format(month) + "/"
         + formatter.format(year) + " " + formatter.format(hour) + ":"
         + formatter.format(minute);
+  }
+
+  public boolean equalsDate(Object obj)
+  {
+    if(!(obj instanceof DateTime))
+    {
+      return false;
+    }
+    DateTime other = (DateTime) obj;
+    return day == other.day && month == other.getMonth() && year == other
+        .getYear();
   }
 
   /**

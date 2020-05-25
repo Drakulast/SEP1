@@ -521,7 +521,28 @@ public class FitnessCenterFileAdapter
     int currentMonth = currentDate.get(GregorianCalendar.MONTH) + 1;
     int currentYear = currentDate.get(GregorianCalendar.YEAR);
 
-    return String.valueOf(currentDay) + "/" + String.valueOf(currentMonth) + "/"
-        + String.valueOf(currentYear);
+    String info = "";
+
+    if (currentDay < 10)
+    {
+      info += "0" + String.valueOf(currentDay) + "/";
+    }
+    else
+    {
+      info += String.valueOf(currentDay) + "/";
+    }
+
+    if (currentMonth < 10)
+    {
+      info += "0" + String.valueOf(currentMonth) + "/";
+    }
+    else
+    {
+      info += String.valueOf(currentMonth) + "/";
+    }
+
+    info += String.valueOf(currentYear);
+
+    return info;
   }
 }

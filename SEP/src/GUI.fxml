@@ -101,7 +101,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="overviewPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
+      <Pane fx:id="overviewPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
          <children>
             <Text layoutX="48.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to VIAFit" wrappingWidth="352.71728515625">
                <font>
@@ -838,7 +838,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="scheduleExportYearInput" GridPane.columnIndex="4" />
-                              <Button fx:id="scheduleExportGetScheduleButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Get schedule" GridPane.columnIndex="6" />
+                              <Button fx:id="scheduleExportGetScheduleButton" mnemonicParsing="false" onMouseClicked="#getSchedule" prefHeight="25.0" prefWidth="180.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Get schedule" GridPane.columnIndex="6" />
                            </children>
                         </GridPane>
                      </children>
