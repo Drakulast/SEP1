@@ -874,6 +874,7 @@ public class GUIController
       loadFindInstructorPane();
       loadSearchInstructorByNamePane();
       setCurrentInstructors();
+
     }
   }
 
@@ -948,6 +949,8 @@ public class GUIController
         {
           editMemberMembershipInput.getSelectionModel().select("Standard");
         }
+        loadEditMemberPane();
+        break;
       }
     }
     if (ex == 0)
@@ -983,6 +986,8 @@ public class GUIController
         {
           editMemberMembershipInput.getSelectionModel().select("Standard");
         }
+        loadEditMemberPane();
+        break;
       }
     }
     if (ex == 0)
@@ -998,14 +1003,11 @@ public class GUIController
         Alert.AlertType.CONFIRMATION))
     {
       Member tempMember = adapter.getAllMembers().get(memberIndicator);
-      adapter.removeMember("TestMembers.bin", tempMember);
-
       tempMember.setFirstName(editMemberFirstNameInput.getText());
       tempMember.setLastName(editMemberLastNameInput.getText());
       tempMember.setAddress(editMemberAddressInput.getText());
       tempMember.setEmail(editMemberEmailInput.getText());
       tempMember.setPhoneNumber(editMemberPhoneInput.getText());
-
       if (editMemberMembershipInput.getValue().equals("Premium"))
       {
         tempMember.upgradeMembership();
@@ -1014,7 +1016,8 @@ public class GUIController
       {
         tempMember.downgradeMembership();
       }
-      adapter.saveMembers("TestMembers.bin", tempMember);
+
+      adapter.editMember("TestMembers.bin", memberIndicator, tempMember);
       setNumberOfMembers();
       if (searchMemberBy)
       {
@@ -1286,6 +1289,13 @@ public class GUIController
     scheduledClassDurationOutput.setText(String.valueOf(tempScheduledClass.get(index).getDuration()));
     scheduledClassCapacityOutput.setText(String.valueOf(tempScheduledClass.get(index).getClassItem().getMaxCapacity()));
 
+    signUpScheduledClassPremiumMembersInput.getItems().clear();
+    updatePremiumMembers();
+    loadPremiumMembersForSignUp();
+
+    cancelScheduledClassAttendingMemberInput.getItems().clear();
+    loadMemberAttendanceList();
+
     LocalDate tempLocal = LocalDate
         .of(tempScheduledClass.get(index).getDateTime().getYear(),
             tempScheduledClass.get(index).getDateTime().getMonth(),
@@ -1356,11 +1366,7 @@ public class GUIController
       break;
     }
 
-    signUpScheduledClassPremiumMembersInput.getItems().clear();
-    updatePremiumMembers();
-    loadPremiumMembersForSignUp();
-    cancelScheduledClassAttendingMemberInput.getItems().clear();
-    loadMemberAttendanceList();
+
 
   }
 
@@ -1484,6 +1490,7 @@ public class GUIController
 
   public void loadPremiumMembersForSignUp()
   {
+    System.out.println("Enters first time");
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1503,23 +1510,27 @@ public class GUIController
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
     ArrayList<Member> memberList = tempScheduledClass.getMembers();
 
-    for(int i=0;i<premiumMembers.size();i++)
-    {
-      for(int j=0;j<memberList.size();j++)
-      {
-        if(!(memberList.get(j).equals(premiumMembers.get(i))))
-        {
-          signUpScheduledClassPremiumMembersInput.getItems().add(premiumMembers.get(i));
-        }
-      }
+   if(memberList.size()>0)
+   {
+     for(int j=0;j<memberList.size();j++)
+     {
+       premiumMembers.remove(memberList.get(j));
+     }
+   }
 
-    }
+     for(int i=0;i<premiumMembers.size();i++)
+     {
+       signUpScheduledClassPremiumMembersInput.getItems().add(premiumMembers.get(i));
+     }
+
+
   }
 
   public void addPremiumMemberToScheduledClass()
   {
     Member tempMember = signUpScheduledClassPremiumMembersInput.getSelectionModel().getSelectedItem();
 
+    System.out.println(tempMember);
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1583,8 +1594,6 @@ public class GUIController
 
   public void cancelMemberAttendance()
   {
-    Member tempMember = signUpScheduledClassPremiumMembersInput.getSelectionModel().getSelectedItem();
-
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1601,21 +1610,26 @@ public class GUIController
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
+    ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
-    ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
     for(int i=0;i<tempArray.size();i++)
     {
-      if((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName()) &&
-          (tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
+      if(((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName())) &&
+          ((tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime())))
       {
+        System.out.println(i);
         index = i;
         break;
       }
     }
-
+    Member tempMember = cancelScheduledClassAttendingMemberInput.getSelectionModel().getSelectedItem();
+    System.out.println(tempMember);
+    System.out.println(tempScheduledClass.getMembers());
     tempScheduledClass.removeMember(tempMember);
+    System.out.println(tempScheduledClass.getMembers());
     adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass);
+    cancelScheduledClassAttendingMemberInput.setValue(null);
   }
 
   //--------------------------------------------------------------------------------------------

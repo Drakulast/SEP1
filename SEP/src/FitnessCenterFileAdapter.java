@@ -84,6 +84,24 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  public void editMember(String membersFileName, int index, Object object)
+  {
+    ArrayList<Member> oldMembers = getAllMembers();
+    oldMembers.set(index, (Member) object);
+    try
+    {
+      myFileIO.writeObjectToFile(membersFileName, oldMembers);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO error when reading file");
+    }
+  }
+
   // remove member
   public void removeMember(String membersFileName, Member member)
   {
