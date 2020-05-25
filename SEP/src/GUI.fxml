@@ -34,7 +34,7 @@
             </Pane>
             <Pane layoutX="800.0" layoutY="1.0" prefHeight="53.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="38.0" fitWidth="161.0" layoutX="40.0" layoutY="8.0" onMouseClicked="#loadScreenSaver" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="39.0" fitWidth="104.0" layoutX="48.0" layoutY="10.0" onMouseClicked="#loadScreenSaver" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/logoLight.png" />
                      </image>
