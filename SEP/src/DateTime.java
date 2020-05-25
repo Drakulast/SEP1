@@ -363,8 +363,7 @@ public class DateTime implements Serializable
       return false;
     }
     DateTime other = (DateTime) obj;
-    return day == other.day && month == other.getMonth() && year == other
-        .getYear();
+    return day == other.day && month == other.month && year == other.year;
   }
 
   /**
@@ -379,7 +378,7 @@ public class DateTime implements Serializable
       return false;
     }
     DateTime other = (DateTime) obj;
-    return day == other.day && month == other.getMonth() && year == other
-        .getYear() && hour == other.hour && minute == other.minute;
+    return day == other.day && month == other.month && year == other.year
+        && hour == other.hour && minute == other.minute;
   }
 }

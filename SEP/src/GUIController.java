@@ -644,6 +644,10 @@ public class GUIController
     signUpMemberScheduledClassButton.setStyle(lightBgButton);
     cancelMemberScheduledClassButton.setStyle(lightBgButton);
     exportScheduledClassButton.setStyle(darkBgButton);
+
+    scheduleExportMonthInput.setValue(null);
+    scheduleExportScheduleOutput.clear();
+    scheduleExportYearInput.clear();
     loadMonths();
   }
   //------------------------------------Alert Panel-----------------------------------------------
@@ -1653,34 +1657,66 @@ public class GUIController
   {
     String month = scheduleExportMonthInput.getSelectionModel().getSelectedItem();
     int year = Integer.parseInt(scheduleExportYearInput.getText());
-    int i;
-    for(i=0;i<months.size();i++)
+    int c=0;
+    for(int i=0;i<months.size();i++)
     {
       if(month.equals(months.get(i)))
+      {
+        c = i;
         break;
+      }
     }
-    int lastDay = DateTime.lastDayOfTheMonth(i+1, year);
+    int lastDay = DateTime.lastDayOfTheMonth(c+1, year);
     ArrayList<ScheduledClass> tempScheduledClasses = adapter.getAllScheduledClasses();
     String returnScheduledClasses="";
     DateTime tempDateTime;
-    for(int j=1;j<lastDay;j++)
+    for(int j=1;j<=lastDay;j++)
     {
-      tempDateTime = new DateTime(j,i+1,year,0,0);
-      for(i=0;i<tempScheduledClasses.size();i++)
+      tempDateTime = new DateTime(j,c+1, year,0,0);
+      for(int i=0;i<tempScheduledClasses.size();i++)
       {
         if(tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
         {
-          returnScheduledClasses += tempScheduledClasses.get(i).getClass().getName()
-              + ", " + tempScheduledClasses.get(i).getDateTime() + "\n";
+          returnScheduledClasses += tempScheduledClasses.get(i).getClassItem().getName()
+              + ", " + tempScheduledClasses.get(i).getDateTime() + ", with " +
+              tempScheduledClasses.get(i).getInstructor().getFullName() + "\n";
         }
       }
     }
+    System.out.println(returnScheduledClasses);
     scheduleExportScheduleOutput.setText(returnScheduledClasses);
   }
 
   // Exporting to xml
-  public void exportToXml(ArrayList<ScheduledClass> scheduledClasses)
+  public void exportToXml()
   {
+    ArrayList<ScheduledClass> scheduledClasses = new ArrayList<ScheduledClass>();
+    String month = scheduleExportMonthInput.getSelectionModel().getSelectedItem();
+    int year = Integer.parseInt(scheduleExportYearInput.getText());
+    int c=0;
+    for(int i=0;i<months.size();i++)
+    {
+      if(month.equals(months.get(i)))
+      {
+        c = i;
+        break;
+      }
+    }
+    int lastDay = DateTime.lastDayOfTheMonth(c+1, year);
+    ArrayList<ScheduledClass> tempScheduledClasses = adapter.getAllScheduledClasses();
+    DateTime tempDateTime;
+    for(int j=1;j<=lastDay;j++)
+    {
+      tempDateTime = new DateTime(j,c+1, year,0,0);
+      for(int i=0;i<tempScheduledClasses.size();i++)
+      {
+        if(tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
+        {
+          scheduledClasses.add(tempScheduledClasses.get(i));
+        }
+      }
+    }
+
     MyTextFileIO textFileIO = new MyTextFileIO();
     String xmlFile = "scheduleExport.xml";
     String stringToAppend = "";
@@ -1688,7 +1724,7 @@ public class GUIController
     {
       textFileIO
           .writeToFile(xmlFile, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-      textFileIO.appendToFile(xmlFile, "<schedule>");
+      textFileIO.writeToFile(xmlFile, "<schedule>");
       for (ScheduledClass scheduledClass : scheduledClasses)
       {
         stringToAppend +=
@@ -1701,11 +1737,11 @@ public class GUIController
                 + "</instructor>" + "<date>" + "<day>" + scheduledClass
                 .getDateTime().getDay() + "</day>" + "<month>" + scheduledClass
                 .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
-                + "<hour>" + scheduledClass.getDateTime().getMinute()
+                + "<hour>" + scheduledClass.getDateTime().getHour()
                 + "</hour>" + "<minute>" + scheduledClass.getDateTime()
                 .getMinute() + "</minute>" + "</time>" + "</scheduledClass>";
-        textFileIO.appendToFile(xmlFile, stringToAppend);
       }
+      textFileIO.appendToFile(xmlFile, stringToAppend);
       textFileIO.appendToFile(xmlFile, "</schedule>");
     }
     catch (FileNotFoundException e)
@@ -1713,8 +1749,11 @@ public class GUIController
       System.out.println("File not found.");
       System.exit(1);
     }
+    scheduleExportMonthInput.setValue(null);
+    scheduleExportScheduleOutput.clear();
+    scheduleExportYearInput.clear();
+    loadMonths();
   }
-
 }
 
 
