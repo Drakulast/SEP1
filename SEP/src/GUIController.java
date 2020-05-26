@@ -538,7 +538,7 @@ public class GUIController
 
     scheduleClassButton.setStyle(lightBgButton);
     findEditScheduleButton.setStyle(darkBgButton);
-    editScheduledClassButton.setStyle(darkBgButton);
+    editScheduledClassButton.setStyle(lightBgButton);
     removeScheduledClassPaneButton.setStyle(lightBgButton);
     signUpMemberScheduledClassButton.setStyle(lightBgButton);
     cancelMemberScheduledClassButton.setStyle(lightBgButton);
@@ -1253,6 +1253,7 @@ public class GUIController
             tempScheduledClass.get(i).getClassItem().getName() + ", "
                 + tempScheduledClass.get(i).getDateTime());
     }
+    loadScheduleEditPane();
   }
 
 
@@ -1737,9 +1738,9 @@ public class GUIController
                 + "</instructor>" + "<date>" + "<day>" + scheduledClass
                 .getDateTime().getDay() + "</day>" + "<month>" + scheduledClass
                 .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
-                + "<hour>" + scheduledClass.getDateTime().getHour()
+                + "<hour>" + scheduledClass.getDateTime().displayHour()
                 + "</hour>" + "<minute>" + scheduledClass.getDateTime()
-                .getMinute() + "</minute>" + "</time>" + "</scheduledClass>";
+                .displayMinute() + "</minute>" + "</time>" + "</scheduledClass>";
       }
       textFileIO.appendToFile(xmlFile, stringToAppend);
       textFileIO.appendToFile(xmlFile, "</schedule>");

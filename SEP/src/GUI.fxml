@@ -148,7 +148,7 @@
             </GridPane>
          </children>
       </Pane>
-      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0" visible="false">
+      <Pane fx:id="instructorsPane" layoutX="200.0" layoutY="53.0" prefHeight="547.0" prefWidth="802.0">
          <children>
             <Button fx:id="registerInstructorButton" mnemonicParsing="false" onAction="#loadRegisterInstructorPane" prefHeight="51.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Register" textFill="#12123a">
                <font>
@@ -166,7 +166,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </Button>
-            <Pane fx:id="registerInstructorPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
+            <Pane fx:id="registerInstructorPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
                <children>
                   <Button fx:id="registerInstructorAddClassButton" layoutX="619.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#mouseClickOnAdd" prefHeight="25.0" prefWidth="65.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Add" />
                   <Button fx:id="registerInstructorSaveButton" layoutX="370.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#saveAndRegisterInstructor" prefHeight="25.0" prefWidth="65.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Save" />
@@ -208,7 +208,7 @@
                   <TextField fx:id="registerInstructorClassInput" focusTraversable="false" layoutX="395.0" layoutY="365.0" prefHeight="25.0" prefWidth="200.0" />
                </children>
             </Pane>
-            <Pane fx:id="findInstructorPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0" visible="false">
+            <Pane fx:id="findInstructorPane" layoutY="51.0" prefHeight="497.0" prefWidth="802.0">
                <children>
                   <Button fx:id="searchInstructorByNameButton" mnemonicParsing="false" onAction="#loadSearchInstructorByNamePane" prefHeight="39.0" prefWidth="400.0" style="-fx-background-color: #B8B8B8;" text="Search By Name" textFill="#12123a">
                      <font>
@@ -254,7 +254,7 @@
                         <TextField fx:id="searchInstructorByPhoneInput" focusTraversable="false" layoutX="395.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" />
                      </children>
                   </Pane>
-                  <Pane fx:id="editInstructorPane" layoutX="-8.0" prefHeight="497.0" prefWidth="802.0" visible="false">
+                  <Pane fx:id="editInstructorPane" layoutX="-8.0" prefHeight="497.0" prefWidth="802.0">
                      <children>
                         <GridPane layoutX="198.0" layoutY="65.0" prefHeight="332.0" prefWidth="371.0">
                            <columnConstraints>
@@ -308,11 +308,11 @@
                               <ListView fx:id="editInstructorClassesInput" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
-                        <Button fx:id="editInstructorAddButton" layoutX="607.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#addInstructorClassListView" styleClass="importantButton" stylesheets="@styles/styles.css" text="Add" />
+                        <Button fx:id="editInstructorAddButton" layoutX="700.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#addInstructorClassListView" styleClass="importantButton" stylesheets="@styles/styles.css" text="Add" />
                         <Button fx:id="editInstructorSaveButton" layoutX="381.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#saveEditedInstructor" styleClass="importantButton" stylesheets="@styles/styles.css" text="Save" />
                         <Button fx:id="editInstructorDeleteButton" layoutX="462.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#deleteInstructor" styleClass="importantButton" stylesheets="@styles/styles.css" text="Delete" />
-                        <Button fx:id="editInstructorRemoveClassButton" layoutX="662.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#removeInstructorClassListView" styleClass="importantButton" stylesheets="@styles/styles.css" text="Remove" />
-                        <TextField fx:id="addClassToInstructorInput" layoutX="588.0" layoutY="346.0" />
+                        <Button fx:id="editInstructorRemoveClassButton" layoutX="600.0" layoutY="306.0" mnemonicParsing="false" onMouseClicked="#removeInstructorClassListView" styleClass="importantButton" stylesheets="@styles/styles.css" text="Remove" />
+                        <TextField fx:id="addClassToInstructorInput" layoutX="600.0" layoutY="372.0" prefHeight="25.0" prefWidth="160.0" />
                      </children>
                   </Pane>
                </children>
@@ -674,7 +674,7 @@
                   </Pane>
                   <Pane fx:id="scheduleEditPane" layoutX="320.0" layoutY="39.0" prefHeight="459.0" prefWidth="480.0">
                      <children>
-                        <Button fx:id="editScheduledClassSaveButton" layoutX="165.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#saveEditedScheduledClass" prefHeight="38.0" prefWidth="150.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Schedule class" />
+                        <Button fx:id="editScheduledClassSaveButton" layoutX="165.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#saveEditedScheduledClass" prefHeight="38.0" prefWidth="150.0" styleClass="importantButton" stylesheets="@styles/styles.css" text="Save" />
                         <Label layoutX="113.0" layoutY="260.0" prefHeight="27.0" prefWidth="86.0" text="Instructor:">
                            <font>
                               <Font size="18.0" />

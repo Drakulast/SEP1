@@ -191,6 +191,12 @@ public class DateTime implements Serializable
     return hour;
   }
 
+  public String displayHour()
+  {
+    DecimalFormat formatter = new DecimalFormat("00");
+    return formatter.format(hour);
+  }
+
   /**
    * Sets the hour of the Time in that date
    * @param hour the hour of the Time in that Date
@@ -207,6 +213,12 @@ public class DateTime implements Serializable
   public int getMinute()
   {
     return minute;
+  }
+
+  public String displayMinute()
+  {
+    DecimalFormat formatter = new DecimalFormat("00");
+    return formatter.format(minute);
   }
 
   /**
