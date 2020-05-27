@@ -736,7 +736,7 @@ public class GUIController
     }
     else
     {
-      messageWarning("An instructor with that phone number already exists");
+      messageWarning("An instructor with this phone number already exists");
     }
   }
 
@@ -772,11 +772,6 @@ public class GUIController
         }
         loadEditInstructorPane();
         break;
-      }
-      else
-      {
-        System.out.println("Wrong");
-
       }
 
     }
@@ -819,11 +814,6 @@ public class GUIController
         loadEditInstructorPane();
         break;
       }
-      else
-      {
-
-      }
-
     }
     if (ex == 0)
     {
@@ -917,59 +907,86 @@ public class GUIController
 
   public void registerMember()
   {
-    Member newMember = new Member(registerMemberFirstNameInput.getText(),
-        registerMemberLastNameInput.getText(),
-        registerMemberAddressInput.getText(),
-        registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
-    registerMemberFirstNameInput.clear();
-    registerMemberLastNameInput.clear();
-    registerMemberAddressInput.clear();
-    registerMemberEmailInput.clear();
-    registerMemberPhoneInput.clear();
-    if (registerMemberMembershipInput.getValue().equals("Premium"))
+    if (adapter.getMember(registerMemberPhoneInput.getText()) == null)
     {
-      newMember.upgradeMembership();
+      Member newMember = new Member(registerMemberFirstNameInput.getText(),
+          registerMemberLastNameInput.getText(),
+          registerMemberAddressInput.getText(),
+          registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
+      registerMemberFirstNameInput.clear();
+      registerMemberLastNameInput.clear();
+      registerMemberAddressInput.clear();
+      registerMemberEmailInput.clear();
+      registerMemberPhoneInput.clear();
+      if (registerMemberMembershipInput.getValue().equals("Premium"))
+      {
+        newMember.upgradeMembership();
+      }
+      adapter.saveMembers("TestMembers.bin", newMember);
+      setNumberOfMembers();
+      registerMemberMembershipInput.setValue(null);
+      messageInformation("Member Added!");
     }
-    adapter.saveMembers("TestMembers.bin", newMember);
-    setNumberOfMembers();
-    registerMemberMembershipInput.setValue(null);
-    messageInformation("Member Added!");
+    else
+    {
+      messageWarning("A member with this phone number already exists");
+    }
+
   }
 
   public void searchMemberByName()
   {
     String firstName = searchMemberByNameFirstNameInput.getText();
     String lastName = searchMemberByNameLastNameInput.getText();
-    int ex = 0;
     ArrayList<Member> members = adapter.getAllMembers();
+
+
+    int ok=0;
     for (int i = 0; i < members.size(); i++)
     {
       if (members.get(i).getFirstName().equals(firstName) && members.get(i)
           .getLastName().equals(lastName))
       {
-        ex = 1;
-        memberIndicator = i;
-        searchMemberBy = true;
-        editMemberFirstNameInput.setText(members.get(i).getFirstName());
-        editMemberLastNameInput.setText(members.get(i).getLastName());
-        editMemberAddressInput.setText(members.get(i).getAddress());
-        editMemberEmailInput.setText(members.get(i).getEmail());
-        editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
-        if (members.get(i).hasPremiumMembership())
-        {
-          editMemberMembershipInput.getSelectionModel().select("Premium");
-        }
-        else
-        {
-          editMemberMembershipInput.getSelectionModel().select("Standard");
-        }
-        loadEditMemberPane();
-        break;
+        ok++;
       }
     }
-    if (ex == 0)
+
+    int ex = 0;
+    if(ok==1)
     {
-      messageWarning("Member not found!");
+      for (int i = 0; i < members.size(); i++)
+      {
+        if (members.get(i).getFirstName().equals(firstName) && members.get(i)
+            .getLastName().equals(lastName))
+        {
+          ex = 1;
+          memberIndicator = i;
+          searchMemberBy = true;
+          editMemberFirstNameInput.setText(members.get(i).getFirstName());
+          editMemberLastNameInput.setText(members.get(i).getLastName());
+          editMemberAddressInput.setText(members.get(i).getAddress());
+          editMemberEmailInput.setText(members.get(i).getEmail());
+          editMemberPhoneInput.setText(members.get(i).getPhoneNumber());
+          if (members.get(i).hasPremiumMembership())
+          {
+            editMemberMembershipInput.getSelectionModel().select("Premium");
+          }
+          else
+          {
+            editMemberMembershipInput.getSelectionModel().select("Standard");
+          }
+          loadEditMemberPane();
+          break;
+        }
+      }
+      if (ex == 0)
+      {
+        messageWarning("Member not found!");
+      }
+    }
+    else
+    {
+      messageWarning("More members with this name have been found.\n Try to search by phone number.");
     }
     searchMemberByNameFirstNameInput.clear();
     searchMemberByNameLastNameInput.clear();
