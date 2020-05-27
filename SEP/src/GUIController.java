@@ -715,22 +715,29 @@ public class GUIController
 
   public void saveAndRegisterInstructor()
   {
-    Instructor tempInstructor = new Instructor(
-        registerInstructorFirstNameInput.getText(),
-        registerInstructorLastNameInput.getText(),
-        registerInstructorAddressInput.getText(),
-        registerInstructorEmailInput.getText(),
-        registerInstructorPhoneInput.getText(), instrAddClasses);
-    adapter.saveInstructors("Instructors.bin", tempInstructor);
-    messageInformation("Instructor Added!");
-    instrAddClasses.clear();
-    registerInstructorFirstNameInput.setText("");
-    registerInstructorLastNameInput.setText("");
-    registerInstructorAddressInput.setText("");
-    registerInstructorEmailInput.setText("");
-    registerInstructorPhoneInput.setText("");
-    System.out.println(tempInstructor);
-    setCurrentInstructors();
+    if (adapter.getInstructor(registerInstructorPhoneInput.getText()) == null)
+    {
+      Instructor tempInstructor = new Instructor(
+          registerInstructorFirstNameInput.getText(),
+          registerInstructorLastNameInput.getText(),
+          registerInstructorAddressInput.getText(),
+          registerInstructorEmailInput.getText(),
+          registerInstructorPhoneInput.getText(), instrAddClasses);
+      adapter.saveInstructors("Instructors.bin", tempInstructor);
+      messageInformation("Instructor Added!");
+      instrAddClasses.clear();
+      registerInstructorFirstNameInput.setText("");
+      registerInstructorLastNameInput.setText("");
+      registerInstructorAddressInput.setText("");
+      registerInstructorEmailInput.setText("");
+      registerInstructorPhoneInput.setText("");
+      System.out.println(tempInstructor);
+      setCurrentInstructors();
+    }
+    else
+    {
+      messageWarning("An instructor with that phone number already exists");
+    }
   }
 
   public void searchInstructorByName()
@@ -914,17 +921,18 @@ public class GUIController
         registerMemberLastNameInput.getText(),
         registerMemberAddressInput.getText(),
         registerMemberEmailInput.getText(), registerMemberPhoneInput.getText());
-    registerMemberFirstNameInput.setText("");
-    registerMemberLastNameInput.setText("");
-    registerMemberAddressInput.setText("");
-    registerMemberEmailInput.setText("");
-    registerMemberPhoneInput.setText("");
+    registerMemberFirstNameInput.clear();
+    registerMemberLastNameInput.clear();
+    registerMemberAddressInput.clear();
+    registerMemberEmailInput.clear();
+    registerMemberPhoneInput.clear();
     if (registerMemberMembershipInput.getValue().equals("Premium"))
     {
       newMember.upgradeMembership();
     }
     adapter.saveMembers("TestMembers.bin", newMember);
     setNumberOfMembers();
+    registerMemberMembershipInput.setValue(null);
     messageInformation("Member Added!");
   }
 
@@ -1228,8 +1236,6 @@ public class GUIController
     System.out.println(adapter.getAllInstructors());
   }
 
-
-
   public void searchForScheduledClasses()
   {
     searchScheduledClassListView.getItems().clear();
@@ -1249,13 +1255,12 @@ public class GUIController
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
     for (int i = 0; i < tempScheduledClass.size(); i++)
     {
-        searchScheduledClassListView.getItems().add(
-            tempScheduledClass.get(i).getClassItem().getName() + ", "
-                + tempScheduledClass.get(i).getDateTime());
+      searchScheduledClassListView.getItems().add(
+          tempScheduledClass.get(i).getClassItem().getName() + ", "
+              + tempScheduledClass.get(i).getDateTime());
     }
     loadScheduleEditPane();
   }
-
 
   public void editSchedule()
   {
@@ -1276,16 +1281,22 @@ public class GUIController
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
 
-    scheduledClassDateOutput.setText(tempScheduledClass.get(index).getDateTime().getDate());
-    scheduledClassTimeOutput.setText(tempScheduledClass.get(index).getDateTime().getTime());
-    scheduledClassNameOutput.setText(tempScheduledClass.get(index).getClassItem().getName());
-    scheduledClassInstructorOutput.setText(tempScheduledClass.get(index).getInstructor().getFullName());
-    scheduledClassDurationOutput.setText(String.valueOf(tempScheduledClass.get(index).getDuration()));
-    scheduledClassCapacityOutput.setText(String.valueOf(tempScheduledClass.get(index).getClassItem().getMaxCapacity()));
+    scheduledClassDateOutput
+        .setText(tempScheduledClass.get(index).getDateTime().getDate());
+    scheduledClassTimeOutput
+        .setText(tempScheduledClass.get(index).getDateTime().getTime());
+    scheduledClassNameOutput
+        .setText(tempScheduledClass.get(index).getClassItem().getName());
+    scheduledClassInstructorOutput
+        .setText(tempScheduledClass.get(index).getInstructor().getFullName());
+    scheduledClassDurationOutput
+        .setText(String.valueOf(tempScheduledClass.get(index).getDuration()));
+    scheduledClassCapacityOutput.setText(String.valueOf(
+        tempScheduledClass.get(index).getClassItem().getMaxCapacity()));
     String membersOutput = "";
-    for(int j=0;j<tempScheduledClass.get(index).getMembers().size();j++)
+    for (int j = 0; j < tempScheduledClass.get(index).getMembers().size(); j++)
     {
-     membersOutput += tempScheduledClass.get(index).getMembers().get(j) + "\n";
+      membersOutput += tempScheduledClass.get(index).getMembers().get(j) + "\n";
     }
     scheduledClassMembersOutput.setText(membersOutput);
 
@@ -1352,7 +1363,8 @@ public class GUIController
       {
         try
         {
-          if (tempScheduledClass.get(index).getInstructor().getFullName().equals(editScheduledClassInstructorInput.getItems().get(b)))
+          if (tempScheduledClass.get(index).getInstructor().getFullName()
+              .equals(editScheduledClassInstructorInput.getItems().get(b)))
           {
             editScheduledClassInstructorInput.getSelectionModel().select(b);
             break;
@@ -1366,13 +1378,12 @@ public class GUIController
       break;
     }
 
-
-
   }
 
   public void saveEditedScheduledClass()
   {
-    System.out.println(searchScheduledClassListView.getSelectionModel().getSelectedItems());
+    System.out.println(
+        searchScheduledClassListView.getSelectionModel().getSelectedItems());
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1392,45 +1403,53 @@ public class GUIController
         .getSelectedIndex();
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
-    DateTime tempDate = new DateTime(1,1,1,1,1);
+    DateTime tempDate = new DateTime(1, 1, 1, 1, 1);
     tempDate.setDay(editScheduledClassDateInput.getValue().getDayOfMonth());
     tempDate.setMonth(editScheduledClassDateInput.getValue().getMonthValue());
     tempDate.setYear(editScheduledClassDateInput.getValue().getYear());
     tempDate.setHour(Integer.parseInt(editScheduledClassHourInput.getText()));
-    tempDate.setMinute(Integer.parseInt(editScheduledClassMinuteInput.getText()));
+    tempDate
+        .setMinute(Integer.parseInt(editScheduledClassMinuteInput.getText()));
     ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
     ScheduledClass tempScheduledClass2;
-    for(int i=0;i<tempArray.size();i++)
+    for (int i = 0; i < tempArray.size(); i++)
     {
-      if((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName()) &&
-          (tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
+      if ((tempArray.get(i).getClassItem().getName())
+          .equals(tempScheduledClass.getClassItem().getName()) && (tempArray
+          .get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
       {
         index = i;
         System.out.println("IT WORKS !");
         break;
       }
     }
-    Class tempClass = adapter.getAllClasses()
-        .get(editScheduledClassClassInput.getSelectionModel().getSelectedIndex());
+    Class tempClass = adapter.getAllClasses().get(
+        editScheduledClassClassInput.getSelectionModel().getSelectedIndex());
 
     ArrayList<Instructor> tempInstructors = adapter.getAllInstructors();
     Instructor tempInstructor = null;
-    String tempInstructorName = editScheduledClassInstructorInput.getSelectionModel().getSelectedItem();
-    for(int j=0;j<tempInstructors.size();j++)
+    String tempInstructorName = editScheduledClassInstructorInput
+        .getSelectionModel().getSelectedItem();
+    for (int j = 0; j < tempInstructors.size(); j++)
     {
-      if(tempInstructors.get(j).getFullName().equals(tempInstructorName))
+      if (tempInstructors.get(j).getFullName().equals(tempInstructorName))
       {
         tempInstructor = tempInstructors.get(j);
         break;
       }
     }
-    try{
-      tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor, tempDate, Integer.parseInt(editScheduledClassDurationInput.getText()));
-      adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass2);
-    }
-    catch(NullPointerException e)
+    try
     {
-      System.out.println("Instructor not found (is null), saveEditedScheduledClass method");
+      tempScheduledClass2 = new ScheduledClass(tempClass, tempInstructor,
+          tempDate,
+          Integer.parseInt(editScheduledClassDurationInput.getText()));
+      adapter.editScheduledClasses("ScheduledClasses.bin", index,
+          tempScheduledClass2);
+    }
+    catch (NullPointerException e)
+    {
+      System.out.println(
+          "Instructor not found (is null), saveEditedScheduledClass method");
     }
 
     searchForScheduledClasses();
@@ -1441,7 +1460,6 @@ public class GUIController
     editScheduledClassInstructorInput.getItems().clear();
     editScheduledClassDateInput.setValue(null);
   }
-
 
   public void removeScheduledClass()
   {
@@ -1462,7 +1480,9 @@ public class GUIController
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
-    if(messageConfirmation("Are you sure you want to remove this class from the schedule?", Alert.AlertType.CONFIRMATION))
+    if (messageConfirmation(
+        "Are you sure you want to remove this class from the schedule?",
+        Alert.AlertType.CONFIRMATION))
     {
       adapter.removeScheduledClass("ScheduledClasses.bin", tempScheduledClass);
       scheduledClassDateOutput.clear();
@@ -1479,9 +1499,9 @@ public class GUIController
   {
     ArrayList<Member> allMembers = adapter.getAllMembers();
     premiumMembers = new ArrayList<Member>();
-    for(int i=0;i<allMembers.size();i++)
+    for (int i = 0; i < allMembers.size(); i++)
     {
-      if(allMembers.get(i).hasPremiumMembership())
+      if (allMembers.get(i).hasPremiumMembership())
       {
         premiumMembers.add(allMembers.get(i));
       }
@@ -1510,25 +1530,26 @@ public class GUIController
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
     ArrayList<Member> memberList = tempScheduledClass.getMembers();
 
-   if(memberList.size()>0)
-   {
-     for(int j=0;j<memberList.size();j++)
-     {
-       premiumMembers.remove(memberList.get(j));
-     }
-   }
+    if (memberList.size() > 0)
+    {
+      for (int j = 0; j < memberList.size(); j++)
+      {
+        premiumMembers.remove(memberList.get(j));
+      }
+    }
 
-     for(int i=0;i<premiumMembers.size();i++)
-     {
-       signUpScheduledClassPremiumMembersInput.getItems().add(premiumMembers.get(i));
-     }
-
+    for (int i = 0; i < premiumMembers.size(); i++)
+    {
+      signUpScheduledClassPremiumMembersInput.getItems()
+          .add(premiumMembers.get(i));
+    }
 
   }
 
   public void addPremiumMemberToScheduledClass()
   {
-    Member tempMember = signUpScheduledClassPremiumMembersInput.getSelectionModel().getSelectedItem();
+    Member tempMember = signUpScheduledClassPremiumMembersInput
+        .getSelectionModel().getSelectedItem();
 
     System.out.println(tempMember);
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
@@ -1550,10 +1571,11 @@ public class GUIController
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
     ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
-    for(int i=0;i<tempArray.size();i++)
+    for (int i = 0; i < tempArray.size(); i++)
     {
-      if((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName()) &&
-          (tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
+      if ((tempArray.get(i).getClassItem().getName())
+          .equals(tempScheduledClass.getClassItem().getName()) && (tempArray
+          .get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
       {
         index = i;
         break;
@@ -1561,7 +1583,8 @@ public class GUIController
     }
 
     tempScheduledClass.addMember(tempMember);
-    adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass);
+    adapter.editScheduledClasses("ScheduledClasses.bin", index,
+        tempScheduledClass);
     signUpScheduledClassPremiumMembersInput.setValue(null);
   }
 
@@ -1586,9 +1609,10 @@ public class GUIController
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
     ArrayList<Member> memberList = tempScheduledClass.getMembers();
-    for(int j=0;j<memberList.size();j++)
+    for (int j = 0; j < memberList.size(); j++)
     {
-      cancelScheduledClassAttendingMemberInput.getItems().add(memberList.get(j));
+      cancelScheduledClassAttendingMemberInput.getItems()
+          .add(memberList.get(j));
     }
   }
 
@@ -1613,22 +1637,25 @@ public class GUIController
     ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
-    for(int i=0;i<tempArray.size();i++)
+    for (int i = 0; i < tempArray.size(); i++)
     {
-      if(((tempArray.get(i).getClassItem().getName()).equals(tempScheduledClass.getClassItem().getName())) &&
-          ((tempArray.get(i).getDateTime()).equals(tempScheduledClass.getDateTime())))
+      if (((tempArray.get(i).getClassItem().getName())
+          .equals(tempScheduledClass.getClassItem().getName())) && ((tempArray
+          .get(i).getDateTime()).equals(tempScheduledClass.getDateTime())))
       {
         System.out.println(i);
         index = i;
         break;
       }
     }
-    Member tempMember = cancelScheduledClassAttendingMemberInput.getSelectionModel().getSelectedItem();
+    Member tempMember = cancelScheduledClassAttendingMemberInput
+        .getSelectionModel().getSelectedItem();
     System.out.println(tempMember);
     System.out.println(tempScheduledClass.getMembers());
     tempScheduledClass.removeMember(tempMember);
     System.out.println(tempScheduledClass.getMembers());
-    adapter.editScheduledClasses("ScheduledClasses.bin", index, tempScheduledClass);
+    adapter.editScheduledClasses("ScheduledClasses.bin", index,
+        tempScheduledClass);
     cancelScheduledClassAttendingMemberInput.setValue(null);
   }
 
@@ -1648,7 +1675,7 @@ public class GUIController
     months.add("October");
     months.add("November");
     months.add("December");
-    for(int i=0;i<months.size();i++)
+    for (int i = 0; i < months.size(); i++)
     {
       scheduleExportMonthInput.getItems().add(months.get(i));
     }
@@ -1656,31 +1683,35 @@ public class GUIController
 
   public void getSchedule()
   {
-    String month = scheduleExportMonthInput.getSelectionModel().getSelectedItem();
+    String month = scheduleExportMonthInput.getSelectionModel()
+        .getSelectedItem();
     int year = Integer.parseInt(scheduleExportYearInput.getText());
-    int c=0;
-    for(int i=0;i<months.size();i++)
+    int c = 0;
+    for (int i = 0; i < months.size(); i++)
     {
-      if(month.equals(months.get(i)))
+      if (month.equals(months.get(i)))
       {
         c = i;
         break;
       }
     }
-    int lastDay = DateTime.lastDayOfTheMonth(c+1, year);
-    ArrayList<ScheduledClass> tempScheduledClasses = adapter.getAllScheduledClasses();
-    String returnScheduledClasses="";
+    int lastDay = DateTime.lastDayOfTheMonth(c + 1, year);
+    ArrayList<ScheduledClass> tempScheduledClasses = adapter
+        .getAllScheduledClasses();
+    String returnScheduledClasses = "";
     DateTime tempDateTime;
-    for(int j=1;j<=lastDay;j++)
+    for (int j = 1; j <= lastDay; j++)
     {
-      tempDateTime = new DateTime(j,c+1, year,0,0);
-      for(int i=0;i<tempScheduledClasses.size();i++)
+      tempDateTime = new DateTime(j, c + 1, year, 0, 0);
+      for (int i = 0; i < tempScheduledClasses.size(); i++)
       {
-        if(tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
+        if (tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
         {
-          returnScheduledClasses += tempScheduledClasses.get(i).getClassItem().getName()
-              + ", " + tempScheduledClasses.get(i).getDateTime() + ", with " +
-              tempScheduledClasses.get(i).getInstructor().getFullName() + "\n";
+          returnScheduledClasses +=
+              tempScheduledClasses.get(i).getClassItem().getName() + ", "
+                  + tempScheduledClasses.get(i).getDateTime() + ", with "
+                  + tempScheduledClasses.get(i).getInstructor().getFullName()
+                  + "\n";
         }
       }
     }
@@ -1692,26 +1723,28 @@ public class GUIController
   public void exportToXml()
   {
     ArrayList<ScheduledClass> scheduledClasses = new ArrayList<ScheduledClass>();
-    String month = scheduleExportMonthInput.getSelectionModel().getSelectedItem();
+    String month = scheduleExportMonthInput.getSelectionModel()
+        .getSelectedItem();
     int year = Integer.parseInt(scheduleExportYearInput.getText());
-    int c=0;
-    for(int i=0;i<months.size();i++)
+    int c = 0;
+    for (int i = 0; i < months.size(); i++)
     {
-      if(month.equals(months.get(i)))
+      if (month.equals(months.get(i)))
       {
         c = i;
         break;
       }
     }
-    int lastDay = DateTime.lastDayOfTheMonth(c+1, year);
-    ArrayList<ScheduledClass> tempScheduledClasses = adapter.getAllScheduledClasses();
+    int lastDay = DateTime.lastDayOfTheMonth(c + 1, year);
+    ArrayList<ScheduledClass> tempScheduledClasses = adapter
+        .getAllScheduledClasses();
     DateTime tempDateTime;
-    for(int j=1;j<=lastDay;j++)
+    for (int j = 1; j <= lastDay; j++)
     {
-      tempDateTime = new DateTime(j,c+1, year,0,0);
-      for(int i=0;i<tempScheduledClasses.size();i++)
+      tempDateTime = new DateTime(j, c + 1, year, 0, 0);
+      for (int i = 0; i < tempScheduledClasses.size(); i++)
       {
-        if(tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
+        if (tempDateTime.equalsDate(tempScheduledClasses.get(i).getDateTime()))
         {
           scheduledClasses.add(tempScheduledClasses.get(i));
         }
@@ -1740,7 +1773,8 @@ public class GUIController
                 .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
                 + "<hour>" + scheduledClass.getDateTime().displayHour()
                 + "</hour>" + "<minute>" + scheduledClass.getDateTime()
-                .displayMinute() + "</minute>" + "</time>" + "</scheduledClass>";
+                .displayMinute() + "</minute>" + "</time>"
+                + "</scheduledClass>";
       }
       textFileIO.appendToFile(xmlFile, stringToAppend);
       textFileIO.appendToFile(xmlFile, "</schedule>");
