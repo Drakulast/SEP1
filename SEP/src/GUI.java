@@ -7,7 +7,11 @@ import java.io.IOException;
 
 public class GUI extends Application
 {
-
+  /**
+   * An abstract method which automatically calls the launch
+   * @param window setting the stage
+   * @throws IOException
+   */
   public void start(Stage window) throws IOException
   {
     window.setTitle("VIAFit");
@@ -17,7 +21,6 @@ public class GUI extends Application
     window.setResizable(false);
     window.setScene(scene);
     window.show();
-
   }
 
 }
