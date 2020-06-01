@@ -6,8 +6,22 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Class used for writing and reading binary files
+ * @author Ionut, Claudiu, Maria, Cezary
+ * @version 1.0
+ */
+
 public class MyFileIO
 {
+
+  /**
+   * Writes an object to a binary file
+   * @param fileName the name of the file in which the object will be written
+   * @param object the object that will be written in the specified file
+   * @throws FileNotFoundException exception thrown if the file could not be found
+   * @throws IOException exception thrown if an IO error occurs
+   */
   public void writeObjectToFile(String fileName, Object object)
       throws FileNotFoundException, IOException
   {
@@ -36,6 +50,14 @@ public class MyFileIO
     }
   }
 
+  /**
+   * Reads an object from a binary file
+   * @param fileName the name of the file from which the object will be read
+   * @return the object read from the specified file
+   * @throws FileNotFoundException exception thrown if the file could not be found
+   * @throws IOException exception thrown if an IO error occurs
+   * @throws ClassNotFoundException exception thrown when no definition for the specified class could be found
+   */
   // When reading from a file the object type needs to be casted
   public Object readObjectFromFile(String fileName)
       throws FileNotFoundException, IOException, ClassNotFoundException

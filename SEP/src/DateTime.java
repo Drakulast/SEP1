@@ -191,6 +191,10 @@ public class DateTime implements Serializable
     return hour;
   }
 
+  /**
+   * Gets the hour represented as a string
+   * @return a string representation of the hour
+   */
   public String displayHour()
   {
     DecimalFormat formatter = new DecimalFormat("00");
@@ -215,6 +219,10 @@ public class DateTime implements Serializable
     return minute;
   }
 
+  /**
+   * Gets the minute represented as a string
+   * @return a string representation of the minute
+   */
   public String displayMinute()
   {
     DecimalFormat formatter = new DecimalFormat("00");
@@ -230,6 +238,11 @@ public class DateTime implements Serializable
     this.minute = minute;
   }
 
+  /**
+   * Check if the current DateTime object is before another DateTime object
+   * @param date2 the DateTime object to compare against
+   * @return true if the current DateTime object is before the other DateTime object, false otherwise
+   */
   public boolean isBefore(DateTime date2)
   {
     int ok=0;
@@ -264,6 +277,11 @@ public class DateTime implements Serializable
     return ok == 1;
   }
 
+  /**
+   * Checks if the current DateTime object is after another DateTime object
+   * @param date2 the DateTime object to compare against
+   * @return true if the current DateTime object is after the other DateTime object, false otherwise
+   */
   public boolean isAfter(DateTime date2)
   {
     int ok=0;
@@ -298,6 +316,10 @@ public class DateTime implements Serializable
     return ok == 1;
   }
 
+  /**
+   * Gets a string representation of the date
+   * @return a string representation of the date
+   */
   public String getDate()
   {
     DecimalFormat formatter = new DecimalFormat("00");
@@ -305,12 +327,22 @@ public class DateTime implements Serializable
         + formatter.format(year);
   }
 
+  /**
+   * Gets a string representation of the time
+   * @return the string representation of the time
+   */
   public String getTime()
   {
     DecimalFormat formatter = new DecimalFormat("00");
     return formatter.format(hour) + ":" + formatter.format(minute);
   }
 
+  /**
+   * Gets the last day of the month
+   * @param month the month for which to get the last day
+   * @param year the year of the given month
+   * @return the number of days in the given month and year
+   */
   public static int lastDayOfTheMonth(int month, int year)
   {
     boolean isLeapYear = false;

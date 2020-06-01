@@ -2196,12 +2196,8 @@ public class GUIController
       {
         stringToAppend +=
             "<scheduledClass>" + "<class>" + "<name>" + scheduledClass
-                .getClassItem().getName() + "</name>" + "<capacity>"
-                + scheduledClass.getClassItem().getMaxCapacity() + "</capacity>"
-                + "</class>" + "<instructor>" + "<firstName>" + scheduledClass
-                .getInstructor().getFirstName() + "</firstName>" + "<lastName>"
-                + scheduledClass.getInstructor().getLastName() + "</lastName>"
-                + "</instructor>" + "<date>" + "<day>" + scheduledClass
+                .getClassItem().getName() + "</name>" + "</class>" + "<instructor>" + "<firstName>" + scheduledClass
+                .getInstructor().getFirstName() + "</firstName>" + "</instructor>" + "<date>" + "<day>" + scheduledClass
                 .getDateTime().getDay() + "</day>" + "<month>" + scheduledClass
                 .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
                 + "<hour>" + scheduledClass.getDateTime().displayHour()
