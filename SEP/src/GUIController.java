@@ -28,6 +28,13 @@ import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 
+/**
+ * The user interface controller that allows for displaying and modifying information
+ * about members, instructors, classes and scheduled classes.
+ * @author Ionut, Claudiu, Maria, Cezary
+ * @version 1.0
+ */
+
 public class GUIController
 {
   @FXML private Button overviewButton;
@@ -184,9 +191,18 @@ public class GUIController
   private ArrayList<Member> premiumMembers;
   private ArrayList<String> months;
 
+  /**
+   * A method that initialize the data when the user interface is opened.
+   * Firstly, declares the adapter object of type FitnessCenterFileAdapter with the specific
+   * files where the data is going to be read and written. Afterwards is calling the
+   * method that loads the overview pane and also calls the methods that sets the
+   * values for the specific sections (e.g. number of members, instructors and classes).
+   * Also, in this method loads the options for the specific ComboBoxes with the
+   * types of memberships that can be chosen for a member.
+   */
   public void initialize()
   {
-    adapter = new FitnessCenterFileAdapter("TestMembers.bin", "Instructors.bin",
+    adapter = new FitnessCenterFileAdapter("Members.bin", "Instructors.bin",
         "Classes.bin", "ScheduledClasses.bin");
     loadOverviewPane();
     setNumberOfMembers();
@@ -205,6 +221,11 @@ public class GUIController
     //    });
   }
 
+  /**
+   * A method which loads the screen saver pane when the user clicks on the logo
+   * in the top right corner. It sets the visibility of the other panes to false
+   * except for the screen saver one which is set to true.
+   */
   //SCREEN SAVER PANE METHODS
   public void loadScreenSaver()
   {
@@ -216,6 +237,11 @@ public class GUIController
     schedulePane.setVisible(false);
   }
 
+  /**
+   * A method which loads the overview pane. It sets the visibility of the other
+   * panes to false except for the overview which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   //OVERVIEW PANE METHODS
   public void loadOverviewPane()
   {
@@ -237,27 +263,51 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
+  /**
+   * A method used for displaying the number of current members. It creates a string
+   * which gets the size of the ArrayList of members from the file using the adapter
+   * and then sets the text of the specific field to this value.
+   */
   public void setNumberOfMembers()
   {
     String numberOfMembers = String.valueOf(adapter.getAllMembers().size());
     area1.setText(numberOfMembers);
   }
 
+  /**
+   * A method used for displaying the number of current Instructors. It sets the text
+   * of the specific field with the size of the ArrayList of Instructors from the file
+   * using the adapter.
+   */
   public void setCurrentInstructors()
   {
     area2.setText(String.valueOf(adapter.getAllInstructors().size()));
   }
 
+  /**
+   * A method used for displaying the number of current Classes. It sets the text
+   * of the specific field with the size of the ArrayList of Classes from the file
+   * using the adapter.
+   */
   public void setCurrentClasses()
   {
     area3.setText(String.valueOf(adapter.getAllClasses().size()));
   }
 
+  /**
+   * A method used for displaying current date. It sets the text of the specific
+   * field by calling today method from the adapter.
+   */
   public void setTodayDate()
   {
     dateLabel.setText(adapter.today());
   }
 
+  /**
+   * A method which loads the instructor pane. It sets the visibility of the other
+   * panes to false except for the instructor and register instructor which are set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   //INSTRUCTORS PANE METHODS
   public void loadInstructorsPane()
   {
@@ -284,6 +334,11 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
+  /**
+   * A method which loads the pane for registering an instructor. It sets the visibility of
+   * the other panes to false except for the one responsible with registering which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadRegisterInstructorPane()
   {
     registerInstructorPane.setVisible(true);
@@ -296,6 +351,11 @@ public class GUIController
     findEditInstructorButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for finding an instructor. It sets the visibility of
+   * the other panes to false except for the one responsible for finding which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadFindInstructorPane()
   {
     registerInstructorPane.setVisible(false);
@@ -311,6 +371,11 @@ public class GUIController
     findEditInstructorButton.setStyle(darkBgButton);
   }
 
+  /**
+   * A method which loads the searching pane for instructor using the name.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for searching which is set to true. Also, it sets the design for the navigation buttons.
+   */
   public void loadSearchInstructorByNamePane()
   {
     searchInstructorByNamePane.setVisible(true);
@@ -321,6 +386,11 @@ public class GUIController
     searchInstructorByPhoneButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the searching pane for instructor using the phone number.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for searching which is set to true. Also, it sets the design for the navigation buttons.
+   */
   public void loadSearchInstructorByPhonePane()
   {
     searchInstructorByNamePane.setVisible(false);
@@ -331,6 +401,11 @@ public class GUIController
     searchInstructorByPhoneButton.setStyle(darkBgButton);
   }
 
+  /**
+   * A method which loads the editing pane for instructor.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for editing which is set to true.
+   */
   public void loadEditInstructorPane()
   {
     editInstructorPane.setVisible(true);
@@ -341,11 +416,11 @@ public class GUIController
     searchInstructorByPhoneButton.setVisible(false);
   }
 
-  public void searchInstructor()
-  {
-    loadEditInstructorPane();
-  }
-
+  /**
+   * A method which loads the pane for members.
+   * It sets the visibility of the other panes to false except for the member
+   * which is set to true. Also, it sets the design for the navigation buttons.
+   */
   //MEMBERS PANE METHODS
   public void loadMembersPane()
   {
@@ -368,6 +443,11 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
+  /**
+   * A method which loads the pane for registering a member. It sets the visibility of
+   * the other panes to false except for the one responsible with registering which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadRegisterMemberPane()
   {
     registerMemberPane.setVisible(true);
@@ -380,6 +460,11 @@ public class GUIController
     findEditMemberButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for finding a member. It sets the visibility of
+   * the other panes to false except for the one responsible for finding which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadFindMemberPane()
   {
     registerMemberPane.setVisible(false);
@@ -394,6 +479,11 @@ public class GUIController
     findEditMemberButton.setStyle(darkBgButton);
   }
 
+  /**
+   * A method which loads the searching pane for member using the name.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for searching which is set to true. Also, it sets the design for the navigation buttons.
+   */
   public void loadSearchMemberByNamePane()
   {
     searchMemberByNamePane.setVisible(true);
@@ -404,6 +494,11 @@ public class GUIController
     searchMemberByPhoneButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the searching pane for member using the phone number.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for searching which is set to true. Also, it sets the design for the navigation buttons.
+   */
   public void loadSearchMemberByPhonePane()
   {
     searchMemberByNamePane.setVisible(false);
@@ -414,6 +509,11 @@ public class GUIController
     searchMemberByPhoneButton.setStyle(darkBgButton);
   }
 
+  /**
+   * A method which loads the editing pane for member.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for editing which is set to true.
+   */
   public void loadEditMemberPane()
   {
     editMemberPane.setVisible(true);
@@ -424,11 +524,20 @@ public class GUIController
     searchMemberByPhoneButton.setVisible(false);
   }
 
+  /**
+   * A method which loads the edit member pane.
+   */
   public void searchMember()
   {
     loadEditMemberPane();
   }
 
+  /**
+   * A method which loads the pane for the fitness classes.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for the fitness classes which is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   //CLASSES PANE METHODS
   public void loadClassesPane()
   {
@@ -451,6 +560,11 @@ public class GUIController
         "-fx-background-color: #12123A;-fx-font-size: 24px;fx-font-weight: bold;");
   }
 
+  /**
+   * A method which loads the pane for adding a fitness class. It sets the visibility of
+   * the search pane to false and the one responsible with adding is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadAddClassPane()
   {
     addClassPane.setVisible(true);
@@ -460,6 +574,11 @@ public class GUIController
     findEditClassButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for searching a fitness class. It sets the visibility of
+   * the add pane to false and the one responsible with searching is set to true.
+   * Also, it sets the design for the navigation buttons.
+   */
   public void loadSearchClassPane()
   {
     addClassPane.setVisible(false);
@@ -469,6 +588,13 @@ public class GUIController
     findEditClassButton.setStyle(darkBgButton);
   }
 
+  /**
+   * A method which loads the pane for scheduling a fitness class or displaying one.
+   * It sets the visibility of the other panes to false except for the scheduling one
+   * which is set to true. Also, it sets the design for the navigation buttons.
+   * Additionally, clears all input fields and loads the ComboBox with the fitness classes
+   * from the system so the user can choose which one to schedule.
+   */
   //SCHEDULE PANE METHODS
   public void loadSchedulePane()
   {
@@ -504,6 +630,13 @@ public class GUIController
     scheduleClassInstructorInput.getItems().clear();
   }
 
+  /**
+   * A method which loads the pane for scheduling a fitness class.
+   * It sets the visibility of the pane responsible for displaying to false and the one
+   * responsible for scheduling is set to true.
+   * Additionally, clears all input fields and loads the ComboBox with the fitness classes
+   * from the system so the user can choose which one to schedule.
+   */
   public void loadScheduleClassPane()
   {
     scheduleClassPane.setVisible(true);
@@ -524,6 +657,13 @@ public class GUIController
     findEditScheduleButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for displaying a scheduled fitness class.
+   * It sets the visibility of the other panes to false except for the displaying one
+   * which is set to true. Additionally, when the pane is loaded, another options
+   * appear because a scheduled class can be edited after is selected.
+   * Also, sets the design for the navigation buttons and clears all input fields.
+   */
   public void loadScheduleDisplayEditExportPane()
   {
     scheduleClassPane.setVisible(false);
@@ -548,6 +688,12 @@ public class GUIController
     searchScheduledClassListView.getItems().clear();
   }
 
+  /**
+   * A method which loads the pane for editing a scheduled fitness class.
+   * It sets the visibility of the other panes to false except for the scheduling and
+   * the one which is responsible for editing, those ones are set to true.
+   * Also, sets the design for the navigation buttons and clears all input fields.
+   */
   public void loadScheduleEditPane()
   {
     scheduleDisplayPane.setVisible(true);
@@ -572,6 +718,12 @@ public class GUIController
 
   }
 
+  /**
+   * A method which loads the pane for removing a scheduled fitness class.
+   * It sets the visibility of the other panes to false except for the scheduling and
+   * the one which is responsible for removing, those ones are set to true.
+   * Also, clears all input fields and sets the design for the navigation buttons.
+   */
   public void loadScheduleRemovePane()
   {
     scheduleDisplayPane.setVisible(true);
@@ -595,6 +747,12 @@ public class GUIController
     exportScheduledClassButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for signing up a member to a scheduled fitness class.
+   * It sets the visibility of the other panes to false except for the scheduling and
+   * the one which is responsible for signing up, those ones are set to true.
+   * Also, sets the design for the navigation buttons.
+   */
   public void loadScheduleSignUpMemberPane()
   {
     scheduleDisplayPane.setVisible(true);
@@ -612,6 +770,12 @@ public class GUIController
     exportScheduledClassButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for canceling the appointment of a member to
+   * a scheduled fitness class. It sets the visibility of the other panes to false except
+   * for the scheduling and the one which is responsible for canceling, those ones
+   * are set to true. Also, sets the design for the navigation buttons.
+   */
   public void loadScheduleCancelMemberPane()
   {
     scheduleDisplayPane.setVisible(true);
@@ -629,6 +793,13 @@ public class GUIController
     exportScheduledClassButton.setStyle(lightBgButton);
   }
 
+  /**
+   * A method which loads the pane for exporting the scheduled fitness classes from a chosen month.
+   * It sets the visibility of the other panes to false except for the one responsible
+   * for exporting which is set to true. Also, sets the design for the navigation buttons,
+   * clears the input fields and calls the method for loading the options in the ComboBox
+   * responsible for choosing the month.
+   */
   public void loadScheduleExportPane()
   {
     scheduleDisplayPane.setVisible(false);
@@ -652,6 +823,10 @@ public class GUIController
   }
   //------------------------------------Alert Panel-----------------------------------------------
 
+  /**
+   * A method which displays an alert warning message
+   * @param message the message that is going to be displayed
+   */
   public void messageWarning(String message)
   {
     Alert alert = new Alert(Alert.AlertType.WARNING, "", ButtonType.OK);
@@ -661,6 +836,10 @@ public class GUIController
     alert.showAndWait();
   }
 
+  /**
+   * A method which displays an alert error message
+   * @param message the message that is going to be displayed
+   */
   public void messageError(String message)
   {
     Alert alert = new Alert(Alert.AlertType.ERROR, "", ButtonType.OK);
@@ -670,6 +849,10 @@ public class GUIController
     alert.showAndWait();
   }
 
+  /**
+   * A method which displays an alert message
+   * @param message the message that is going to be displayed
+   */
   public void messageNone(String message)
   {
     Alert alert = new Alert(Alert.AlertType.NONE, "", ButtonType.OK);
@@ -679,6 +862,10 @@ public class GUIController
     alert.showAndWait();
   }
 
+  /**
+   * A method which displays an alert information message
+   * @param message the message that is going to be displayed
+   */
   public void messageInformation(String message)
   {
     Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
@@ -688,6 +875,12 @@ public class GUIController
     alert.showAndWait();
   }
 
+  /**
+   * A method which displays an alert confirmation message
+   * @param message the message that is going to be displayed
+   * @param alertType the type of alert when the message is going to be displayed
+   * @return
+   */
   public boolean messageConfirmation(String message, Alert.AlertType alertType)
   {
     Alert alert = new Alert(alertType, "", ButtonType.OK, ButtonType.CANCEL);
@@ -706,6 +899,12 @@ public class GUIController
   }
 
   //------------------------------------Instructor------------------------------------------------
+
+  /**
+   * A method which saves all the fitness classes about an instructor that he can hold.
+   * The fitness classes are inserted  by the user in a text field. This method saves the
+   * information until the data about instructor is saved.
+   */
   public void mouseClickOnAdd()
   {
     instrAddClasses.add(registerInstructorClassInput.getText());
@@ -713,6 +912,13 @@ public class GUIController
 
   }
 
+  /**
+   * A method which is used to register an instructor. Gets the information inserted
+   * by the user in the fields and store this specific data about the instructor in
+   * the system. This is done by calling the saving method from the adapter which
+   * saves the the information in a binary file. Finally, clears the fields and calls
+   * again the method which displays the number of the instructors in the overview pane.
+   */
   public void saveAndRegisterInstructor()
   {
     if (adapter.getInstructor(registerInstructorPhoneInput.getText()) == null)
@@ -740,6 +946,13 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which searches an instructor using the first and last name. Firstly,
+   * takes all the instructors from the binary file and then it loops once through
+   * the list to check if the names matches. If the instructor is found an editing pane
+   * is opened with the data about the instructor that can be changed. If the instructor
+   * is not found an alert message is going to be displayed.
+   */
   public void searchInstructorByName()
   {
     editInstructorClassesInput.getItems().clear();
@@ -783,6 +996,13 @@ public class GUIController
     searchInstructorByNameLastNameInput.clear();
   }
 
+  /**
+   * A method which searches an instructor using the phone number. Firstly,
+   * takes all the instructors from the binary file and then it loops once through
+   * the list to check if the phone numbers matches. If the instructor is found an editing pane
+   * is opened with the data about the instructor that can be changed. If the instructor
+   * is not found an alert message is going to be displayed.
+   */
   public void searchInstructorByPhoneNumber()
   {
     editInstructorClassesInput.getItems().clear();
@@ -822,6 +1042,11 @@ public class GUIController
     searchInstructorByPhoneInput.clear();
   }
 
+  /**
+   * A method which can add more classes to an instructor when the user is editing
+   * the data about him. Also, the method clears the input field and display the
+   * fitness classes in the list view after the class is added.
+   */
   public void addInstructorClassListView()
   {
     Instructor tempInstructor = adapter.getAllInstructors()
@@ -835,6 +1060,11 @@ public class GUIController
 
   }
 
+  /**
+   * A method which can remove a class from an instructor when the user is editing
+   * the data about him. Also the method clear the fields and displays the updated
+   * list view of the fitness classes that the instructor can hold.
+   */
   public void removeInstructorClassListView()
   {
     for (int i = 0;
@@ -857,6 +1087,14 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which saves the data about an instructor after the user has made some
+   * changes. Firstly, it displays a confirmation message and after that, if
+   * the user confirms, the method gets all the inserted data from the fields and
+   * makes the changes in the binary file by calling the editing method from adapter.
+   * Also the method loads the searching pane and sets the number of the current
+   * instructors from the overview pane.
+   */
   public void saveEditedInstructor()
   {
     if (messageConfirmation("Do you want to save?",
@@ -873,7 +1111,6 @@ public class GUIController
       adapter.editInstructor("Instructors.bin", instructorIndicator,
           tempInstructor);
 
-      System.out.println(adapter.getAllInstructors().get(instructorIndicator));
       loadFindInstructorPane();
       loadSearchInstructorByNamePane();
       setCurrentInstructors();
@@ -881,6 +1118,13 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which removes a specific instructor from the system. Firstly, it displays
+   * a confirmation message and after that, if the user confirms, the instructor is
+   * removed from the system by calling the remove method from the adapter. Also all the fields
+   * are cleared, the searching pane is loaded and the current number of instructors
+   * is updated.
+   */
   public void deleteInstructor()
   {
     if (messageConfirmation("Do you want to delete this instructor?",
@@ -905,6 +1149,14 @@ public class GUIController
   }
   // -------------------------Members----------------------------------
 
+  /**
+   * A method which is used to register a member. Gets the information inserted
+   * by the user in the fields and store this specific data about the member in
+   * the system. This is done by calling the saving method from the adapter which
+   * saves the the information in a binary file. Finally, clears the fields, calls
+   * the method which displays the number of the members in the overview pane and
+   * calls the method for displaying an alert message.
+   */
   public void registerMember()
   {
     if (adapter.getMember(registerMemberPhoneInput.getText()) == null)
@@ -935,6 +1187,15 @@ public class GUIController
 
   }
 
+  /**
+   * A method which searches a member using the first and last name. Firstly,
+   * takes all the members from the binary file and then it loops once through
+   * the list to check if the names matches. If one member is found with this name,
+   * an editing pane is opened with the data about the member that can be changed.
+   * If more members with this name are found, the method is going to display an alert
+   * message advising the user to search the member by phone number. If the member
+   * is not found an alert message is going to be displayed.
+   */
   public void searchMemberByName()
   {
     String firstName = searchMemberByNameFirstNameInput.getText();
@@ -993,6 +1254,13 @@ public class GUIController
     searchMemberByNameLastNameInput.clear();
   }
 
+  /**
+   * A method which searches a member using the phone number. Firstly,
+   * takes all the members from the binary file and then it loops once through
+   * the list to check if the phone numbers matches. If the member is found with this
+   * phone number, an editing pane is opened with the data about the member that can be changed.
+   * If the member is not found an alert message is going to be displayed.
+   */
   public void searchMemberByPhoneNumber()
   {
     String phoneNumber = searchMemberByPhoneInput.getText();
@@ -1029,6 +1297,14 @@ public class GUIController
     searchMemberByPhoneInput.clear();
   }
 
+  /**
+   * A method which saves the data about a member after the user has made some
+   * changes. Firstly, it displays a confirmation message and after that, if
+   * the user confirms, the method gets all the inserted data from the fields and
+   * makes the changes in the binary file by calling the editing method from adapter.
+   * Also the method loads the searching pane that was used for finding the member
+   * and sets the number of the current members from the overview pane.
+   */
   public void saveMember()
   {
     if (messageConfirmation("Do you want to save?",
@@ -1067,6 +1343,13 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which removes a specific member from the system. Firstly, it displays
+   * a confirmation message and after that, if the user confirms, the member is
+   * removed from the system by calling the remove method from the adapter. Also,
+   * the searching pane used for finding the member is loaded and the current number
+   * of members is updated.
+   */
   public void deleteMember()
   {
     if (messageConfirmation("Do you want to delete this member?",
@@ -1093,11 +1376,17 @@ public class GUIController
   }
 
   // -------------------------Classes----------------------------------
+
+  /**
+   * A method which is used for saving the data about a new fitness class. Firstly, the method
+   * verifies if the user inserted the proper data and after that it gets the data
+   * from the input fields and saves them in the system by calling the saving method
+   * from the adapter. Also, clears all the fields and updated the number of the classes.
+   */
   public void saveAddedClasses()
   {
     if (addClassCapacityInput.getText().matches("[0-9]+"))
     {
-      System.out.println(adapter.getAllClasses());
       Class tempClass = new Class("No Name", 0);
       tempClass.setName(addClassNameInput.getText());
       int a = Integer.parseInt(addClassCapacityInput.getText());
@@ -1106,9 +1395,6 @@ public class GUIController
       setCurrentClasses();
       addClassNameInput.clear();
       addClassCapacityInput.clear();
-      System.out.println(adapter.getAllClasses());
-      addClassNameInput.setText("");
-      addClassCapacityInput.setText("");
     }
     else
     {
@@ -1116,6 +1402,12 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which searches a fitness class using the name. It loops once through
+   * the list to check if the names matches. If the class is found the editing pane
+   * is opened and the data about the class is displayed. If the class is not found
+   * an alert message is displayed.
+   */
   public void searchClassesByName()
   {
     int ex = 0;
@@ -1130,13 +1422,6 @@ public class GUIController
         editClassCapacityInput.setText(
             String.valueOf(adapter.getAllClasses().get(i).getMaxCapacity()));
       }
-      else
-      {
-
-        System.out.println(
-            "If this message appears " + adapter.getAllClasses().size()
-                + " then it didnt find class");
-      }
     }
     if (ex == 0)
     {
@@ -1144,20 +1429,31 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which saves the data about a fitness class after the user made some changes.
+   * Firstly, it displays a confirmation message after that, if the user confirms,
+   * the method gets the data from the fields and calls the editing method from the
+   * adapter to save the changes. Also, updates the number of the current classes
+   * by calling the method responsible for setting the number in the overview pane.
+   */
   public void saveEditedClass()
   {
     if (messageConfirmation("Do you want to save?",
         Alert.AlertType.CONFIRMATION))
     {
-      System.out.println(adapter.getAllClasses());
       Class tempClass = new Class(ediClassNameInput.getText(),
           Integer.parseInt(editClassCapacityInput.getText()));
       adapter.editClass("Classes.bin", classIndicator, tempClass);
       setCurrentClasses();
-      System.out.println(adapter.getAllClasses());
     }
   }
 
+  /**
+   * A method which removes a fitness class from the system. Firstly, it displays a confirmation
+   * message after that, if the user confirms, the method deletes the class by
+   * calling the removing method from the adapter. Also the method updates the number
+   * of the current classes and clear the fields.
+   */
   public void removeClass()
   {
     if (messageConfirmation("Do you want to delete this class?",
@@ -1175,6 +1471,11 @@ public class GUIController
   }
 
   // -------------------------Schedule----------------------------------
+
+  /**
+   * A method which calls the comboBoxDependency method if the user selects a fitness
+   * class otherwise the list of items in the ComboBox is cleared.
+   */
   public void comboBoxClass()
   {
     if (scheduleClassClassInput.getSelectionModel().getSelectedItem() != null)
@@ -1187,6 +1488,11 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which checks which instructors can hold the selected fitness
+   * class and adds them to the ComboBox. Afterwards, the user can choose the
+   * available instructors from that ComboBox.
+   */
   public void comboBoxDependency()
   {
     scheduleClassInstructorInput.getItems().clear();
@@ -1196,8 +1502,8 @@ public class GUIController
     {
       if (adapter.getAllInstructors().get(i).hasClass(tempString))
       {
-        String help = adapter.getAllInstructors().get(i).getFullName();
-        if (!scheduleClassInstructorInput.getItems().contains(help))
+        String instrName = adapter.getAllInstructors().get(i).getFullName();
+        if (!scheduleClassInstructorInput.getItems().contains(instrName))
         {
           scheduleClassInstructorInput.getItems()
               .add(adapter.getAllInstructors().get(i).getFullName());
@@ -1207,22 +1513,29 @@ public class GUIController
 
   }
 
+  /**
+   * A method which saves the data about a new scheduled fitness class.
+   * Firstly, it checks if the user inserted a date, if a date is not inserted
+   * the method will display an alert warning message. However, if the user inserts
+   * a date then the method will take all the inserted values from the fields and
+   * it is going to save them by calling the saving method from the adapter.
+   */
   public void schedule()
   {
-    int test = -1;
-    for (int i = 0; i < adapter.getAllInstructors().size(); i++)
-    {
-      if (adapter.getAllInstructors().get(i).getFullName().equals(
-          scheduleClassInstructorInput.getSelectionModel().getSelectedItem()))
-      {
-        test = i;
-      }
-    }
-    System.out.println("test");
-    System.out.println(adapter.getAllScheduledClasses());
-
     if (scheduleClassDateInput.getValue() != null)
     {
+      int test = -1;
+      for (int i = 0; i < adapter.getAllInstructors().size(); i++)
+      {
+        if (adapter.getAllInstructors().get(i).getFullName().equals(
+            scheduleClassInstructorInput.getSelectionModel().getSelectedItem()))
+        {
+          test = i;
+        }
+      }
+      System.out.println("test");
+      System.out.println(adapter.getAllScheduledClasses());
+
       DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
       tempDateTime
           .setMinute(Integer.parseInt(scheduleClassMinuteInput.getText()));
@@ -1263,6 +1576,14 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which searches and displays the scheduled fitness classes within a
+   * time period chosen by the user. Firstly, the method clears the list view and
+   * uses two DateTime objects with the values inserted by the user to search for
+   * scheduled fitness classes in that time period. After that, the classes are
+   * identified and displayed in the list view. Also, the method loads the edit
+   * schedule pane.
+   */
   public void searchForScheduledClasses()
   {
     searchScheduledClassListView.getItems().clear();
@@ -1289,6 +1610,14 @@ public class GUIController
     loadScheduleEditPane();
   }
 
+
+  /**
+   * A method which fills the fields in the edit, remove, sign up and cancel attendance
+   * panes when the user selects a scheduled fitness class from the list view.
+   * Firstly, the method identifies the selected scheduled fitness class from
+   * the list view and then fills the fields from the different panes with the
+   * specific data required for that field.
+   */
   public void editSchedule()
   {
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
@@ -1407,6 +1736,13 @@ public class GUIController
 
   }
 
+  /**
+   * A method which saves the scheduled fitness class after the user made some changes
+   * at it. Firstly, the method identifies the selected scheduled fitness class from
+   * the list view and then identifies its position in the system. Furthermore, gets
+   * the data from the fields and saves the changes in the system by calling the
+   * editing method from the adapter.
+   */
   public void saveEditedScheduledClass()
   {
     System.out.println(
@@ -1488,6 +1824,13 @@ public class GUIController
     editScheduledClassDateInput.setValue(null);
   }
 
+  /**
+   * A method which is used for removing a scheduled fitness class. Firstly, the
+   * method identifies the selected class from the list view and then displays an
+   * alert confirmation message. If the user confirms, the scheduled fitness class
+   * is going to be removed by calling the removing method from adapter and fields
+   * are going to be cleared. Also, the list view is loaded again to be updated.
+   */
   public void removeScheduledClass()
   {
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
@@ -1502,10 +1845,13 @@ public class GUIController
         .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
     tempDateTime2
         .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+
     ArrayList<ScheduledClass> tempScheduledClasses = adapter
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
+
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
+
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
     if (messageConfirmation(
@@ -1523,6 +1869,12 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which updates the list of premium members every time when it is called.
+   * Gets all the members registered in the system and selects selects the ones with
+   * premium membership to add them to the list of premium members. This list is used
+   * for knowing which members can be signed up for scheduled fitness classes.
+   */
   public void updatePremiumMembers()
   {
     ArrayList<Member> allMembers = adapter.getAllMembers();
@@ -1536,9 +1888,17 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which loads the members with premium membership to the ComboBox for
+   * the sign up pane. If a member has premium membership but is already assigned
+   * to the selected class, the method will not load him to the ComboBox because
+   * each member can be assigned just one time. Firstly, the method identifies the
+   * selected class from the list view and then gets the list of the signed up
+   * members. After that, the ones that have premium membership and are not already
+   * assigned are loaded to the ComboBoc for the sign up pane.
+   */
   public void loadPremiumMembersForSignUp()
   {
-    System.out.println("Enters first time");
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1556,6 +1916,7 @@ public class GUIController
     int index = searchScheduledClassListView.getSelectionModel()
         .getSelectedIndex();
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
+
     ArrayList<Member> memberList = tempScheduledClass.getMembers();
 
     if (memberList.size() > 0)
@@ -1574,12 +1935,18 @@ public class GUIController
 
   }
 
+  /**
+   * A method which signs up a selected member to a selected scheduled fitness class.
+   * Firstly, the method gets the selected member from the ComboBox and the selected
+   * class from the list view. After that finds the position of the selected scheduled
+   * fitness class in the system, adds the member to the list and saves the changes
+   * by calling the editing method from the adapter. Also, clears the field in the end.
+   */
   public void addPremiumMemberToScheduledClass()
   {
     Member tempMember = signUpScheduledClassPremiumMembersInput
         .getSelectionModel().getSelectedItem();
 
-    System.out.println(tempMember);
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1616,6 +1983,12 @@ public class GUIController
     signUpScheduledClassPremiumMembersInput.setValue(null);
   }
 
+  /**
+   * A method which loads the members that have signed up for a selected class to
+   * the ComboBox for the removing member's attendance pane. Firstly, the method
+   * identifies the selected class from the list view and then gets the list of the
+   * signed up members from the system an loads them to the ComboBox.
+   */
   public void loadMemberAttendanceList()
   {
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
@@ -1644,6 +2017,14 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which removes a member's attendance at a fitness class. Firstly, the method
+   * identifies the selected class from the list view and then it loops through the
+   * list of all scheduled classes to identify its position in the system. After that,
+   * the member is removed by calling the removing method from the ScheduledClass class
+   * and then the class is saved in the system by calling the editing method from the adapter.
+   * Also, at the end of the method the field is cleared.
+   */
   public void cancelMemberAttendance()
   {
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
@@ -1658,12 +2039,15 @@ public class GUIController
         .setMonth(searchScheduledClassToInput.getValue().getMonthValue());
     tempDateTime2
         .setDay(searchScheduledClassToInput.getValue().getDayOfMonth());
+
     ArrayList<ScheduledClass> tempScheduledClasses = adapter
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
-    int index = searchScheduledClassListView.getSelectionModel()
-        .getSelectedIndex();
-    ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
+
+    int index = searchScheduledClassListView.getSelectionModel().getSelectedIndex();
+
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
+
+    ArrayList<ScheduledClass> tempArray = adapter.getAllScheduledClasses();
 
     for (int i = 0; i < tempArray.size(); i++)
     {
@@ -1678,16 +2062,19 @@ public class GUIController
     }
     Member tempMember = cancelScheduledClassAttendingMemberInput
         .getSelectionModel().getSelectedItem();
-    System.out.println(tempMember);
-    System.out.println(tempScheduledClass.getMembers());
     tempScheduledClass.removeMember(tempMember);
-    System.out.println(tempScheduledClass.getMembers());
     adapter.editScheduledClasses("ScheduledClasses.bin", index,
         tempScheduledClass);
     cancelScheduledClassAttendingMemberInput.setValue(null);
   }
 
   //--------------------------------------------------------------------------------------------
+
+  /**
+   * A method which loads the ComboBox from the export pane with the month of the year.
+   * Firstly adds all the months in an ArrayList<String> and then loads each element
+   * to the ComboBox.
+   */
   public void loadMonths()
   {
     months = new ArrayList<String>();
@@ -1709,6 +2096,14 @@ public class GUIController
     }
   }
 
+  /**
+   * A method which displays the scheduled fitness classes from a chosen month of
+   * a year in a text area for the user. Firstly, the method gets the inserted month and
+   * year from the fields and then calls the method from the DateTime which returns
+   * the last they of that month. Furthermore, it gets all the scheduled fitness
+   * classes from that time period and assembles the data in a string variable which
+   * is displayed in the text area of the user interface.
+   */
   public void getSchedule()
   {
     String month = scheduleExportMonthInput.getSelectionModel()
@@ -1748,6 +2143,16 @@ public class GUIController
   }
 
   // Exporting to xml
+
+  /**
+   * A method which exports the scheduled classes from a chosen month and year
+   * to a file with an XML format. Firstly, the method gets the inserted month and
+   * year from the fields and then calls the method from the DateTime which returns
+   * the last they of that month. Furthermore, it gets all the scheduled fitness
+   * classes from that time period and assembles the data in a string variable with
+   * an XML format. The string variable is exported to the file by calling the
+   * method from adapter.
+   */
   public void exportToXml()
   {
     ArrayList<ScheduledClass> scheduledClasses = new ArrayList<ScheduledClass>();
