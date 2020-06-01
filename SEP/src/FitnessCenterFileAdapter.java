@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+/**
+ * An adapter to the FitnessCenter file to retrieve, store, edit and remove data about members, instructors, classes and scheduledClasses.
+ * @author Ionut, Claudiu, Maria, Cezary
+ * @version 1.0
+ */
 public class FitnessCenterFileAdapter
 {
   private MyFileIO myFileIO;
@@ -12,6 +17,13 @@ public class FitnessCenterFileAdapter
   private String classesFilename;
   private String scheduledClassesFilename;
 
+  /**
+   * 4-argument constructor setting the file name.
+   * @param membersFileName the name and path of the file where members will be saved, retrieved, removed and edited
+   * @param instructorsFilename the name and path of the file where instructors will be saved, retrieved, removed and edited
+   * @param classesFilename the name and path of the file where classes will be saved, retrieved, removed and edited
+   * @param scheduledClassesFilename the name and path of the file where scheduledClasses will be saved, retrieved, removed and edited
+   */
   public FitnessCenterFileAdapter(String membersFileName,
       String instructorsFilename, String classesFilename,
       String scheduledClassesFilename)
@@ -23,7 +35,10 @@ public class FitnessCenterFileAdapter
     this.scheduledClassesFilename = scheduledClassesFilename;
   }
 
-  // MyFileIO to retrieve an ArrayList with members
+  /**
+   * Uses the MyFileIO class to retrieve a MemberList object with all members.
+   * @return a MemberList object with all stored members
+   */
   public ArrayList<Member> getAllMembers()
   {
     ArrayList<Member> members = new ArrayList<Member>();
@@ -47,7 +62,11 @@ public class FitnessCenterFileAdapter
     return members;
   }
 
-  // MyFileIO to retrieve a member
+  /**
+   * Uses the MyFileIO class to retrieve a MemberList object with all members.
+   * @param phoneNumber the phone number of a member used to retrieve a specific member
+   * @return a Member object with the phone number passed as argument
+   */
   public Member getMember(String phoneNumber)
   {
     ArrayList<Member> members = getAllMembers();
@@ -64,7 +83,11 @@ public class FitnessCenterFileAdapter
     return member;
   }
 
-  // save members
+  /**
+   * Use the MyFileIO class to save the member object passed as a parameter.
+   * @param membersFileName the name and path of the file where members will be saved
+   * @param object the object saved to members
+   */
   public void saveMembers(String membersFileName, Object object)
   {
     ArrayList<Member> oldMembers = getAllMembers();
@@ -84,6 +107,12 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  /**
+   * Use the MyFileIO class to save the member object passed as a parameter.
+   * @param membersFileName the name and path of the file where members are saved
+   * @param index the position of the edited object in the members array list
+   * @param object the member object edited
+   */
   public void editMember(String membersFileName, int index, Object object)
   {
     ArrayList<Member> oldMembers = getAllMembers();
@@ -102,7 +131,11 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // remove member
+  /**
+   * Uses the MyFileIO class to retrieve a MemberList object with all members.
+   * @param membersFileName the name and path of the file where members will be saved
+   * @param member the object removed from members
+   */
   public void removeMember(String membersFileName, Member member)
   {
     ArrayList<Member> oldMembers = getAllMembers();
@@ -128,7 +161,10 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // MyFileIO to retrieve an ArrayList with instructors
+  /**
+   * Uses the MyFileIO class to retrieve a InstructorsList object with all instructors.
+   * @return a InstructorList object with all stored instructors.
+   */
   public ArrayList<Instructor> getAllInstructors()
   {
     ArrayList<Instructor> instructors = new ArrayList<Instructor>();
@@ -153,7 +189,11 @@ public class FitnessCenterFileAdapter
     return instructors;
   }
 
-  // MyFileIO to retrieve an instructor
+  /**
+   * Uses the MyFileIO class to retrieve a InstructorList object with all instructors.
+   * @param phoneNumber the phone number of an instructor used to retrieve a specific instructor
+   * @return a Instructor object with the phone number passed as argument
+   */
   public Instructor getInstructor(String phoneNumber)
   {
     ArrayList<Instructor> instructors = getAllInstructors();
@@ -170,6 +210,11 @@ public class FitnessCenterFileAdapter
     return instructor;
   }
 
+  /**
+   * Use the MyFileIO class to save the instructor object passed as a parameter.
+   * @param instructorsFilename the name and path of the file where instructors will be saved
+   * @param object the object saved to instructors
+   */
   public void saveInstructors(String instructorsFilename, Object object)
   {
     ArrayList<Instructor> oldInstructors = getAllInstructors();
@@ -189,6 +234,12 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  /**
+   * Use the MyFileIO class to save the instructor object passed as a parameter.
+   * @param instructorsFilename the name and path of the file where instructors are saved
+   * @param index the position of the edited object in the instructors array list
+   * @param object the instructor object edited
+   */
   public void editInstructor(String instructorsFilename, int index, Object object)
   {
     ArrayList<Instructor> oldInstructors = getAllInstructors();
@@ -208,7 +259,11 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // remove instructor
+  /**
+   * Uses the MyFileIO class to retrieve a InstructorList object with all instructors.
+   * @param instructorsFilename the name and path of the file where instructors will be saved
+   * @param instructor the object removed from instructors
+   */
   public void removeInstructor(String instructorsFilename,
       Instructor instructor)
   {
@@ -235,7 +290,10 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // MyFileIO to retrieve an ArrayList with classes
+  /**
+   * Uses the MyFileIO class to retrieve a ClassList object with all classes.
+   * @return a ClassList object with all stored classes.
+   */
   public ArrayList<Class> getAllClasses()
   {
     ArrayList<Class> classes = new ArrayList<Class>();
@@ -258,6 +316,13 @@ public class FitnessCenterFileAdapter
     }
     return classes;
   }
+
+  /**
+   * Use the MyFileIO class to save the class object passed as a parameter.
+   * @param classesFilename the name and path of the file where classes are saved
+   * @param index the position of the edited object in the classes array list
+   * @param object the class object edited
+   */
   public void editClass(String classesFilename, int index, Object object)
   {
     ArrayList<Class> oldClasses = getAllClasses();
@@ -276,7 +341,12 @@ public class FitnessCenterFileAdapter
       System.out.println("IO error when reading file");
     }
   }
-  // MyFileIO to retrieve a classes
+
+  /**
+   * Uses the MyFileIO class to retrieve a ClassList object with all classes.
+   * @param name the name of an class used to retrieve a specific class
+   * @return a Class object with the name passed as argument
+   */
   public Class getClassByName(String name)
   {
     ArrayList<Class> classes = getAllClasses();
@@ -292,7 +362,11 @@ public class FitnessCenterFileAdapter
     return classByName;
   }
 
-  // save classes
+  /**
+   * Use the MyFileIO class to save the class object passed as a parameter.
+   * @param classesFilename the name and path of the file where classes will be saved
+   * @param object the object saved to classes
+   */
   public void saveClasses(String classesFilename, Object object)
   {
     ArrayList<Class> oldClasses = getAllClasses();
@@ -312,7 +386,11 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // remove class
+  /**
+   * Uses the MyFileIO class to retrieve a ClassList object with all classes.
+   * @param classesFilename the name and path of the file where classes will be saved
+   * @param oldClass the object removed from classes
+   */
   public void removeClass(String classesFilename, Class oldClass)
   {
     ArrayList<Class> oldClasses = getAllClasses();
@@ -338,7 +416,10 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // MyFileIO to retrieve an ArrayList with scheduled classes
+  /**
+   * Uses the MyFileIO class to retrieve a ScheduledClassList object with all scheduled classes.
+   * @return a ScheduledClassList object with all stored scheduled classes.
+   */
   public ArrayList<ScheduledClass> getAllScheduledClasses()
   {
     ArrayList<ScheduledClass> scheduledClasses = new ArrayList<ScheduledClass>();
@@ -364,7 +445,12 @@ public class FitnessCenterFileAdapter
     return scheduledClasses;
   }
 
-  // MyFileIO to retrieve a scheduled class
+  /**
+   * Uses the MyFileIO class to retrieve a ScheduledClass object with all scheduled classes.
+   * @param dateTime the DateTime object used to retrieve a specific scheduled class on specific date
+   * @param className the class name used to retrieve a specific scheduled class with specific name
+   * @return a ScheduledClass object with the phone number passed as argument
+   */
   public ScheduledClass getScheduledClass(DateTime dateTime, String className)
   {
     ArrayList<ScheduledClass> scheduledClasses = getAllScheduledClasses();
@@ -382,8 +468,13 @@ public class FitnessCenterFileAdapter
     return scheduledClass;
   }
 
-  // MyFileIO to retrieve an ArrayList with scheduled classes within interval of time
 
+  /**
+   * Uses the MyFileIO class to retrieve a ScheduledClass object with all scheduled classes.
+   * @param from the DateTime object used to define a start point for time interval within which ScheduledClass objects are retrieved
+   * @param to the DateTime object used to define an end point for time interval within which ScheduledClass objects are retrieved
+   * @return a ScheduledClass object with scheduled classes between specified time interval
+   */
   public ArrayList<ScheduledClass> getScheduledClassesInTimeInterval(
       DateTime from, DateTime to)
   {
@@ -402,7 +493,11 @@ public class FitnessCenterFileAdapter
     return scheduledClassesFromTo;
   }
 
-  // save schedules classes
+  /**
+   * Use the MyFileIO class to save the ScheduledClass object passed as a parameter.
+   * @param scheduledClassesFilename the name and path of the file where scheduled classes will be saved
+   * @param object the object saved to classes
+   */
   public void saveScheduleClasses(String scheduledClassesFilename,
       Object object)
   {
@@ -423,7 +518,12 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // edit schedules classes
+  /**
+   * Use the MyFileIO class to save the ScheduledClass object passed as a parameter.
+   * @param scheduledClassesFilename the name and path of the file where scheduled classes are saved
+   * @param index the position of the edited object in the ScheduledClass array list
+   * @param object the ScheduledClass object edited
+   */
   public void editScheduledClasses(String scheduledClassesFilename, int index,
       Object object)
   {
@@ -444,7 +544,11 @@ public class FitnessCenterFileAdapter
     }
   }
 
-  // remove scheduled class
+  /**
+   * Uses the MyFileIO class to retrieve a ScheduledClass object with all scheduled classes.
+   * @param scheduledClassesFilename the name and path of the file where scheduled classes will be saved
+   * @param scheduledClass the object removed from classes
+   */
   public void removeScheduledClass(String scheduledClassesFilename,
       ScheduledClass scheduledClass)
   {
@@ -471,6 +575,12 @@ public class FitnessCenterFileAdapter
     }
   }
 
+  /**
+   * Uses the MyFileIO class to retrieve a ScheduledClass object with all scheduled classes.
+   * @param from the DateTime object used to define a start point for time interval within which ScheduledClass objects are retrieved
+   * @param to the DateTime object used to define an end point for time interval within which ScheduledClass objects are retrieved
+   * @return a String object with scheduled classes between specified time interval
+   */
   public String displayScheduledClassesInTimeInterval(DateTime from,
       DateTime to)
   {
@@ -491,7 +601,7 @@ public class FitnessCenterFileAdapter
       }
       else
       {
-        tempStringToReturn += "\n\tNo instructor assignded yet.";
+        tempStringToReturn += "\n\tNo instructor assigned yet.";
       }
       if (scheduledClassesFromTo.get(i).getMembers().size() == 0)
       {
@@ -513,7 +623,10 @@ public class FitnessCenterFileAdapter
     return stringToReturn;
   }
 
-  //Get the current date
+  /**
+   * Uses the GregorianCalendar class to retrieve the current day, month and year.
+   * @return a String object with the current date
+   */
   public static String today()
   {
     GregorianCalendar currentDate = new GregorianCalendar();
