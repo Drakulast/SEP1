@@ -10,7 +10,7 @@ public class GUI extends Application
   /**
    * An abstract method which automatically calls the launch
    * @param window setting the stage
-   * @throws IOException
+   * @throws IOException exception thrown if an IO error occurs
    */
   public void start(Stage window) throws IOException
   {
