@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-
+/**
+ * A class that includes all the instructors, members, classes and scheduled classes in the fitness center
+ * @author Ionut, Claudiu, Maria, Cezary
+ * @version 1.0
+ */
 public class FitnessCenter
 {
   private ArrayList<Instructor> instructors;
@@ -7,6 +11,9 @@ public class FitnessCenter
   private ArrayList<Member> members;
   private ArrayList<ScheduledClass> scheduledClasses;
 
+  /**
+   * A no-argument constructor that creates all the arrayLists
+   */
   public FitnessCenter()
   {
     instructors = new ArrayList<Instructor>();
@@ -15,11 +22,19 @@ public class FitnessCenter
     scheduledClasses = new ArrayList<ScheduledClass>();
   }
 
+  /**
+   * A method that adds the class to the fitness center
+   * @param classItem class that needs to be added
+   */
   public void addClass(Class classItem)
   {
     classes.add(classItem);
   }
 
+  /**
+   * A method that removes the class from fitness center, and then from the schedule if it was scheduled
+   * @param classItem the class to be removed
+   */
   public void removeClass(Class classItem)
   {
     //Removing the Class object from the classes array
@@ -36,6 +51,10 @@ public class FitnessCenter
 
   }
 
+  /**
+   * A method that removes the class of selected name from fitness center, and then from the schedule if it was scheduled
+   * @param className name of the class
+   */
   public void removeClass(String className)
   {
     //Removing the Class object from the classes array
@@ -60,6 +79,11 @@ public class FitnessCenter
 
   }
 
+  /**
+   * A method that returns a class if it exists in the fitness center
+   * @param className class to be returned
+   * @return class if it exists
+   */
   public Class getClassItem(String className)
   {
     for (Class classItem : classes)
@@ -72,11 +96,19 @@ public class FitnessCenter
     return null;
   }
 
+  /**
+   * A method that adds instructor to the fintess center
+   * @param instructor instructor to be added
+   */
   public void addInstructor(Instructor instructor)
   {
     instructors.add(instructor);
   }
 
+  /**
+   * A method that removes the instructor if it exists in the fitness center, and from all the scheduled classes
+   * @param phoneNumber phone number of instructor
+   */
   public void removeInstructor(String phoneNumber)
   {
     //Removing the Instructor object from the instructors array
@@ -102,6 +134,11 @@ public class FitnessCenter
     }
   }
 
+  /**
+   * A method that returns instructor of selected phone number
+   * @param phoneNumber phone number of the instructor
+   * @return instructor if it exists in the fitness center
+   */
   public Instructor getInstructor(String phoneNumber)
   {
     for (Instructor instructor : instructors)
@@ -114,12 +151,20 @@ public class FitnessCenter
     return null;
   }
 
+  /**
+   * A method that adds the member if it doesn't exist in fitness center
+   * @param member member to be added
+   */
   public void addMember(Member member)
   {
     if (getMember(member.getPhoneNumber()) == null)
       members.add(member);
   }
 
+  /**
+   * A method that removes the member if it exists in the fitness center
+   * @param phoneNumber phone number of the member
+   */
   public void removeMember(String phoneNumber)
   {
     for (Member member : members)
@@ -131,6 +176,11 @@ public class FitnessCenter
     }
   }
 
+  /**
+   * A method that returns a member if it exists in the fitness center
+   * @param phoneNumber phone number of the member
+   * @return return the member
+   */
   public Member getMember(String phoneNumber)
   {
     for (Member member : members)
@@ -143,6 +193,10 @@ public class FitnessCenter
     return null;
   }
 
+  /**
+   * A method that add a class that is scheduled
+   * @param scheduledClass scheduled class
+   */
   public void addScheduledClass(ScheduledClass scheduledClass)
   {
     boolean classAlreadyExists = false;
@@ -159,6 +213,10 @@ public class FitnessCenter
     }
   }
 
+  /**
+   * A method that removes a scheduled class
+   * @param scheduledClass scheduled class
+   */
   public void removeScheduledClass(ScheduledClass scheduledClass)
   {
     scheduledClasses.remove(scheduledClass);
@@ -177,26 +235,46 @@ public class FitnessCenter
     return null;
   }
 
+  /**
+   * A method that returns all the instructors in fitness center
+   * @return arrayList of all the instructors
+   */
   public ArrayList<Instructor> getInstructors()
   {
     return instructors;
   }
 
+  /**
+   * A method that returns all the class in fitness center
+   * @return arrayList if all the classes
+   */
   public ArrayList<Class> getClasses()
   {
     return classes;
   }
 
+  /**
+   * A method that returns all the members in fitness center
+   * @return ArrayList of all the members
+   */
   public ArrayList<Member> getMembers()
   {
     return members;
   }
 
+  /**
+   * A method that returns all the scheduled classes in fitness center
+   * @return ArrayList of all the scheduled classes
+   */
   public ArrayList<ScheduledClass> getScheduledClasses()
   {
     return scheduledClasses;
   }
 
+  /**
+   * A method that returns String with all the information of fitness center
+   * @return instructors, classes, members and scheduled classes of the fitness center
+   */
   public String toString()
   {
     return "FitnessCenter{" + "instructors=" + instructors + ", classes="
@@ -204,6 +282,11 @@ public class FitnessCenter
         + scheduledClasses + '}';
   }
 
+  /**
+   * A method that checks if the object is fitness center
+   * @param obj object to be compared
+   * @return true if the object is a fitness center
+   */
   public boolean equals(Object obj)
   {
     if (!(obj instanceof ScheduledClass))
