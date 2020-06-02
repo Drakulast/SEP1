@@ -213,12 +213,6 @@ public class GUIController
     registerMemberMembershipInput.getItems().add("Premium");
     editMemberMembershipInput.getItems().add("Standard");
     editMemberMembershipInput.getItems().add("Premium");
-
-    //System.out.println(adapter.getAllMembers());
-    //    Platform.runLater(() ->
-    //    {
-    //      setNumberOfMembers();
-    //    });
   }
 
   /**
@@ -879,7 +873,7 @@ public class GUIController
    * A method which displays an alert confirmation message
    * @param message the message that is going to be displayed
    * @param alertType the type of alert when the message is going to be displayed
-   * @return
+   * @return true if the user confirms
    */
   public boolean messageConfirmation(String message, Alert.AlertType alertType)
   {
@@ -937,7 +931,6 @@ public class GUIController
       registerInstructorAddressInput.setText("");
       registerInstructorEmailInput.setText("");
       registerInstructorPhoneInput.setText("");
-      System.out.println(tempInstructor);
       setCurrentInstructors();
     }
     else
@@ -1107,7 +1100,6 @@ public class GUIController
       tempInstructor.setAddress(editInstructorAddressInput.getText());
       tempInstructor.setEmail(editInstructorEmailInput.getText());
       tempInstructor.setPhoneNumber(editInstructorPhoneInput.getText());
-      System.out.println(adapter.getAllInstructors().get(instructorIndicator));
       adapter.editInstructor("Instructors.bin", instructorIndicator,
           tempInstructor);
 
@@ -1130,7 +1122,6 @@ public class GUIController
     if (messageConfirmation("Do you want to delete this instructor?",
         Alert.AlertType.WARNING))
     {
-      System.out.println(adapter.getAllInstructors().size());
       adapter.removeInstructor("Instructors.bin",
           adapter.getAllInstructors().get(instructorIndicator));
       editInstructorFirstNameInput.setText("");
@@ -1139,7 +1130,6 @@ public class GUIController
       editInstructorEmailInput.setText("");
       editInstructorPhoneInput.setText("");
       editInstructorClassesInput.getItems().clear();
-      System.out.println(adapter.getAllInstructors().size());
       loadFindInstructorPane();
       searchInstructorByNameFirstNameInput.setText("");
       searchInstructorByNameLastNameInput.setText("");
@@ -1459,14 +1449,12 @@ public class GUIController
     if (messageConfirmation("Do you want to delete this class?",
         Alert.AlertType.WARNING))
     {
-      System.out.println(adapter.getAllClasses());
       adapter.removeClass("Classes.bin",
           adapter.getAllClasses().get(classIndicator));
       setCurrentClasses();
       ediClassNameInput.clear();
       editClassCapacityInput.clear();
       searchClassNameInput.clear();
-      System.out.println(adapter.getAllClasses());
     }
   }
 
@@ -1533,8 +1521,6 @@ public class GUIController
           test = i;
         }
       }
-      System.out.println("test");
-      System.out.println(adapter.getAllScheduledClasses());
 
       DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
       tempDateTime
@@ -1566,9 +1552,6 @@ public class GUIController
             .add(adapter.getAllClasses().get(i).getName());
       }
       scheduleClassInstructorInput.getItems().clear();
-      System.out.println("test");
-      System.out.println(adapter.getAllScheduledClasses());
-      System.out.println(adapter.getAllInstructors());
     }
     else
     {
@@ -1745,8 +1728,6 @@ public class GUIController
    */
   public void saveEditedScheduledClass()
   {
-    System.out.println(
-        searchScheduledClassListView.getSelectionModel().getSelectedItems());
     DateTime tempDateTime = new DateTime(0, 0, 0, 0, 0);
     DateTime tempDateTime2 = new DateTime(0, 0, 0, 0, 0);
     tempDateTime.setYear(searchScheduledClassFromInput.getValue().getYear());
@@ -1782,7 +1763,6 @@ public class GUIController
           .get(i).getDateTime()).equals(tempScheduledClass.getDateTime()))
       {
         index = i;
-        System.out.println("IT WORKS !");
         break;
       }
     }
@@ -2055,7 +2035,6 @@ public class GUIController
           .equals(tempScheduledClass.getClassItem().getName())) && ((tempArray
           .get(i).getDateTime()).equals(tempScheduledClass.getDateTime())))
       {
-        System.out.println(i);
         index = i;
         break;
       }
@@ -2138,7 +2117,6 @@ public class GUIController
         }
       }
     }
-    System.out.println(returnScheduledClasses);
     scheduleExportScheduleOutput.setText(returnScheduledClasses);
   }
 
