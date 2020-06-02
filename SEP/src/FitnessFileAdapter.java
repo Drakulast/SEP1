@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
  * @author Ionut, Claudiu, Maria, Cezary
  * @version 1.0
  */
-public class FitnessCenterFileAdapter
+public class FitnessFileAdapter
 {
   private MyFileIO myFileIO;
   private String membersFileName;
@@ -24,7 +24,7 @@ public class FitnessCenterFileAdapter
    * @param classesFilename the name and path of the file where classes will be saved, retrieved, removed and edited
    * @param scheduledClassesFilename the name and path of the file where scheduledClasses will be saved, retrieved, removed and edited
    */
-  public FitnessCenterFileAdapter(String membersFileName,
+  public FitnessFileAdapter(String membersFileName,
       String instructorsFilename, String classesFilename,
       String scheduledClassesFilename)
   {

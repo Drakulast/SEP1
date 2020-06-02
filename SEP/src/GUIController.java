@@ -1,36 +1,21 @@
-import com.sun.javafx.scene.control.InputField;
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Optional;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import org.w3c.dom.ls.LSOutput;
-
-import javax.swing.*;
 
 /**
  * The user interface controller that allows for displaying and modifying information
  * about members, instructors, classes and scheduled classes.
+ *
  * @author Ionut, Claudiu, Maria, Cezary
  * @version 1.0
  */
@@ -179,7 +164,7 @@ public class GUIController
 
   @FXML private Label dateLabel;
 
-  private FitnessCenterFileAdapter adapter;
+  private FitnessFileAdapter adapter;
   private ArrayList<String> instrAddClasses = new ArrayList<String>();
   private ArrayList<String> indicatorArray = new ArrayList<String>();
   private int instructorIndicator = 0;
@@ -202,7 +187,7 @@ public class GUIController
    */
   public void initialize()
   {
-    adapter = new FitnessCenterFileAdapter("Members.bin", "Instructors.bin",
+    adapter = new FitnessFileAdapter("Members.bin", "Instructors.bin",
         "Classes.bin", "ScheduledClasses.bin");
     loadOverviewPane();
     setNumberOfMembers();
@@ -825,6 +810,7 @@ public class GUIController
 
   /**
    * A method which displays an alert warning message
+   *
    * @param message the message that is going to be displayed
    */
   public void messageWarning(String message)
@@ -838,6 +824,7 @@ public class GUIController
 
   /**
    * A method which displays an alert error message
+   *
    * @param message the message that is going to be displayed
    */
   public void messageError(String message)
@@ -851,6 +838,7 @@ public class GUIController
 
   /**
    * A method which displays an alert message
+   *
    * @param message the message that is going to be displayed
    */
   public void messageNone(String message)
@@ -864,6 +852,7 @@ public class GUIController
 
   /**
    * A method which displays an alert information message
+   *
    * @param message the message that is going to be displayed
    */
   public void messageInformation(String message)
@@ -877,9 +866,10 @@ public class GUIController
 
   /**
    * A method which displays an alert confirmation message
-   * @param message the message that is going to be displayed
+   *
+   * @param message   the message that is going to be displayed
    * @param alertType the type of alert when the message is going to be displayed
-   * @return
+   * @return true if the user click the "OK" button, false otherwise
    */
   public boolean messageConfirmation(String message, Alert.AlertType alertType)
   {
@@ -1610,7 +1600,6 @@ public class GUIController
     loadScheduleEditPane();
   }
 
-
   /**
    * A method which fills the fields in the edit, remove, sign up and cancel attendance
    * panes when the user selects a scheduled fitness class from the list view.
@@ -2043,7 +2032,8 @@ public class GUIController
     ArrayList<ScheduledClass> tempScheduledClasses = adapter
         .getScheduledClassesInTimeInterval(tempDateTime, tempDateTime2);
 
-    int index = searchScheduledClassListView.getSelectionModel().getSelectedIndex();
+    int index = searchScheduledClassListView.getSelectionModel()
+        .getSelectedIndex();
 
     ScheduledClass tempScheduledClass = tempScheduledClasses.get(index);
 
@@ -2072,7 +2062,7 @@ public class GUIController
 
   /**
    * A method which loads the ComboBox from the export pane with the month of the year.
-   * Firstly adds all the months in an ArrayList<String> and then loads each element
+   * Firstly adds all the months in an ArrayList of type String and then loads each element
    * to the ComboBox.
    */
   public void loadMonths()
@@ -2196,13 +2186,16 @@ public class GUIController
       {
         stringToAppend +=
             "<scheduledClass>" + "<class>" + "<name>" + scheduledClass
-                .getClassItem().getName() + "</name>" + "</class>" + "<instructor>" + "<firstName>" + scheduledClass
-                .getInstructor().getFirstName() + "</firstName>" + "</instructor>" + "<date>" + "<day>" + scheduledClass
+                .getClassItem().getName() + "</name>" + "</class>"
+                + "<instructor>" + "<firstName>" + scheduledClass
+                .getInstructor().getFirstName() + "</firstName>"
+                + "</instructor>" + "<date>" + "<day>" + scheduledClass
                 .getDateTime().getDay() + "</day>" + "<month>" + scheduledClass
-                .getDateTime().getMonth() + "</month>" + "</date>" + "<time>"
-                + "<hour>" + scheduledClass.getDateTime().displayHour()
-                + "</hour>" + "<minute>" + scheduledClass.getDateTime()
-                .displayMinute() + "</minute>" + "</time>"
+                .getDateTime().getMonth() + "</month>" + "<year>"
+                + scheduledClass.getDateTime().getYear() + "</year>" + "</date>"
+                + "<time>" + "<hour>" + scheduledClass.getDateTime()
+                .displayHour() + "</hour>" + "<minute>" + scheduledClass
+                .getDateTime().displayMinute() + "</minute>" + "</time>"
                 + "</scheduledClass>";
       }
       textFileIO.appendToFile(xmlFile, stringToAppend);

@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 
 /**
- * A class containing a constructor for date & time and also the methods for using this data
+ * A class containing a constructor for date and time and also the methods for using this data
  * @author Ionut, Claudiu, Maria, Cezary
  * @version 1.0
  * Also the date it's going to be stored in a binary document so the class is Serialized
@@ -17,7 +17,7 @@ public class DateTime implements Serializable
   private int minute;
 
   /**
-   * Five-argument constructor which initialize a date & time
+   * Five-argument constructor which initialize a date and time
    * @param day the day to add to the date
    * @param month the month to add to the date
    * @param year the year to add to the date
@@ -389,8 +389,8 @@ public class DateTime implements Serializable
   }
 
   /**
-   * Returns a string representation of the Date & Time
-   * @return a string representation of the Date & Time in the format: "day/month/year hour:minute"
+   * Returns a string representation of the Date and Time
+   * @return a string representation of the Date and Time in the format: "day/month/year hour:minute"
    */
   public String toString()
   {
@@ -411,7 +411,7 @@ public class DateTime implements Serializable
   }
 
   /**
-   * Compares day, month, year, hour & minute of two DateTime objects
+   * Compares day, month, year, hour and minute of two DateTime objects
    * @param obj the object to compare with
    * @return true if the given object is equal to this DateTime object
    */
