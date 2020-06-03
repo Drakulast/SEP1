@@ -18,10 +18,11 @@ public class DateTime implements Serializable
 
   /**
    * Five-argument constructor which initialize a date and time
-   * @param day the day to add to the date
-   * @param month the month to add to the date
-   * @param year the year to add to the date
-   * @param hour the hour to add to the time of the date
+   *
+   * @param day    the day to add to the date
+   * @param month  the month to add to the date
+   * @param year   the year to add to the date
+   * @param hour   the hour to add to the time of the date
    * @param minute the minute to add to the time of the date
    */
   public DateTime(int day, int month, int year, int hour, int minute)
@@ -130,6 +131,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the day of the date
+   *
    * @return the day of the date
    */
   public int getDay()
@@ -139,6 +141,7 @@ public class DateTime implements Serializable
 
   /**
    * Sets the day of the Date
+   *
    * @param day the day of the date that we want to set
    */
   public void setDay(int day)
@@ -148,6 +151,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the month of the date
+   *
    * @return the month of the date
    */
   public int getMonth()
@@ -157,6 +161,7 @@ public class DateTime implements Serializable
 
   /**
    * Sets the month of the Date
+   *
    * @param month the month of the date that we want to set
    */
   public void setMonth(int month)
@@ -166,6 +171,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the year of the date
+   *
    * @return the year of the date
    */
   public int getYear()
@@ -175,6 +181,7 @@ public class DateTime implements Serializable
 
   /**
    * Sets the year of the Date
+   *
    * @param year the year of the date that we want to set
    */
   public void setYear(int year)
@@ -184,6 +191,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the hour of the time in that date
+   *
    * @return the hour of the time in that date
    */
   public int getHour()
@@ -193,6 +201,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the hour represented as a string
+   *
    * @return a string representation of the hour
    */
   public String displayHour()
@@ -203,6 +212,7 @@ public class DateTime implements Serializable
 
   /**
    * Sets the hour of the Time in that date
+   *
    * @param hour the hour of the Time in that Date
    */
   public void setHour(int hour)
@@ -212,6 +222,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the minute of the time in that date
+   *
    * @return the minute of the time in that date
    */
   public int getMinute()
@@ -221,6 +232,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets the minute represented as a string
+   *
    * @return a string representation of the minute
    */
   public String displayMinute()
@@ -231,6 +243,7 @@ public class DateTime implements Serializable
 
   /**
    * Sets the minute of the Time in that date
+   *
    * @param minute the minute of the time in that Date
    */
   public void setMinute(int minute)
@@ -240,35 +253,38 @@ public class DateTime implements Serializable
 
   /**
    * Check if the current DateTime object is before another DateTime object
+   *
    * @param date2 the DateTime object to compare against
    * @return true if the current DateTime object is before the other DateTime object, false otherwise
    */
   public boolean isBefore(DateTime date2)
   {
-    int ok=0;
-    if(year<date2.year)
-      ok=1;
-    if(year== date2.year)
+    int ok = 0;
+    if (year < date2.year)
+      ok = 1;
+    if (year == date2.year)
     {
-      if(month< date2.month)
-      {ok=1;}
-      if(month==date2.month)
+      if (month < date2.month)
       {
-        if(day<date2.day)
+        ok = 1;
+      }
+      if (month == date2.month)
+      {
+        if (day < date2.day)
         {
-          ok=1;
+          ok = 1;
         }
-        if(day== date2.day)
+        if (day == date2.day)
         {
-          if(hour<date2.hour)
+          if (hour < date2.hour)
           {
-            ok=1;
+            ok = 1;
           }
-          if(hour==date2.hour)
+          if (hour == date2.hour)
           {
-            if(minute<date2.minute)
+            if (minute < date2.minute)
             {
-              ok=1;
+              ok = 1;
             }
           }
         }
@@ -279,35 +295,38 @@ public class DateTime implements Serializable
 
   /**
    * Checks if the current DateTime object is after another DateTime object
+   *
    * @param date2 the DateTime object to compare against
    * @return true if the current DateTime object is after the other DateTime object, false otherwise
    */
   public boolean isAfter(DateTime date2)
   {
-    int ok=0;
-    if(year>date2.year)
-      ok=1;
-    if(year== date2.year)
+    int ok = 0;
+    if (year > date2.year)
+      ok = 1;
+    if (year == date2.year)
     {
-      if(month> date2.month)
-      {ok=1;}
-      if(month==date2.month)
+      if (month > date2.month)
       {
-        if(day>date2.day)
+        ok = 1;
+      }
+      if (month == date2.month)
+      {
+        if (day > date2.day)
         {
-          ok=1;
+          ok = 1;
         }
-        if(day== date2.day)
+        if (day == date2.day)
         {
-          if(hour>date2.hour)
+          if (hour > date2.hour)
           {
-            ok=1;
+            ok = 1;
           }
-          if(hour==date2.hour)
+          if (hour == date2.hour)
           {
-            if(minute>date2.minute)
+            if (minute > date2.minute)
             {
-              ok=1;
+              ok = 1;
             }
           }
         }
@@ -318,6 +337,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets a string representation of the date
+   *
    * @return a string representation of the date
    */
   public String getDate()
@@ -329,6 +349,7 @@ public class DateTime implements Serializable
 
   /**
    * Gets a string representation of the time
+   *
    * @return the string representation of the time
    */
   public String getTime()
@@ -339,8 +360,9 @@ public class DateTime implements Serializable
 
   /**
    * Gets the last day of the month
+   *
    * @param month the month for which to get the last day
-   * @param year the year of the given month
+   * @param year  the year of the given month
    * @return the number of days in the given month and year
    */
   public static int lastDayOfTheMonth(int month, int year)
@@ -351,12 +373,18 @@ public class DateTime implements Serializable
       if (year % 100 == 0)
       {
         if (year % 400 == 0)
-        {isLeapYear = true;}
+        {
+          isLeapYear = true;
+        }
         else
-        {isLeapYear = false;}
+        {
+          isLeapYear = false;
+        }
       }
       else
-      {isLeapYear = true;}
+      {
+        isLeapYear = true;
+      }
     }
     else
     {
@@ -383,13 +411,15 @@ public class DateTime implements Serializable
         return 28;
       }
     }
-    else {
+    else
+    {
       return 0;
     }
   }
 
   /**
    * Returns a string representation of the Date and Time
+   *
    * @return a string representation of the Date and Time in the format: "day/month/year hour:minute"
    */
   public String toString()
@@ -402,7 +432,7 @@ public class DateTime implements Serializable
 
   public boolean equalsDate(Object obj)
   {
-    if(!(obj instanceof DateTime))
+    if (!(obj instanceof DateTime))
     {
       return false;
     }
@@ -412,6 +442,7 @@ public class DateTime implements Serializable
 
   /**
    * Compares day, month, year, hour and minute of two DateTime objects
+   *
    * @param obj the object to compare with
    * @return true if the given object is equal to this DateTime object
    */

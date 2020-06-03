@@ -29,7 +29,7 @@ import org.w3c.dom.ls.LSOutput;
 import javax.swing.*;
 
 /**
- * The user interface controller that allows for displaying and modifying information
+ * The user interface controller that allows displaying and modifying information
  * about members, instructors, classes and scheduled classes.
  * @author Ionut, Claudiu, Maria, Cezary
  * @version 1.0
@@ -179,7 +179,7 @@ public class GUIController
 
   @FXML private Label dateLabel;
 
-  private FitnessCenterFileAdapter adapter;
+  private FitnessFileAdapter adapter;
   private ArrayList<String> instrAddClasses = new ArrayList<String>();
   private ArrayList<String> indicatorArray = new ArrayList<String>();
   private int instructorIndicator = 0;
@@ -202,7 +202,7 @@ public class GUIController
    */
   public void initialize()
   {
-    adapter = new FitnessCenterFileAdapter("Members.bin", "Instructors.bin",
+    adapter = new FitnessFileAdapter("Members.bin", "Instructors.bin",
         "Classes.bin", "ScheduledClasses.bin");
     loadOverviewPane();
     setNumberOfMembers();
@@ -1165,7 +1165,7 @@ public class GUIController
       {
         newMember.upgradeMembership();
       }
-      adapter.saveMembers("TestMembers.bin", newMember);
+      adapter.saveMembers("Members.bin", newMember);
       setNumberOfMembers();
       registerMemberMembershipInput.setValue(null);
       messageInformation("Member Added!");
@@ -1315,7 +1315,7 @@ public class GUIController
         tempMember.downgradeMembership();
       }
 
-      adapter.editMember("TestMembers.bin", memberIndicator, tempMember);
+      adapter.editMember("Members.bin", memberIndicator, tempMember);
       setNumberOfMembers();
       if (searchMemberBy)
       {
@@ -1345,7 +1345,7 @@ public class GUIController
     if (messageConfirmation("Do you want to delete this member?",
         Alert.AlertType.WARNING))
     {
-      adapter.removeMember("TestMembers.bin",
+      adapter.removeMember("Members.bin",
           adapter.getAllMembers().get(memberIndicator));
       setNumberOfMembers();
 
@@ -2051,7 +2051,7 @@ public class GUIController
 
   /**
    * A method which loads the ComboBox from the export pane with the month of the year.
-   * Firstly adds all the months in an ArrayList<String> and then loads each element
+   * Firstly adds all the months in an ArrayList of type String and then loads each element
    * to the ComboBox.
    */
   public void loadMonths()
